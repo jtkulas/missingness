@@ -2756,8 +2756,24 @@ t + scale_x_continuous(name="Social Desirability Stratum", breaks=c(1,3,6,8),
  
 ```
 
+We want to expand this figure by including `quanteda` text analyses (or careless responses)
  
-```{r hists}
+```{r quanteda}
+
+write.csv(together, "letslook.csv")
+
+#library(quanteda)
+
+#temp <- data[-150,]   ## Duplicate item
+
+#data2 <- corpus(temp, docid_field = "Items",
+#  text_field = "Items")
+
+#tab2 <- textstat_readability(data2,
+#                     measure = c("Flesch.Kincaid", "Dale.Chall"))
+
+#tab3 <- tab2[order(-tab2$Flesch.Kincaid),]
+#knitr::kable(tab3, digits=2)
 
 
 ```

@@ -2837,9 +2837,9 @@ tab2 <- textstat_readability(data2,
 #write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/self4_quanteda.csv", row.names = TRUE)
 ```
 
-```{r quanteda, other2}
+```{r quanteda, other1}
 
-test <- read.csv("Observer-Rated+Personality_+Once+Removed+2+(Fall+2019)+-+Copy+-+Copy_December+13,+2019_10.30.csv") 
+test <- read.csv("Observer-Rated+Personality_+Once+Removed+1+(Fall+2019)+-+Copy+-+Copy_September+11,+2020_17.53.csv") 
 
 temp <- as.data.frame(t(test))   ## Duplicate item
 temp2 <- temp[-c(1:17),]
@@ -2851,7 +2851,7 @@ data2 <- corpus(temp3, docid_field = "V1",
 tab2 <- textstat_readability(data2,
                      measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
 
-#write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/other2_quanteda.csv", row.names = TRUE)
+write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/other1_quanteda.csv", row.names = TRUE)
 ```
 
 ```{r quanteda, other2}

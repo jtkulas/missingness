@@ -2960,6 +2960,7 @@ tab2 <- textstat_readability(data2,
 test <- read.csv("Observer-Rated+Personality_+Twice+Removed+4+(Fall+2019)+-+Copy+-+Copy_December+11,+2019_15.12.csv") 
 
 temp <- as.data.frame(t(test))   ## Duplicate item
+View(temp)
 temp2 <- temp[-c(1:17),]
 temp3 <- temp2[-c(81:85),]
 
@@ -2970,5 +2971,44 @@ tab2 <- textstat_readability(data2,
                      measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
 
 #write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/twice4_quanteda.csv", row.names = TRUE)
+```
+
+```{r self1gather}
+
+library(dplyr)
+
+self1long <- read.csv("Observer-Rated Personality_ Self1 (Fall 2019) - Copy - Copy_December 3, 2019_13.53.csv")
+
+self1long_temp <- self1long[-c(1:2),]
+View(self1long_temp)
+
+form <- c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1)
+
+selfother <- c("self", "self","self","self","self","self","self","self","self","self",
+               "self", "self","self","self","self","self","self","self","self","self",
+               "self", "self","self","self","self","self","self","self","self","self",
+               "self", "self","self","self","self","self","self","self","self","self",
+               "self", "self","self","self","self","self","self","self","self","self",
+               "self", "self","self","self","self","self","self","self","self","self",
+               "self", "self","self","self","self","self","self","self","self","self",
+               "self", "self","self","self")
+
+temp1 <- cbind(self1long_temp, form, selfother)
+View(temp1)
+
+#Make the format "long"
+combinedself1long <- temp1 %>% 
+  gather(key = "item", 
+         value = "responses",
+         c(18:97))
+
+View(combinedself1long)
 ```
 

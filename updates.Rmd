@@ -3012,3 +3012,60 @@ combinedself1long <- temp1 %>%
 View(combinedself1long)
 ```
 
+```{r transposed-self}
+
+library(dplyr)
+library(tidyr)
+
+View(use_self)
+
+#Make the format "long"
+self_long <- use_self %>% 
+  gather(key = "item", 
+         value = "responses",
+         c(1:80))
+
+View(self_long)
+
+write.csv(self_long, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/self_long.csv", row.names = TRUE)
+
+```
+
+```{r transposed-once}
+
+library(dplyr)
+library(tidyr)
+
+View(use_one)
+
+#Make the format "long"
+once_long <- use_one %>% 
+  gather(key = "item", 
+         value = "responses",
+         c(1:80))
+
+View(once_long)
+
+write.csv(once_long, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/once_long.csv", row.names = TRUE)
+
+```
+
+
+```{r transposed-twice}
+
+library(dplyr)
+library(tidyr)
+
+View(use_two)
+
+#Make the format "long"
+twice_long <- use_two %>% 
+  gather(key = "item", 
+         value = "responses",
+         c(1:80))
+
+View(twice_long)
+
+write.csv(twice_long, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/twice_long.csv", row.names = TRUE)
+
+```

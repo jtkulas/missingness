@@ -1547,7 +1547,7 @@ write.csv(data,"useFurr.csv")
 
 
 
-```{r salvaged, echo=FALSE, warning=FALSE, message=FALSE}
+```{r salvaged, echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
 
 
 data$item1[data$item1 == 6] <- NA
@@ -2761,7 +2761,7 @@ We want to expand this figure by including `quanteda` text analyses (or careless
 2) apply `quanteda` analyses
 3) compute NA's (add up number of missing)
  
-```{r quanteda, self1}
+```{r quantedaself1}
 
 library(quanteda)
 
@@ -2780,7 +2780,7 @@ tab2 <- textstat_readability(data2,
 #write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/self1_quanteda.csv", row.names = TRUE)
 ```
 
-```{r quanteda, self2}
+```{r quantedaself2}
 
 library(quanteda)
 
@@ -2799,7 +2799,7 @@ tab2 <- textstat_readability(data2,
 #write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/self2_quanteda.csv", row.names = TRUE)
 ```
 
-```{r quanteda, self3}
+```{r quantedaself3}
 
 library(quanteda)
 
@@ -2818,7 +2818,7 @@ tab2 <- textstat_readability(data2,
 #write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/self3_quanteda.csv", row.names = TRUE)
 ```
 
-```{r quanteda, self4}
+```{r quantedaself4}
 
 library(quanteda)
 
@@ -2837,7 +2837,7 @@ tab2 <- textstat_readability(data2,
 #write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/self4_quanteda.csv", row.names = TRUE)
 ```
 
-```{r quanteda, other1}
+```{r quantedaother1}
 
 test <- read.csv("Observer-Rated+Personality_+Once+Removed+1+(Fall+2019)+-+Copy+-+Copy_September+11,+2020_17.53.csv") 
 
@@ -2851,10 +2851,10 @@ data2 <- corpus(temp3, docid_field = "V1",
 tab2 <- textstat_readability(data2,
                      measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
 
-write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/other1_quanteda.csv", row.names = TRUE)
+write.csv(tab2, "other1_quanteda.csv", row.names = TRUE)
 ```
 
-```{r quanteda, other2}
+```{r quantedaother2}
 
 test <- read.csv("Observer-Rated+Personality_+Once+Removed+2+(Fall+2019)+-+Copy+-+Copy_December+13,+2019_10.30.csv") 
 
@@ -2871,7 +2871,7 @@ tab2 <- textstat_readability(data2,
 #write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/other2_quanteda.csv", row.names = TRUE)
 ```
 
-```{r quanteda, other3}
+```{r quantedaother3}
 
 test <- read.csv("Observer-Rated+Personality_+Once+Removed+3+(Fall+2019)+-+Copy+-+Copy_December+13,+2019_10.29.csv") 
 
@@ -2888,7 +2888,7 @@ tab2 <- textstat_readability(data2,
 #write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/other3_quanteda.csv", row.names = TRUE)
 ```
 
-```{r quanteda, other4}
+```{r quantedaother4}
 
 test <- read.csv("Observer-Rated Personality_ Once Removed 4 (Fall 2019) - Copy - Copy_December 8, 2019_10.36.csv") 
 
@@ -2905,7 +2905,7 @@ tab2 <- textstat_readability(data2,
 #write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/other4_quanteda.csv", row.names = TRUE)
 ```
 
-```{r quanteda, twice1}
+```{r quantedatwice1}
 
 test <- read.csv("Observer-Rated+Personality_+Twice+Removed+1+(Fall+2019)+-+Copy+-+Copy_December+11,+2019_15.11.csv") 
 
@@ -2922,7 +2922,7 @@ tab2 <- textstat_readability(data2,
 #write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/twice1_quanteda.csv", row.names = TRUE)
 ```
 
-```{r quanteda, twice2}
+```{r quantedatwice2}
 
 test <- read.csv("Observer-Rated+Personality_+Twice+Removed+2+(Fall+2019)+-+Copy+-+Copy_December+11,+2019_15.11.csv") 
 
@@ -2939,7 +2939,7 @@ tab2 <- textstat_readability(data2,
 #write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/twice2_quanteda.csv", row.names = TRUE)
 ```
 
-```{r quanteda, twice3}
+```{r quantedatwice3}
 
 test <- read.csv("Observer-Rated+Personality_+Twice+Removed+3+(Fall+2019)+-+Copy+-+Copy_December+11,+2019_15.12.csv") 
 
@@ -2956,7 +2956,7 @@ tab2 <- textstat_readability(data2,
 #write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/twice3_quanteda.csv", row.names = TRUE)
 ```
 
-```{r quanteda, twice4}
+```{r quantedatwice4}
 test <- read.csv("Observer-Rated+Personality_+Twice+Removed+4+(Fall+2019)+-+Copy+-+Copy_December+11,+2019_15.12.csv") 
 
 temp <- as.data.frame(t(test))   ## Duplicate item
@@ -2976,11 +2976,13 @@ tab2 <- textstat_readability(data2,
 ```{r self1gather}
 
 library(dplyr)
+library(tidyr)
+
 
 self1long <- read.csv("Observer-Rated Personality_ Self1 (Fall 2019) - Copy - Copy_December 3, 2019_13.53.csv")
 
 self1long_temp <- self1long[-c(1:2),]
-View(self1long_temp)
+# View(self1long_temp)
 
 form <- c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
           1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -3001,7 +3003,7 @@ selfother <- c("self", "self","self","self","self","self","self","self","self","
                "self", "self","self","self")
 
 temp1 <- cbind(self1long_temp, form, selfother)
-View(temp1)
+#View(temp1)
 
 #Make the format "long"
 combinedself1long <- temp1 %>% 
@@ -3009,7 +3011,7 @@ combinedself1long <- temp1 %>%
          value = "responses",
          c(18:97))
 
-View(combinedself1long)
+#View(combinedself1long)
 ```
 
 ```{r transposed-self}
@@ -3027,7 +3029,7 @@ self_long <- use_self %>%
 
 View(self_long)
 
-write.csv(self_long, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/self_long.csv", row.names = TRUE)
+write.csv(self_long, "self_long.csv", row.names = TRUE)
 
 ```
 
@@ -3046,7 +3048,7 @@ once_long <- use_one %>%
 
 View(once_long)
 
-write.csv(once_long, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/once_long.csv", row.names = TRUE)
+write.csv(once_long, "once_long.csv", row.names = TRUE)
 
 ```
 
@@ -3066,6 +3068,6 @@ twice_long <- use_two %>%
 
 View(twice_long)
 
-write.csv(twice_long, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/twice_long.csv", row.names = TRUE)
+write.csv(twice_long, "twice_long.csv", row.names = TRUE)
 
 ```

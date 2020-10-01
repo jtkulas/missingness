@@ -133,7 +133,9 @@ data2 <- corpus(temp3, docid_field = "V1",
 tab2 <- textstat_readability(data2,
                              measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
 
-one <- cbind(form1,tab2)
+sd1 <- read.csv("form1SD.csv")
+
+one <- cbind(form1,tab2,sd1[5])
 
 ###################################################
 
@@ -149,7 +151,9 @@ data2 <- corpus(temp3, docid_field = "V1",
 tab2 <- textstat_readability(data2,
                              measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
 
-two <- cbind(form2,tab2)
+sd2 <- read.csv("form2SD.csv")
+
+two <- cbind(form2,tab2,sd2[5])
 
 ##################################################
 
@@ -165,7 +169,9 @@ data2 <- corpus(temp3, docid_field = "V1",
 tab2 <- textstat_readability(data2,
                              measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
 
-three <- cbind(form3,tab2)
+sd3 <- read.csv("form3SD.csv")
+
+three <- cbind(form3,tab2,sd3[5])
 
 #################################################
 
@@ -181,7 +187,9 @@ data2 <- corpus(temp3, docid_field = "V1",
 tab2 <- textstat_readability(data2,
                              measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
 
-four <- cbind(form4,tab2)
+sd4 <- read.csv("form4SD.csv")
+
+four <- cbind(form4,tab2,sd4[5])
 
 ################################################
 ################################################

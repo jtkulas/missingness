@@ -197,3 +197,37 @@ four <- cbind(form4,tab2,sd4[5])
 ################################################ File to use (9/30/20):
 
 USETHIS <- rbind(one,two,three,four)
+
+library(tidyverse)
+
+USETHIS$response[USETHIS$response == 6] <- NA   ## temporarily treating the same (for SIOP)
+
+USETHIS$count <- is.na(USETHIS$response) # returns TRUE of x is missing
+
+USETHIS$count[USETHIS$count == "TRUE"] <- 1
+USETHIS$count[USETHIS$count >= "FALSE"] <- 0
+USETHIS$count <- as.numeric(as.character(USETHIS$count))
+
+cor(USETHIS[7:10])
+
+model <- lm(count ~ ELF + SD, USETHIS)
+summary(model)
+
+t.test(SD ~ count, USETHIS)
+t.test(ELF ~ count, USETHIS)
+t.test(Flesch.Kincaid ~ count, USETHIS)
+t.test(FOG.NRI ~ count, USETHIS)
+t.test(Dale.Chall ~ count, USETHIS)
+
+## Boxplot with 10 x-axis locations
+
+## PLAY WITH THIS AND GET A PRETTY FIGURE!!!!
+
+toplot <- USETHIS %>%                            
+  group_by(count) %>% 
+  summarise((sd = mean(SD, na.rm=TRUE),
+            (elf = mean(ELF, na.rm=TRUE),
+             (fle = mean(Flesch.Kincaid, na.rm=TRUE),
+              (fog = mean(FOG.NRI, na.rm=TRUE))
+
+

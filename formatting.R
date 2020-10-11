@@ -230,4 +230,36 @@ toplot <- USETHIS %>%
              (fle = mean(Flesch.Kincaid, na.rm=TRUE),
               (fog = mean(FOG.NRI, na.rm=TRUE))
 
+#What if we do separate graphs for each DV?
+
+#For comparison boxplots, need factor/character variable, I think.
+USETHIS$countc <- as.character(as.numeric(USETHIS$count))
+class(USETHIS$countc)
+
+USETHIS$countc[USETHIS$countc == "1"] <- "NoResponse"
+USETHIS$countc[USETHIS$countc == "0"] <- "Response"
+
+USETHIS$countc
+
+#SD plot
+ggplot(USETHIS, aes(x=countc, y=SD, fill=countc)) + 
+  geom_boxplot()
+
+colnames(USETHIS)
+
+#Flesch.Kincaid plot
+ggplot(USETHIS, aes(x=countc, y=Flesch.Kincaid, fill=countc)) + 
+  geom_boxplot()
+
+#Dale.Chall plot
+ggplot(USETHIS, aes(x=countc, y=Dale.Chall, fill=countc)) + 
+  geom_boxplot()
+
+#ELF plot
+ggplot(USETHIS, aes(x=countc, y=ELF, fill=countc)) + 
+  geom_boxplot()
+
+#FOG.NRI plot
+ggplot(USETHIS, aes(x=countc, y=FOG.NRI, fill=countc)) + 
+  geom_boxplot()
 

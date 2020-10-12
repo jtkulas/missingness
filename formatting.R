@@ -281,3 +281,10 @@ temp <- sort(USETHIS$ZFOG.NRI)
 
 ggplot(USETHIS, aes(x=countc, y=ZFOG.NRI)) + 
   geom_bar(stat = "identity")
+
+sdmeans <- USETHIS %>% summarise(USETHIS$SD),
+                                 group_by(USETHIS$countc))
+library(psych)
+
+describe.by(USETHIS, USETHIS$countc)
+describe(USETHIS)

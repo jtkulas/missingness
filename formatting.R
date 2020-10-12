@@ -218,6 +218,11 @@ summary(model3)
 anova(model,model2)
 anova(model2,model3)
 
+glm(count ~ ELF + Flesch.Kincaid + FOG.NRI + Dale.Chall + SD , USETHIS, family = "binomial")
+
+
+
+
 t.test(SD ~ count, USETHIS)
 t.test(ELF ~ count, USETHIS)
 t.test(Flesch.Kincaid ~ count, USETHIS)
@@ -255,3 +260,9 @@ q <- ggplot(data_long, aes(x=index, y=value, fill=Response)) +
 
 q + coord_flip()
 
+
+long2 <- gather(USETHIS, index, value, ZELF:Zsd, factor_key=TRUE)
+colnames(long2)[13] <- "Response"
+
+ggplot(long2, aes(x=index, y=value, fill=Response)) + 
+  geom_boxplot() + ylim(-4,4)

@@ -210,8 +210,13 @@ USETHIS$count <- as.numeric(as.character(USETHIS$count))
 
 cor(USETHIS[7:10])
 
-model <- lm(count ~ ELF + SD, USETHIS)
-summary(model)
+model <- glm(count ~ ELF + Flesch.Kincaid + FOG.NRI + Dale.Chall + SD , USETHIS, family=binomial(link="logit"))
+model2 <- glm(count ~ ELF + Flesch.Kincaid + FOG.NRI + Dale.Chall + SD + type, USETHIS, family=binomial(link="logit"))
+model3 <- glm(count ~ ELF + Flesch.Kincaid + FOG.NRI + Dale.Chall + SD + type + type*ELF + type*Flesch.Kincaid + type*FOG.NRI + type*Dale.Chall + type*SD, USETHIS, family=binomial(link="logit"))
+summary(model)    ## Not sure how to report this
+summary(model3)
+anova(model,model2)
+anova(model2,model3)
 
 t.test(SD ~ count, USETHIS)
 t.test(ELF ~ count, USETHIS)
@@ -219,16 +224,7 @@ t.test(Flesch.Kincaid ~ count, USETHIS)
 t.test(FOG.NRI ~ count, USETHIS)
 t.test(Dale.Chall ~ count, USETHIS)
 
-## Boxplot with 10 x-axis locations
 
-## PLAY WITH THIS AND GET A PRETTY FIGURE!!!!
-
-toplot <- USETHIS %>%                            
-  group_by(count) %>% 
-  summarise((sd = mean(SD, na.rm=TRUE),
-            (elf = mean(ELF, na.rm=TRUE),
-             (fle = mean(Flesch.Kincaid, na.rm=TRUE),
-              (fog = mean(FOG.NRI, na.rm=TRUE))
 
 #What if we do separate graphs for each DV?
 
@@ -236,48 +232,26 @@ toplot <- USETHIS %>%
 USETHIS$countc <- as.character(as.numeric(USETHIS$count))
 class(USETHIS$countc)
 
-USETHIS$countc[USETHIS$countc == "1"] <- "NoResponse"
-USETHIS$countc[USETHIS$countc == "0"] <- "Response"
+USETHIS$countc[USETHIS$countc == "1"] <- "NA"
+USETHIS$countc[USETHIS$countc == "0"] <- "Valid Response"
 
-USETHIS$countc
-
-#SD plot
-ggplot(USETHIS, aes(x=countc, y=SD, fill=countc)) + 
-  geom_boxplot()
-
-colnames(USETHIS)
-
-#Flesch.Kincaid plot
-ggplot(USETHIS, aes(x=countc, y=Flesch.Kincaid, fill=countc)) + 
-  geom_boxplot()
-
-#Dale.Chall plot
-ggplot(USETHIS, aes(x=countc, y=Dale.Chall, fill=countc)) + 
-  geom_boxplot()
-
-#ELF plot
-ggplot(USETHIS, aes(x=countc, y=ELF, fill=countc)) + 
-  geom_boxplot()
-
-#FOG.NRI plot
-ggplot(USETHIS, aes(x=countc, y=FOG.NRI, fill=countc)) + 
-  geom_boxplot()
-
-
-#hist(USETHIS$Dale.Chall)
-
-colnames(USETHIS)
 
 USETHIS$ZELF <- scale(USETHIS$ELF)
 USETHIS$ZFlesch.Kincaid <- scale(USETHIS$Flesch.Kincaid)
 USETHIS$ZDale.Chall <- scale(USETHIS$Dale.Chall)
 USETHIS$ZFOG.NRI <- scale(USETHIS$FOG.NRI)
+USETHIS$Zsd <- scale(USETHIS$SD)
 
-#Trying it with z scores.
-ggplot(USETHIS, aes(x=countc, y=ZFOG.NRI, fill=countc)) + 
-  geom_boxplot()
 
-temp <- sort(USETHIS$ZFOG.NRI)
+toplot2 <- USETHIS %>%                            
+  group_by(countc) %>% 
+  summarise(flesch = mean(ZFlesch.Kincaid, na.rm=TRUE), elf = mean(ZELF, na.rm=TRUE), dale = mean(ZDale.Chall, na.rm=TRUE), fog = mean(ZFOG.NRI, na.rm=TRUE), sd = mean(Zsd, na.rm=TRUE))
 
-ggplot(USETHIS, aes(x=countc, y=ZFOG.NRI)) + 
-  geom_bar(stat = "identity")
+data_long <- gather(toplot2, index, value, flesch:sd, factor_key=TRUE)
+colnames(data_long)[1] <- "Response"
+
+q <- ggplot(data_long, aes(x=index, y=value, fill=Response)) + 
+  geom_bar(stat="identity", position = "dodge")
+
+q + coord_flip()
+

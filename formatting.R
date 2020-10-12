@@ -263,3 +263,21 @@ ggplot(USETHIS, aes(x=countc, y=ELF, fill=countc)) +
 ggplot(USETHIS, aes(x=countc, y=FOG.NRI, fill=countc)) + 
   geom_boxplot()
 
+
+#hist(USETHIS$Dale.Chall)
+
+colnames(USETHIS)
+
+USETHIS$ZELF <- scale(USETHIS$ELF)
+USETHIS$ZFlesch.Kincaid <- scale(USETHIS$Flesch.Kincaid)
+USETHIS$ZDale.Chall <- scale(USETHIS$Dale.Chall)
+USETHIS$ZFOG.NRI <- scale(USETHIS$FOG.NRI)
+
+#Trying it with z scores.
+ggplot(USETHIS, aes(x=countc, y=ZFOG.NRI, fill=countc)) + 
+  geom_boxplot()
+
+temp <- sort(USETHIS$ZFOG.NRI)
+
+ggplot(USETHIS, aes(x=countc, y=ZFOG.NRI)) + 
+  geom_bar(stat = "identity")

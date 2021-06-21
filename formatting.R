@@ -237,7 +237,7 @@ t.test(Dale.Chall ~ count, USETHIS)
 USETHIS$countc <- as.character(as.numeric(USETHIS$count))
 class(USETHIS$countc)
 
-USETHIS$countc[USETHIS$countc == "1"] <- "NA"
+USETHIS$countc[USETHIS$countc == "1"] <- "Missing"
 USETHIS$countc[USETHIS$countc == "0"] <- "Valid Response"
 
 

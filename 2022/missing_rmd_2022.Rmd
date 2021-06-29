@@ -1,0 +1,65 @@
+---
+title: "missing_2022"
+author: "Alicia Stachowski"
+date: "6/29/2021"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(digits=2)
+```
+
+Do we want to use readability to predict the three dichotomous outcomes (e.g., don't know)? Not sure what that would look like - is that most easily understood if we explore 3 unique regressions? 
+
+Or, could try to get some quick data on how sensitive the questions themselves are and use that in a similar way to desirability...
+
+```{r read_data, include = FALSE}
+library(tidyverse)
+library(haven)
+library(plyr)
+library(quanteda)
+library(readtext)
+
+#https://tutorials.methodsconsultants.com/posts/reading-sas-spss-or-stata-files-into-r-using-haven/
+
+data <- read_sas("gss2020panel_r1.sas7bdat", NULL) 
+
+as_factor(data)
+#read the data in as factors
+
+#tag missing values
+#https://haven.tidyverse.org/articles/semantics.html
+print_tagged_na(data$ABANY_2) #Ok, so the data are "tagged" - the code is under the NA
+test_total <- is_tagged_na(data$ABANY_2); count(test_total)
+
+test_d <- is_tagged_na(data$ABANY_2, "d") #view number of "don't know" codes
+test_i <- is_tagged_na(data$ABANY_2, "i") #inapplicable codes (don't use this - it's for when a respondent didn't see a question given their survey form, or because it did not apply to their circumstance)
+test_n <- is_tagged_na(data$ABANY_2, "n") #no answer codes
+test_s <- is_tagged_na(data$ABANY_2, "s") #skips over a question on the web
+
+count(test_d)
+count(test_n)
+count(test_s)
+
+```
+# https://quanteda.io/reference/textstat_readability.html
+
+Note - most were web-based responses. Ultimately, 70.8 percent of respondents completed the GSS Panel survey via web survey, and 29.2 percent of respondents completed it by phone interview. 
+
+Note: in the 2020 survey administration, the codebook indicates a lot of terms were made more neutral to attempt to minimize the don't knows etc. 
+
+```{r readability_stats}
+
+#This will work to generate the readability stats for each question. There are 183 potential questions for us to use out of the 4,295 listed in the original dataset.
+
+#I did not have a good solution to a space in the question where {response to fill} was inserted from another question. 
+
+data1 <- readtext("data_prep.csv") #read in the text file
+corpus1 <- corpus(data1, docid_field = "text", text_field = "label")  # build a new corpus from the text file
+head(corpus1) #look at the corpus a little
+
+#compute readability stats for items.
+readability_trial <- textstat_readability(corpus1,
+                     measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
+```

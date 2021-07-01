@@ -10,9 +10,11 @@ knitr::opts_chunk$set(echo = TRUE)
 options(digits=2)
 ```
 
-Do we want to use readability to predict the three dichotomous outcomes (e.g., don't know)? Not sure what that would look like - is that most easily understood if we explore 3 unique regressions? 
+Do we want to use readability to predict the three dichotomous outcomes (e.g., don't know)? Not sure what that would look like - is that most easily understood if we explore 3 unique regressions? Write a function for that??
 
 Or, could try to get some quick data on how sensitive the questions themselves are and use that in a similar way to desirability...
+
+Next: select only the usable variables?? and create a new dataframe of just those?
 
 ```{r read_data, include = FALSE}
 library(tidyverse)
@@ -25,11 +27,15 @@ library(readtext)
 
 data <- read_sas("gss2020panel_r1.sas7bdat", NULL) 
 
-as_factor(data)
-#read the data in as factors
+as_factor(data)#read the data in as factors
+
+```
+
+```{r missingvalues, include = FALSE}
 
 #tag missing values
 #https://haven.tidyverse.org/articles/semantics.html
+#Here's a good source of info for this too: https://bookdown.org/ndphillips/YaRrr/
 print_tagged_na(data$ABANY_2) #Ok, so the data are "tagged" - the code is under the NA
 test_total <- is_tagged_na(data$ABANY_2); count(test_total)
 
@@ -38,11 +44,16 @@ test_i <- is_tagged_na(data$ABANY_2, "i") #inapplicable codes (don't use this - 
 test_n <- is_tagged_na(data$ABANY_2, "n") #no answer codes
 test_s <- is_tagged_na(data$ABANY_2, "s") #skips over a question on the web
 
-count(test_d)
-count(test_n)
-count(test_s)
+#count, then read in the logical vector as integer, then replace 1's ("trues") for other values for n and s responses so we have one variable with numbers now indicating which values of missing are there.
+count(test_d); test_d <- as.integer(test_d) # don't knows are 1
+count(test_n); test_n <- as.integer(test_n); test_n[test_n == 1] <- 2 #no answer 
+count(test_s); test_s <- as.integer(test_s); test_s[test_s == 1] <- 3 #skipped
 
+abany_r <- test_d + test_i + test_n + test_s
+table(abany_r) #NOTE: 0's indicate a non-missing, valid answer here. The test above was for "is it tagged as missing" so 0 indicates "it's NOT missing.
 ```
+
+
 # https://quanteda.io/reference/textstat_readability.html
 
 Note - most were web-based responses. Ultimately, 70.8 percent of respondents completed the GSS Panel survey via web survey, and 29.2 percent of respondents completed it by phone interview. 

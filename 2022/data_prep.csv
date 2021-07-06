@@ -27,7 +27,7 @@ ADVFRONT,Sci Rsch is necessary and should be supported by federal govt,
 AFFRMACT,Favor preference in hiring blacks,
 AFRAIDOF,People act as if they are afraid of R,(In your day-to-day life how often have any of the following things happened to you?) People act as if they are afraid of you.
 AFTERLIF,Belief in life after death,
-AGE,Age of respondent,How old {response to agefill} last birthday?
+AGE,Age of respondent,
 AGED,Should aged live with their children,
 AGEKDBRN,R's age when 1st child born,
 ANCESTRS,Believe in supernatural power of deceased ancestors,
@@ -99,13 +99,13 @@ COHRS2,No. of hours partner usually works a week,
 COIND10,Partner's industry code (2010),
 COISCO08,"Partner's occupation, 2010 census & 2008 ISCO code",
 COJew,What sort of Jew Is R's partner currently,
-COLATH,Allow anti-religionist to teach,"Should such a person be allowed to teach in a college or university, or not? (somebody who is against all churches and religion)"
-COLCOM,Should communist teacher be fired," Suppose he is teaching in a college. Should he be fired, or not? (communist)"
+COLATH,Allow anti-religionist to teach,"Should such a person be allowed to teach in a college or university, or not? "
+COLCOM,Should communist teacher be fired," Suppose he is teaching in a college. Should he be fired, or not? "
 COLDEG1,The highest degree R have earned,
-COLHOMO,Allow homosexual to teach,"Should such a person be allowed to teach in a college or university, or not? (homosexual)"
-COLMIL,Allow militarist to teach,"Should such a person be allowed to teach in a college or university, or not? (militarist)"
-COLMSLM,Allow anti-American muslim clergymen teaching in college,"Should such a person be allowed to teach in a college or university, or not? (anti-American muslim clergymen)"
-COLRAC,Allow racist to teach," Should such a person be allowed to teach in a college or university, or not? (racist)"
+COLHOMO,Allow homosexual to teach,"Should such a person be allowed to teach in a college or university, or not? "
+COLMIL,Allow militarist to teach,"Should such a person be allowed to teach in a college or university, or not? "
+COLMSLM,Allow anti-American muslim clergymen teaching in college,"Should such a person be allowed to teach in a college or university, or not? "
+COLRAC,Allow racist to teach," Should such a person be allowed to teach in a college or university, or not? "
 COLSCI,R has taken any college-level sci course,
 COLSCINM,Number of college-level sci courses R have taken,
 COMFORT,Religion helps people to gain comfort in times of trouble and sorrow,
@@ -141,7 +141,7 @@ CONSENT,Participation/recording consent,
 CONTV,Confidence in television,
 CONWKDAY,Number of people R contacts with on a typical weekday,
 COOCC10,Partner's census occupation code (2010),
-COOP,R's attitude toward interview,"IN GENERAL, WHAT WAS THE RESPONDENT'S ATTITUDE TOWARD THE INTERVIEW?"
+COOP,R's attitude toward interview,
 COOTHER,Other protestant denominations,
 COPRES10,Partner's occupational prestige score (2010),
 COPRES105PLUS,Partner's occupational prestige score using threshold method (2010),
@@ -196,7 +196,7 @@ DWELLING,Type of structure,
 DWELLPRE,Type of structure in which the respondent lives,
 DWELOWN,Does R own or rent home?,"Currently, do you (or does your family) own your home, pay rent, or something else?"
 DWELOWN16,DID Rs FAMILY OWN OR RENT HOME WHEN R WAS AGE 16,
-EARNRS,How many in family earned money,EARNRS
+EARNRS,How many in family earned money,
 EARTHSUN,Sci knowledge: the earth goes around the sun,
 EDUC,Highest year of school completed,
 EGOMEANS,Life meaningful only if you provide meaning,
@@ -385,8 +385,8 @@ INTFARM,Interested in farm issues,
 INTHISP,"Is interviewer Spanish, Hispanic or latino",
 INTID,Interviewer id,
 INTINTL,Interested in international issues,
-INTLBLKS,Unintelligent - intelligent,(Do people in this group tend to be unintelligent or tend to be intelligent?)Blacks?
-INTLHSPS,Unintelligent - intelligent,"(Do people in these groups tend to be unintelligent or tend to be intelligent?)Hispanics, Latinos?"
+INTLBLKS,Unintelligent - intelligent,(Do people in this group tend to be unintelligent or tend to be intelligent?)
+INTLHSPS,Unintelligent - intelligent,(Do people in these groups tend to be unintelligent or tend to be intelligent?)
 INTLWHTS,Unintelligent -intelligent,Where would you rate Whites in general on this scale?
 INTMED,Interested in medical discoveries,
 INTMIL,Interested in military policy,
@@ -435,11 +435,11 @@ LETDIE1,Allow incurable patients to die,"When a person has a disease that cannot
 LETIN1A,Number of immigrants nowadays should be,Do you think the number of immigrants to America nowadays should be...
 LIBATH,Allow anti-religious book in library,"If some people in your community suggested that a book he wrote against churches and religion should be taken out of your public library, would you favor removing this book, or not?"
 LIBCOM,Allow communists book in library,"communist - Suppose he wrote a book which is in your public library. Somebody in your community suggests that the book should be removed from the library. Would you favor removing it, or not?"
-LIBHOMO,Allow homosexuals book in library,"homosexual - If somebody in your community suggests that a book he wrote in favor of homosexuality should be taken out of your public library, would you favor removing it, or not?"
-LIBMIL,Allow militarists book in library,"militarist - Suppose he wrote a book advocating doing away with elections and letting the military run the country.
+LIBHOMO,Allow homosexuals book in library," If somebody in your community suggests that a book he wrote in favor of homosexuality should be taken out of your public library, would you favor removing it, or not?"
+LIBMIL,Allow militarists book in library," Suppose he wrote a book advocating doing away with elections and letting the military run the country.
 Somebody in your community suggests that the book be removed from the public library. Would you favor removing it, or not?"
-LIBMSLM,Allow anti-American muslim clergymen's books in library,"anti-American muslim clergymen If some people in your community suggested that a book he wrote which preaches hatred of the United States should be taken out of your public library, would you favor removing this book, or not?"
-LIBRAC,Allow racists book in library,"racist - If some people in your community suggested that a book he wrote which said Blacks are inferior should be taken out of your public library, would you favor removing this book, or not?"
+LIBMSLM,Allow anti-American muslim clergymen's books in library,"If some people in your community suggested that a book he wrote which preaches hatred of the United States should be taken out of your public library, would you favor removing this book, or not?"
+LIBRAC,Allow racists book in library,"If some people in your community suggested that a book he wrote which said Blacks are inferior should be taken out of your public library, would you favor removing this book, or not?"
 LIFE,Is life exciting or dull,"In general, do you find life exciting, pretty routine, or dull?"
 LIFEIN5,R's rating of life overall in five years from 0-10,
 LIFENOW,R's rating of life overall now from 0-10,
@@ -895,7 +895,7 @@ SPJew,What sort of Jew Is R's spouse currently,"Does your {response to _spfill1}
 SPKATH,Allow anti-religionist to speak,"There are always some people whose ideas are considered bad or dangerous by other people. For instance, somebody who is against all churches and religion... If such a person wanted to make a speech in your community against churches and religion, should he be allowed to speak, or not?"
 SPKCOM,Allow communist to speak,"Now, we would like to ask you some questions about a man who admits he is a Communist. Suppose this admitted Communist wanted to make a speech in your community. Should he be allowed to speak, or not?"
 SPKHOMO,Allow homosexual to speak,
-SPKLANG,How well Does R speak other language,How well do you speak that language ({BETRLANG})?
+SPKLANG,How well Does R speak other language,How well do you speak that language ({})?
 SPKMIL,Allow militarist to speak,"Consider a person who advocates doing away with elections and letting the military run the country. If such a person wanted to make a speech in your community, should he be allowed to speak, or not?"
 SPKMSLM,Allow muslim clergymen preaching hatred of the us,"Now consider a Muslim clergyman who preaches hatred of the United States. If such a person wanted to make a speech in your community preaching hatred of the United States, should he be allowed to speak, or not?"
 SPKRAC,Allow racist to speak,"Or, consider a person who believes that Blacks are genetically inferior. If such a person wanted to make a speech in your community claiming that Blacks are inferior, should he be allowed to speak, or not?"

@@ -16,7 +16,7 @@ Or, could try to get some quick data on how sensitive the questions themselves a
 
 Next: select only the usable variables?? and create a new dataframe of just those?
 
-```{r read_data, include = FALSE}
+```{r readdata, include = FALSE}
 library(tidyverse)
 library(haven)
 library(plyr)
@@ -26,9 +26,6 @@ library(readtext)
 #https://tutorials.methodsconsultants.com/posts/reading-sas-spss-or-stata-files-into-r-using-haven/
 
 data <- read_sas("gss2020panel_r1.sas7bdat", NULL) 
-
-as_factor(data)#read the data in as factors
-
 ```
 
 ```{r missingvalues, include = FALSE}
@@ -48,11 +45,428 @@ test_s <- is_tagged_na(data$ABANY_2, "s") #skips over a question on the web
 count(test_d); test_d <- as.integer(test_d) # don't knows are 1
 count(test_n); test_n <- as.integer(test_n); test_n[test_n == 1] <- 2 #no answer 
 count(test_s); test_s <- as.integer(test_s); test_s[test_s == 1] <- 3 #skipped
-
-abany_r <- test_d + test_i + test_n + test_s
+count(test_i); test_i <- as.integer(test_i); test_i[test_i == 1] <- 4 #not applicable
+abany_r <- test_d + test_n + test_s + test_i
 table(abany_r) #NOTE: 0's indicate a non-missing, valid answer here. The test above was for "is it tagged as missing" so 0 indicates "it's NOT missing.
 ```
 
+```{r create_missing_function, include = FALSE}
+
+#https://r4ds.had.co.nz/functions.html
+#https://www.datamentor.io/r-programming/function/
+
+missing_codes <- function(variablename) {
+test_d <- is_tagged_na(variablename, "d"); 
+test_i <- is_tagged_na(variablename, "i");   
+test_n <- is_tagged_na(variablename, "n");   
+test_s <- is_tagged_na(variablename, "s");  
+test_d <- as.integer(test_d);  # 1 means don't know
+test_n <- as.integer(test_n);  
+test_n[test_n == 1] <- 2; 
+test_s <- as.integer(test_s); 
+test_s[test_s == 1] <- 3; 
+test_i <- as.integer(test_i); 
+test_i[test_i == 1] <- 4; 
+test_d + test_n + test_s + test_i
+}
+```
+
+```{r apply_missing_function}
+#example of how we could recode all of them by variable name
+variablename <- data$ABANY_2
+abany_recoded <- missing_codes(variablename)
+
+table(abany_recoded) #This newly created variable should be the same as one below
+table(abany_r) #it worked
+table(data$ABANY_2)
+
+#Now, need a loop to do all of the variables this way
+#https://r4ds.had.co.nz/iteration.html
+#https://www.datacamp.com/community/tutorials/tutorial-on-loops-in-r
+#output <- vector("double", length = 4295)  # 1. output
+#for (i in seq_along(data)) {            # 2. sequence
+#  output[[i]] <- missing_codes(data)      # 3. body
+#}
+#output
+```
+
+```{r apply_missing_codes}
+
+variablename <- data$COLRAC_2	;	COLRAC_2_recoded <- missing_codes(variablename)	;	table(COLRAC_2_recoded)	;	data <- cbind(data,COLRAC_2_recoded)	
+
+variablename <- data$COLCOM_2	;	COLCOM_2_recoded <- missing_codes(variablename)	;	table(COLCOM_2_recoded)	;	data <- cbind(data,COLCOM_2_recoded)	
+
+variablename <- data$INTLHSPS_2	;	INTLHSPS_2_recoded <- missing_codes(variablename)	;	table(INTLHSPS_2_recoded)	;	data <- cbind(data,INTLHSPS_2_recoded)	
+
+variablename <- data$INTLBLKS_2	;	INTLBLKS_2_recoded <- missing_codes(variablename)	;	table(INTLBLKS_2_recoded)	;	data <- cbind(data,INTLBLKS_2_recoded)	
+
+variablename <- data$LONELY2_2	;	LONELY2_2_recoded <- missing_codes(variablename)	;	table(LONELY2_2_recoded)	;	data <- cbind(data,LONELY2_2_recoded)	
+
+variablename <- data$AFRAIDOF_2	;	AFRAIDOF_2_recoded <- missing_codes(variablename)	;	table(AFRAIDOF_2_recoded)	;	data <- cbind(data,AFRAIDOF_2_recoded)	
+
+variablename <- data$NOTSMART_2	;	NOTSMART_2_recoded <- missing_codes(variablename)	;	table(NOTSMART_2_recoded)	;	data <- cbind(data,NOTSMART_2_recoded)	
+
+variablename <- data$THREATEN_2	;	THREATEN_2_recoded <- missing_codes(variablename)	;	table(THREATEN_2_recoded)	;	data <- cbind(data,THREATEN_2_recoded)	
+
+variablename <- data$POORSERV_2	;	POORSERV_2_recoded <- missing_codes(variablename)	;	table(POORSERV_2_recoded)	;	data <- cbind(data,POORSERV_2_recoded)	
+
+variablename <- data$NATCHLD_2	;	NATCHLD_2_recoded <- missing_codes(variablename)	;	table(NATCHLD_2_recoded)	;	data <- cbind(data,NATCHLD_2_recoded)	
+
+variablename <- data$NATFAREY_2	;	NATFAREY_2_recoded <- missing_codes(variablename)	;	table(NATFAREY_2_recoded)	;	data <- cbind(data,NATFAREY_2_recoded)	
+
+variablename <- data$NATCITYY_2	;	NATCITYY_2_recoded <- missing_codes(variablename)	;	table(NATCITYY_2_recoded)	;	data <- cbind(data,NATCITYY_2_recoded)	
+
+variablename <- data$NATRACEY_2	;	NATRACEY_2_recoded <- missing_codes(variablename)	;	table(NATRACEY_2_recoded)	;	data <- cbind(data,NATRACEY_2_recoded)	
+
+variablename <- data$NATAIDY_2	;	NATAIDY_2_recoded <- missing_codes(variablename)	;	table(NATAIDY_2_recoded)	;	data <- cbind(data,NATAIDY_2_recoded)	
+
+variablename <- data$NATDRUG_2	;	NATDRUG_2_recoded <- missing_codes(variablename)	;	table(NATDRUG_2_recoded)	;	data <- cbind(data,NATDRUG_2_recoded)	
+
+variablename <- data$NATENRGY_2	;	NATENRGY_2_recoded <- missing_codes(variablename)	;	table(NATENRGY_2_recoded)	;	data <- cbind(data,NATENRGY_2_recoded)	
+
+variablename <- data$NATDRUGY_2	;	NATDRUGY_2_recoded <- missing_codes(variablename)	;	table(NATDRUGY_2_recoded)	;	data <- cbind(data,NATDRUGY_2_recoded)	
+
+variablename <- data$NATEDUCY_2	;	NATEDUCY_2_recoded <- missing_codes(variablename)	;	table(NATEDUCY_2_recoded)	;	data <- cbind(data,NATEDUCY_2_recoded)	
+
+variablename <- data$NATCRIME_2	;	NATCRIME_2_recoded <- missing_codes(variablename)	;	table(NATCRIME_2_recoded)	;	data <- cbind(data,NATCRIME_2_recoded)	
+
+variablename <- data$NATHEALY_2	;	NATHEALY_2_recoded <- missing_codes(variablename)	;	table(NATHEALY_2_recoded)	;	data <- cbind(data,NATHEALY_2_recoded)	
+
+variablename <- data$NATENVIR_2	;	NATENVIR_2_recoded <- missing_codes(variablename)	;	table(NATENVIR_2_recoded)	;	data <- cbind(data,NATENVIR_2_recoded)	
+
+variablename <- data$NATHEAL_2	;	NATHEAL_2_recoded <- missing_codes(variablename)	;	table(NATHEAL_2_recoded)	;	data <- cbind(data,NATHEAL_2_recoded)	
+
+variablename <- data$NATRACE_2	;	NATRACE_2_recoded <- missing_codes(variablename)	;	table(NATRACE_2_recoded)	;	data <- cbind(data,NATRACE_2_recoded)	
+
+variablename <- data$NATEDUC_2	;	NATEDUC_2_recoded <- missing_codes(variablename)	;	table(NATEDUC_2_recoded)	;	data <- cbind(data,NATEDUC_2_recoded)	
+
+variablename <- data$NATCRIMY_2	;	NATCRIMY_2_recoded <- missing_codes(variablename)	;	table(NATCRIMY_2_recoded)	;	data <- cbind(data,NATCRIMY_2_recoded)	
+
+variablename <- data$NATMASS_2	;	NATMASS_2_recoded <- missing_codes(variablename)	;	table(NATMASS_2_recoded)	;	data <- cbind(data,NATMASS_2_recoded)	
+
+variablename <- data$NATARMSY_2	;	NATARMSY_2_recoded <- missing_codes(variablename)	;	table(NATARMSY_2_recoded)	;	data <- cbind(data,NATARMSY_2_recoded)	
+
+variablename <- data$NATPARK_2	;	NATPARK_2_recoded <- missing_codes(variablename)	;	table(NATPARK_2_recoded)	;	data <- cbind(data,NATPARK_2_recoded)	
+
+variablename <- data$NATSOC_2	;	NATSOC_2_recoded <- missing_codes(variablename)	;	table(NATSOC_2_recoded)	;	data <- cbind(data,NATSOC_2_recoded)	
+
+variablename <- data$NATCITY_2	;	NATCITY_2_recoded <- missing_codes(variablename)	;	table(NATCITY_2_recoded)	;	data <- cbind(data,NATCITY_2_recoded)	
+
+variablename <- data$NATSPACY_2	;	NATSPACY_2_recoded <- missing_codes(variablename)	;	table(NATSPACY_2_recoded)	;	data <- cbind(data,NATSPACY_2_recoded)	
+
+variablename <- data$NATSCI_2	;	NATSCI_2_recoded <- missing_codes(variablename)	;	table(NATSCI_2_recoded)	;	data <- cbind(data,NATSCI_2_recoded)	
+
+variablename <- data$NATENVIY_2	;	NATENVIY_2_recoded <- missing_codes(variablename)	;	table(NATENVIY_2_recoded)	;	data <- cbind(data,NATENVIY_2_recoded)	
+
+variablename <- data$NATARMS_2	;	NATARMS_2_recoded <- missing_codes(variablename)	;	table(NATARMS_2_recoded)	;	data <- cbind(data,NATARMS_2_recoded)	
+
+variablename <- data$NATSPAC_2	;	NATSPAC_2_recoded <- missing_codes(variablename)	;	table(NATSPAC_2_recoded)	;	data <- cbind(data,NATSPAC_2_recoded)	
+
+variablename <- data$NATFARE_2	;	NATFARE_2_recoded <- missing_codes(variablename)	;	table(NATFARE_2_recoded)	;	data <- cbind(data,NATFARE_2_recoded)	
+
+variablename <- data$WRKGOVT_2	;	WRKGOVT_2_recoded <- missing_codes(variablename)	;	table(WRKGOVT_2_recoded)	;	data <- cbind(data,WRKGOVT_2_recoded)	
+
+variablename <- data$TAX_2	;	TAX_2_recoded <- missing_codes(variablename)	;	table(TAX_2_recoded)	;	data <- cbind(data,TAX_2_recoded)	
+
+variablename <- data$FEPRESCH_2	;	FEPRESCH_2_recoded <- missing_codes(variablename)	;	table(FEPRESCH_2_recoded)	;	data <- cbind(data,FEPRESCH_2_recoded)	
+
+variablename <- data$FECHLD_2	;	FECHLD_2_recoded <- missing_codes(variablename)	;	table(FECHLD_2_recoded)	;	data <- cbind(data,FECHLD_2_recoded)	
+
+variablename <- data$JOBFIND_2	;	JOBFIND_2_recoded <- missing_codes(variablename)	;	table(JOBFIND_2_recoded)	;	data <- cbind(data,JOBFIND_2_recoded)	
+
+variablename <- data$EMAILHR_2	;	EMAILHR_2_recoded <- missing_codes(variablename)	;	table(EMAILHR_2_recoded)	;	data <- cbind(data,EMAILHR_2_recoded)	
+
+variablename <- data$EMAILMIN_2	;	EMAILMIN_2_recoded <- missing_codes(variablename)	;	table(EMAILMIN_2_recoded)	;	data <- cbind(data,EMAILMIN_2_recoded)	
+
+variablename <- data$LOCALNUM_2	;	LOCALNUM_2_recoded <- missing_codes(variablename)	;	table(LOCALNUM_2_recoded)	;	data <- cbind(data,LOCALNUM_2_recoded)	
+
+variablename <- data$PRAY_2	;	PRAY_2_recoded <- missing_codes(variablename)	;	table(PRAY_2_recoded)	;	data <- cbind(data,PRAY_2_recoded)	
+
+variablename <- data$HUNT_2	;	HUNT_2_recoded <- missing_codes(variablename)	;	table(HUNT_2_recoded)	;	data <- cbind(data,HUNT_2_recoded)	
+
+variablename <- data$LIBMSLM_2	;	LIBMSLM_2_recoded <- missing_codes(variablename)	;	table(LIBMSLM_2_recoded)	;	data <- cbind(data,LIBMSLM_2_recoded)	
+
+variablename <- data$RACWORK_2	;	RACWORK_2_recoded <- missing_codes(variablename)	;	table(RACWORK_2_recoded)	;	data <- cbind(data,RACWORK_2_recoded)	
+
+variablename <- data$RACLIVE_2	;	RACLIVE_2_recoded <- missing_codes(variablename)	;	table(RACLIVE_2_recoded)	;	data <- cbind(data,RACLIVE_2_recoded)	
+
+variablename <- data$MARITAL_2	;	MARITAL_2_recoded <- missing_codes(variablename)	;	table(MARITAL_2_recoded)	;	data <- cbind(data,MARITAL_2_recoded)	
+
+variablename <- data$FEHIRE_2	;	FEHIRE_2_recoded <- missing_codes(variablename)	;	table(FEHIRE_2_recoded)	;	data <- cbind(data,FEHIRE_2_recoded)	
+
+variablename <- data$OTHLANG_2	;	OTHLANG_2_recoded <- missing_codes(variablename)	;	table(OTHLANG_2_recoded)	;	data <- cbind(data,OTHLANG_2_recoded)	
+
+variablename <- data$LIBCOM_2	;	LIBCOM_2_recoded <- missing_codes(variablename)	;	table(LIBCOM_2_recoded)	;	data <- cbind(data,LIBCOM_2_recoded)	
+
+variablename <- data$FINRELA_2	;	FINRELA_2_recoded <- missing_codes(variablename)	;	table(FINRELA_2_recoded)	;	data <- cbind(data,FINRELA_2_recoded)	
+
+variablename <- data$SPKMIL_2	;	SPKMIL_2_recoded <- missing_codes(variablename)	;	table(SPKMIL_2_recoded)	;	data <- cbind(data,SPKMIL_2_recoded)	
+
+variablename <- data$DWELOWN_2	;	DWELOWN_2_recoded <- missing_codes(variablename)	;	table(DWELOWN_2_recoded)	;	data <- cbind(data,DWELOWN_2_recoded)	
+
+variablename <- data$EVWORK_2	;	EVWORK_2_recoded <- missing_codes(variablename)	;	table(EVWORK_2_recoded)	;	data <- cbind(data,EVWORK_2_recoded)	
+
+variablename <- data$PRES16_2	;	PRES16_2_recoded <- missing_codes(variablename)	;	table(PRES16_2_recoded)	;	data <- cbind(data,PRES16_2_recoded)	
+
+variablename <- data$SPEVWORK_2	;	SPEVWORK_2_recoded <- missing_codes(variablename)	;	table(SPEVWORK_2_recoded)	;	data <- cbind(data,SPEVWORK_2_recoded)	
+
+variablename <- data$ROWNGUN_2	;	ROWNGUN_2_recoded <- missing_codes(variablename)	;	table(ROWNGUN_2_recoded)	;	data <- cbind(data,ROWNGUN_2_recoded)	
+
+variablename <- data$WRKWAYUP_2	;	WRKWAYUP_2_recoded <- missing_codes(variablename)	;	table(WRKWAYUP_2_recoded)	;	data <- cbind(data,WRKWAYUP_2_recoded)	
+
+variablename <- data$SEXNOW_2	;	SEXNOW_2_recoded <- missing_codes(variablename)	;	table(SEXNOW_2_recoded)	;	data <- cbind(data,SEXNOW_2_recoded)	
+
+variablename <- data$USWARY_2	;	USWARY_2_recoded <- missing_codes(variablename)	;	table(USWARY_2_recoded)	;	data <- cbind(data,USWARY_2_recoded)	
+
+variablename <- data$CAPPUN_2	;	CAPPUN_2_recoded <- missing_codes(variablename)	;	table(CAPPUN_2_recoded)	;	data <- cbind(data,CAPPUN_2_recoded)	
+
+variablename <- data$OWNGUN_2	;	OWNGUN_2_recoded <- missing_codes(variablename)	;	table(OWNGUN_2_recoded)	;	data <- cbind(data,OWNGUN_2_recoded)	
+
+variablename <- data$WEBMOB_2	;	WEBMOB_2_recoded <- missing_codes(variablename)	;	table(WEBMOB_2_recoded)	;	data <- cbind(data,WEBMOB_2_recoded)	
+
+variablename <- data$COMPUSE_2	;	COMPUSE_2_recoded <- missing_codes(variablename)	;	table(COMPUSE_2_recoded)	;	data <- cbind(data,COMPUSE_2_recoded)	
+
+variablename <- data$SPANKING_2	;	SPANKING_2_recoded <- missing_codes(variablename)	;	table(SPANKING_2_recoded)	;	data <- cbind(data,SPANKING_2_recoded)	
+
+variablename <- data$PILLOK_2	;	PILLOK_2_recoded <- missing_codes(variablename)	;	table(PILLOK_2_recoded)	;	data <- cbind(data,PILLOK_2_recoded)	
+
+variablename <- data$SUICIDE1_2	;	SUICIDE1_2_recoded <- missing_codes(variablename)	;	table(SUICIDE1_2_recoded)	;	data <- cbind(data,SUICIDE1_2_recoded)	
+
+variablename <- data$SUICIDE3_2	;	SUICIDE3_2_recoded <- missing_codes(variablename)	;	table(SUICIDE3_2_recoded)	;	data <- cbind(data,SUICIDE3_2_recoded)	
+
+variablename <- data$SUICIDE2_2	;	SUICIDE2_2_recoded <- missing_codes(variablename)	;	table(SUICIDE2_2_recoded)	;	data <- cbind(data,SUICIDE2_2_recoded)	
+
+variablename <- data$SUICIDE4_2	;	SUICIDE4_2_recoded <- missing_codes(variablename)	;	table(SUICIDE4_2_recoded)	;	data <- cbind(data,SUICIDE4_2_recoded)	
+
+variablename <- data$ABRAPE_2	;	ABRAPE_2_recoded <- missing_codes(variablename)	;	table(ABRAPE_2_recoded)	;	data <- cbind(data,ABRAPE_2_recoded)	
+
+variablename <- data$ABNOMORE_2	;	ABNOMORE_2_recoded <- missing_codes(variablename)	;	table(ABNOMORE_2_recoded)	;	data <- cbind(data,ABNOMORE_2_recoded)	
+
+variablename <- data$ABSINGLE_2	;	ABSINGLE_2_recoded <- missing_codes(variablename)	;	table(ABSINGLE_2_recoded)	;	data <- cbind(data,ABSINGLE_2_recoded)	
+
+variablename <- data$ABPOOR_2	;	ABPOOR_2_recoded <- missing_codes(variablename)	;	table(ABPOOR_2_recoded)	;	data <- cbind(data,ABPOOR_2_recoded)	
+
+variablename <- data$ABANY_2	;	ABANY_2_recoded <- missing_codes(variablename)	;	table(ABANY_2_recoded)	;	data <- cbind(data,ABANY_2_recoded)	
+
+variablename <- data$ABHLTH_2	;	ABHLTH_2_recoded <- missing_codes(variablename)	;	table(ABHLTH_2_recoded)	;	data <- cbind(data,ABHLTH_2_recoded)	
+
+variablename <- data$ABDEFECT_2	;	ABDEFECT_2_recoded <- missing_codes(variablename)	;	table(ABDEFECT_2_recoded)	;	data <- cbind(data,ABDEFECT_2_recoded)	
+
+variablename <- data$LETIN1A_2	;	LETIN1A_2_recoded <- missing_codes(variablename)	;	table(LETIN1A_2_recoded)	;	data <- cbind(data,LETIN1A_2_recoded)	
+
+variablename <- data$RACDIF3_2	;	RACDIF3_2_recoded <- missing_codes(variablename)	;	table(RACDIF3_2_recoded)	;	data <- cbind(data,RACDIF3_2_recoded)	
+
+variablename <- data$RACDIF2_2	;	RACDIF2_2_recoded <- missing_codes(variablename)	;	table(RACDIF2_2_recoded)	;	data <- cbind(data,RACDIF2_2_recoded)	
+
+variablename <- data$RACDIF4_2	;	RACDIF4_2_recoded <- missing_codes(variablename)	;	table(RACDIF4_2_recoded)	;	data <- cbind(data,RACDIF4_2_recoded)	
+
+variablename <- data$RACDIF1_2	;	RACDIF1_2_recoded <- missing_codes(variablename)	;	table(RACDIF1_2_recoded)	;	data <- cbind(data,RACDIF1_2_recoded)	
+
+#variablename <- data$SPJew_2	;	SPJew_2_recoded <- missing_codes(variablename)	;	table(SPJew_2_recoded)	;	data <- cbind(data,SPJew_2_recoded)	
+
+variablename <- data$FINALTER_2	;	FINALTER_2_recoded <- missing_codes(variablename)	;	table(FINALTER_2_recoded)	;	data <- cbind(data,FINALTER_2_recoded)	
+
+variablename <- data$EARNRS_2	;	EARNRS_2_recoded <- missing_codes(variablename)	;	table(EARNRS_2_recoded)	;	data <- cbind(data,EARNRS_2_recoded)	
+
+variablename <- data$MEOVRWRK_2	;	MEOVRWRK_2_recoded <- missing_codes(variablename)	;	table(MEOVRWRK_2_recoded)	;	data <- cbind(data,MEOVRWRK_2_recoded)	
+
+variablename <- data$WRKSLFFAM_2	;	WRKSLFFAM_2_recoded <- missing_codes(variablename)	;	table(WRKSLFFAM_2_recoded)	;	data <- cbind(data,WRKSLFFAM_2_recoded)	
+
+variablename <- data$NATAID_2	;	NATAID_2_recoded <- missing_codes(variablename)	;	table(NATAID_2_recoded)	;	data <- cbind(data,NATAID_2_recoded)	
+
+variablename <- data$DIVORCE_2	;	DIVORCE_2_recoded <- missing_codes(variablename)	;	table(DIVORCE_2_recoded)	;	data <- cbind(data,DIVORCE_2_recoded)	
+
+variablename <- data$WIDOWED_2	;	WIDOWED_2_recoded <- missing_codes(variablename)	;	table(WIDOWED_2_recoded)	;	data <- cbind(data,WIDOWED_2_recoded)	
+
+variablename <- data$SAVESOUL_2	;	SAVESOUL_2_recoded <- missing_codes(variablename)	;	table(SAVESOUL_2_recoded)	;	data <- cbind(data,SAVESOUL_2_recoded)	
+
+variablename <- data$LIBHOMO_2	;	LIBHOMO_2_recoded <- missing_codes(variablename)	;	table(LIBHOMO_2_recoded)	;	data <- cbind(data,LIBHOMO_2_recoded)	
+
+variablename <- data$MARHOMO_2	;	MARHOMO_2_recoded <- missing_codes(variablename)	;	table(MARHOMO_2_recoded)	;	data <- cbind(data,MARHOMO_2_recoded)	
+
+variablename <- data$CHILDS_2	;	CHILDS_2_recoded <- missing_codes(variablename)	;	table(CHILDS_2_recoded)	;	data <- cbind(data,CHILDS_2_recoded)	
+
+variablename <- data$HRS2_2	;	HRS2_2_recoded <- missing_codes(variablename)	;	table(HRS2_2_recoded)	;	data <- cbind(data,HRS2_2_recoded)	
+
+variablename <- data$HRS1_2	;	HRS1_2_recoded <- missing_codes(variablename)	;	table(HRS1_2_recoded)	;	data <- cbind(data,HRS1_2_recoded)	
+
+variablename <- data$YOUSUP_2	;	YOUSUP_2_recoded <- missing_codes(variablename)	;	table(YOUSUP_2_recoded)	;	data <- cbind(data,YOUSUP_2_recoded)	
+
+variablename <- data$ATTEND_2	;	ATTEND_2_recoded <- missing_codes(variablename)	;	table(ATTEND_2_recoded)	;	data <- cbind(data,ATTEND_2_recoded)	
+
+variablename <- data$SOCBAR_2	;	SOCBAR_2_recoded <- missing_codes(variablename)	;	table(SOCBAR_2_recoded)	;	data <- cbind(data,SOCBAR_2_recoded)	
+
+variablename <- data$NEWS_2	;	NEWS_2_recoded <- missing_codes(variablename)	;	table(NEWS_2_recoded)	;	data <- cbind(data,NEWS_2_recoded)	
+
+variablename <- data$SOCFREND_2	;	SOCFREND_2_recoded <- missing_codes(variablename)	;	table(SOCFREND_2_recoded)	;	data <- cbind(data,SOCFREND_2_recoded)	
+
+variablename <- data$SOCREL_2	;	SOCREL_2_recoded <- missing_codes(variablename)	;	table(SOCREL_2_recoded)	;	data <- cbind(data,SOCREL_2_recoded)	
+
+variablename <- data$SOCOMMUN_2	;	SOCOMMUN_2_recoded <- missing_codes(variablename)	;	table(SOCOMMUN_2_recoded)	;	data <- cbind(data,SOCOMMUN_2_recoded)	
+
+variablename <- data$RELACTIV_2	;	RELACTIV_2_recoded <- missing_codes(variablename)	;	table(RELACTIV_2_recoded)	;	data <- cbind(data,RELACTIV_2_recoded)	
+
+variablename <- data$LONELY1_2	;	LONELY1_2_recoded <- missing_codes(variablename)	;	table(LONELY1_2_recoded)	;	data <- cbind(data,LONELY1_2_recoded)	
+
+variablename <- data$AGE_2	;	AGE_2_recoded <- missing_codes(variablename)	;	table(AGE_2_recoded)	;	data <- cbind(data,AGE_2_recoded)	
+
+variablename <- data$SPKLANG_2	;	SPKLANG_2_recoded <- missing_codes(variablename)	;	table(SPKLANG_2_recoded)	;	data <- cbind(data,SPKLANG_2_recoded)	
+
+variablename <- data$LIBATH_2	;	LIBATH_2_recoded <- missing_codes(variablename)	;	table(LIBATH_2_recoded)	;	data <- cbind(data,LIBATH_2_recoded)	
+
+variablename <- data$CLASS_2	;	CLASS_2_recoded <- missing_codes(variablename)	;	table(CLASS_2_recoded)	;	data <- cbind(data,CLASS_2_recoded)	
+
+variablename <- data$RICHWORK_2	;	RICHWORK_2_recoded <- missing_codes(variablename)	;	table(RICHWORK_2_recoded)	;	data <- cbind(data,RICHWORK_2_recoded)	
+
+variablename <- data$VOTE16_2	;	VOTE16_2_recoded <- missing_codes(variablename)	;	table(VOTE16_2_recoded)	;	data <- cbind(data,VOTE16_2_recoded)	
+
+variablename <- data$LIFE_2	;	LIFE_2_recoded <- missing_codes(variablename)	;	table(LIFE_2_recoded)	;	data <- cbind(data,LIFE_2_recoded)	
+
+variablename <- data$COURTS_2	;	COURTS_2_recoded <- missing_codes(variablename)	;	table(COURTS_2_recoded)	;	data <- cbind(data,COURTS_2_recoded)	
+
+variablename <- data$COOP_2	;	COOP_2_recoded <- missing_codes(variablename)	;	table(COOP_2_recoded)	;	data <- cbind(data,COOP_2_recoded)	
+
+variablename <- data$RANK_2	;	RANK_2_recoded <- missing_codes(variablename)	;	table(RANK_2_recoded)	;	data <- cbind(data,RANK_2_recoded)	
+
+variablename <- data$RINCOM16_2	;	RINCOM16_2_recoded <- missing_codes(variablename)	;	table(RINCOM16_2_recoded)	;	data <- cbind(data,RINCOM16_2_recoded)	
+
+variablename <- data$SPWKSUP_2	;	SPWKSUP_2_recoded <- missing_codes(variablename)	;	table(SPWKSUP_2_recoded)	;	data <- cbind(data,SPWKSUP_2_recoded)	
+
+variablename <- data$DISRSPCT_2	;	DISRSPCT_2_recoded <- missing_codes(variablename)	;	table(DISRSPCT_2_recoded)	;	data <- cbind(data,DISRSPCT_2_recoded)	
+
+variablename <- data$RESPECT_2	;	RESPECT_2_recoded <- missing_codes(variablename)	;	table(RESPECT_2_recoded)	;	data <- cbind(data,RESPECT_2_recoded)	
+
+variablename <- data$PISTOL_2	;	PISTOL_2_recoded <- missing_codes(variablename)	;	table(PISTOL_2_recoded)	;	data <- cbind(data,PISTOL_2_recoded)	
+
+variablename <- data$RIFLE_2	;	RIFLE_2_recoded <- missing_codes(variablename)	;	table(RIFLE_2_recoded)	;	data <- cbind(data,RIFLE_2_recoded)	
+
+variablename <- data$SHOTGUN_2	;	SHOTGUN_2_recoded <- missing_codes(variablename)	;	table(SHOTGUN_2_recoded)	;	data <- cbind(data,SHOTGUN_2_recoded)	
+
+variablename <- data$FEAR_2	;	FEAR_2_recoded <- missing_codes(variablename)	;	table(FEAR_2_recoded)	;	data <- cbind(data,FEAR_2_recoded)	
+
+variablename <- data$FEFAM_2	;	FEFAM_2_recoded <- missing_codes(variablename)	;	table(FEFAM_2_recoded)	;	data <- cbind(data,FEFAM_2_recoded)	
+
+variablename <- data$WRKSTAT_2	;	WRKSTAT_2_recoded <- missing_codes(variablename)	;	table(WRKSTAT_2_recoded)	;	data <- cbind(data,WRKSTAT_2_recoded)	
+
+variablename <- data$LIBMIL_2	;	LIBMIL_2_recoded <- missing_codes(variablename)	;	table(LIBMIL_2_recoded)	;	data <- cbind(data,LIBMIL_2_recoded)	
+
+variablename <- data$FEPOL_2	;	FEPOL_2_recoded <- missing_codes(variablename)	;	table(FEPOL_2_recoded)	;	data <- cbind(data,FEPOL_2_recoded)	
+
+variablename <- data$SPKMSLM_2	;	SPKMSLM_2_recoded <- missing_codes(variablename)	;	table(SPKMSLM_2_recoded)	;	data <- cbind(data,SPKMSLM_2_recoded)	
+
+variablename <- data$POSTLIFE_2	;	POSTLIFE_2_recoded <- missing_codes(variablename)	;	table(POSTLIFE_2_recoded)	;	data <- cbind(data,POSTLIFE_2_recoded)	
+
+variablename <- data$LIVEBLKS_2	;	LIVEBLKS_2_recoded <- missing_codes(variablename)	;	table(LIVEBLKS_2_recoded)	;	data <- cbind(data,LIVEBLKS_2_recoded)	
+
+variablename <- data$USCITZN_2	;	USCITZN_2_recoded <- missing_codes(variablename)	;	table(USCITZN_2_recoded)	;	data <- cbind(data,USCITZN_2_recoded)	
+
+variablename <- data$SPKCOM_2	;	SPKCOM_2_recoded <- missing_codes(variablename)	;	table(SPKCOM_2_recoded)	;	data <- cbind(data,SPKCOM_2_recoded)	
+
+variablename <- data$SATJOB_2	;	SATJOB_2_recoded <- missing_codes(variablename)	;	table(SATJOB_2_recoded)	;	data <- cbind(data,SATJOB_2_recoded)	
+
+variablename <- data$SPKRAC_2	;	SPKRAC_2_recoded <- missing_codes(variablename)	;	table(SPKRAC_2_recoded)	;	data <- cbind(data,SPKRAC_2_recoded)	
+
+variablename <- data$USEWWW_2	;	USEWWW_2_recoded <- missing_codes(variablename)	;	table(USEWWW_2_recoded)	;	data <- cbind(data,USEWWW_2_recoded)	
+
+variablename <- data$LIBRAC_2	;	LIBRAC_2_recoded <- missing_codes(variablename)	;	table(LIBRAC_2_recoded)	;	data <- cbind(data,LIBRAC_2_recoded)	
+
+variablename <- data$DIVLAW_2	;	DIVLAW_2_recoded <- missing_codes(variablename)	;	table(DIVLAW_2_recoded)	;	data <- cbind(data,DIVLAW_2_recoded)	
+
+variablename <- data$COLMSLM_2	;	COLMSLM_2_recoded <- missing_codes(variablename)	;	table(COLMSLM_2_recoded)	;	data <- cbind(data,COLMSLM_2_recoded)	
+
+variablename <- data$COLHOMO_2	;	COLHOMO_2_recoded <- missing_codes(variablename)	;	table(COLHOMO_2_recoded)	;	data <- cbind(data,COLHOMO_2_recoded)	
+
+variablename <- data$COLMIL_2	;	COLMIL_2_recoded <- missing_codes(variablename)	;	table(COLMIL_2_recoded)	;	data <- cbind(data,COLMIL_2_recoded)	
+
+variablename <- data$COLATH_2	;	COLATH_2_recoded <- missing_codes(variablename)	;	table(COLATH_2_recoded)	;	data <- cbind(data,COLATH_2_recoded)	
+
+variablename <- data$GETAHEAD_2	;	GETAHEAD_2_recoded <- missing_codes(variablename)	;	table(GETAHEAD_2_recoded)	;	data <- cbind(data,GETAHEAD_2_recoded)	
+
+variablename <- data$RACOPEN_2	;	RACOPEN_2_recoded <- missing_codes(variablename)	;	table(RACOPEN_2_recoded)	;	data <- cbind(data,RACOPEN_2_recoded)	
+
+variablename <- data$HAPPY_2	;	HAPPY_2_recoded <- missing_codes(variablename)	;	table(HAPPY_2_recoded)	;	data <- cbind(data,HAPPY_2_recoded)	
+
+variablename <- data$HAPMAR_2	;	HAPMAR_2_recoded <- missing_codes(variablename)	;	table(HAPMAR_2_recoded)	;	data <- cbind(data,HAPMAR_2_recoded)	
+
+variablename <- data$HAPCOHAB_2	;	HAPCOHAB_2_recoded <- missing_codes(variablename)	;	table(HAPCOHAB_2_recoded)	;	data <- cbind(data,HAPCOHAB_2_recoded)	
+
+variablename <- data$PRAYER_2	;	PRAYER_2_recoded <- missing_codes(variablename)	;	table(PRAYER_2_recoded)	;	data <- cbind(data,PRAYER_2_recoded)	
+
+variablename <- data$SPKATH_2	;	SPKATH_2_recoded <- missing_codes(variablename)	;	table(SPKATH_2_recoded)	;	data <- cbind(data,SPKATH_2_recoded)	
+
+variablename <- data$PREMARSX_2	;	PREMARSX_2_recoded <- missing_codes(variablename)	;	table(PREMARSX_2_recoded)	;	data <- cbind(data,PREMARSX_2_recoded)	
+
+variablename <- data$JOBLOSE_2	;	JOBLOSE_2_recoded <- missing_codes(variablename)	;	table(JOBLOSE_2_recoded)	;	data <- cbind(data,JOBLOSE_2_recoded)	
+
+variablename <- data$INCOM16_2	;	INCOM16_2_recoded <- missing_codes(variablename)	;	table(INCOM16_2_recoded)	;	data <- cbind(data,INCOM16_2_recoded)	
+
+variablename <- data$RELPERSN_2	;	RELPERSN_2_recoded <- missing_codes(variablename)	;	table(RELPERSN_2_recoded)	;	data <- cbind(data,RELPERSN_2_recoded)	
+
+variablename <- data$SPRTPRSN_2	;	SPRTPRSN_2_recoded <- missing_codes(variablename)	;	table(SPRTPRSN_2_recoded)	;	data <- cbind(data,SPRTPRSN_2_recoded)	
+
+variablename <- data$POPESPKS_2	;	POPESPKS_2_recoded <- missing_codes(variablename)	;	table(POPESPKS_2_recoded)	;	data <- cbind(data,POPESPKS_2_recoded)	
+
+variablename <- data$SEXBIRTH_2	;	SEXBIRTH_2_recoded <- missing_codes(variablename)	;	table(SEXBIRTH_2_recoded)	;	data <- cbind(data,SEXBIRTH_2_recoded)	
+
+variablename <- data$SATFIN_2	;	SATFIN_2_recoded <- missing_codes(variablename)	;	table(SATFIN_2_recoded)	;	data <- cbind(data,SATFIN_2_recoded)	
+
+variablename <- data$POLVIEWS_2	;	POLVIEWS_2_recoded <- missing_codes(variablename)	;	table(POLVIEWS_2_recoded)	;	data <- cbind(data,POLVIEWS_2_recoded)	
+
+variablename <- data$MARBLK_2	;	MARBLK_2_recoded <- missing_codes(variablename)	;	table(MARBLK_2_recoded)	;	data <- cbind(data,MARBLK_2_recoded)	
+
+variablename <- data$MARHISP_2	;	MARHISP_2_recoded <- missing_codes(variablename)	;	table(MARHISP_2_recoded)	;	data <- cbind(data,MARHISP_2_recoded)	
+
+variablename <- data$MARWHT_2	;	MARWHT_2_recoded <- missing_codes(variablename)	;	table(MARWHT_2_recoded)	;	data <- cbind(data,MARWHT_2_recoded)	
+
+#variablename <- data$MARAsian_2	;	MARAsian_2_recoded <- missing_codes(variablename)	;	table(MARAsian_2_recoded)	;	data <- cbind(data,MARAsian_2_recoded)	
+
+variablename <- data$HOMOSEX_2	;	HOMOSEX_2_recoded <- missing_codes(variablename)	;	table(HOMOSEX_2_recoded)	;	data <- cbind(data,HOMOSEX_2_recoded)	
+
+variablename <- data$CHLDIDEL_2	;	CHLDIDEL_2_recoded <- missing_codes(variablename)	;	table(CHLDIDEL_2_recoded)	;	data <- cbind(data,CHLDIDEL_2_recoded)	
+
+variablename <- data$DISCAFFM_2	;	DISCAFFM_2_recoded <- missing_codes(variablename)	;	table(DISCAFFM_2_recoded)	;	data <- cbind(data,DISCAFFM_2_recoded)	
+
+variablename <- data$DISCAFF_2	;	DISCAFF_2_recoded <- missing_codes(variablename)	;	table(DISCAFF_2_recoded)	;	data <- cbind(data,DISCAFF_2_recoded)	
+
+variablename <- data$DISCAFFW_2	;	DISCAFFW_2_recoded <- missing_codes(variablename)	;	table(DISCAFFW_2_recoded)	;	data <- cbind(data,DISCAFFW_2_recoded)	
+
+variablename <- data$TEENSEX_2	;	TEENSEX_2_recoded <- missing_codes(variablename)	;	table(TEENSEX_2_recoded)	;	data <- cbind(data,TEENSEX_2_recoded)	
+
+variablename <- data$SEX_2	;	SEX_2_recoded <- missing_codes(variablename)	;	table(SEX_2_recoded)	;	data <- cbind(data,SEX_2_recoded)	
+
+variablename <- data$XMARSEX_2	;	XMARSEX_2_recoded <- missing_codes(variablename)	;	table(XMARSEX_2_recoded)	;	data <- cbind(data,XMARSEX_2_recoded)	
+
+variablename <- data$RELIG_2	;	RELIG_2_recoded <- missing_codes(variablename)	;	table(RELIG_2_recoded)	;	data <- cbind(data,RELIG_2_recoded)	
+
+variablename <- data$DENOM_2	;	DENOM_2_recoded <- missing_codes(variablename)	;	table(DENOM_2_recoded)	;	data <- cbind(data,DENOM_2_recoded)	
+
+variablename <- data$SPDEN_2	;	SPDEN_2_recoded <- missing_codes(variablename)	;	table(SPDEN_2_recoded)	;	data <- cbind(data,SPDEN_2_recoded)	
+
+variablename <- data$LETDIE1_2	;	LETDIE1_2_recoded <- missing_codes(variablename)	;	table(LETDIE1_2_recoded)	;	data <- cbind(data,LETDIE1_2_recoded)	
+
+variablename <- data$INTLWHTS_2	;	INTLWHTS_2_recoded <- missing_codes(variablename)	;	table(INTLWHTS_2_recoded)	;	data <- cbind(data,INTLWHTS_2_recoded)	
+
+variablename <- data$BETRLANG_2	;	BETRLANG_2_recoded <- missing_codes(variablename)	;	table(BETRLANG_2_recoded)	;	data <- cbind(data,BETRLANG_2_recoded)	
+
+variablename <- data$BIBLE_2	;	BIBLE_2_recoded <- missing_codes(variablename)	;	table(BIBLE_2_recoded)	;	data <- cbind(data,BIBLE_2_recoded)	
+
+variablename <- data$IF16WHO_2	;	IF16WHO_2_recoded <- missing_codes(variablename)	;	table(IF16WHO_2_recoded)	;	data <- cbind(data,IF16WHO_2_recoded)	
+
+variablename <- data$SEXEDUC_2	;	SEXEDUC_2_recoded <- missing_codes(variablename)	;	table(SEXEDUC_2_recoded)	;	data <- cbind(data,SEXEDUC_2_recoded)	
+
+variablename <- data$RELITEN_2	;	RELITEN_2_recoded <- missing_codes(variablename)	;	table(RELITEN_2_recoded)	;	data <- cbind(data,RELITEN_2_recoded)	
+
+variablename <- data$GUNLAW_2	;	GUNLAW_2_recoded <- missing_codes(variablename)	;	table(GUNLAW_2_recoded)	;	data <- cbind(data,GUNLAW_2_recoded)	
+
+variablename <- data$REBORN_2	;	REBORN_2_recoded <- missing_codes(variablename)	;	table(REBORN_2_recoded)	;	data <- cbind(data,REBORN_2_recoded)	
+
+variablename <- data$HEALTH_2	;	HEALTH_2_recoded <- missing_codes(variablename)	;	table(HEALTH_2_recoded)	;	data <- cbind(data,HEALTH_2_recoded)	
+
+variablename <- data$INCOME16_2	;	INCOME16_2_recoded <- missing_codes(variablename)	;	table(INCOME16_2_recoded)	;	data <- cbind(data,INCOME16_2_recoded)
+
+data_clean <- write.csv(data, "data_clean.csv")
+
+```
 
 # https://quanteda.io/reference/textstat_readability.html
 
@@ -73,4 +487,12 @@ head(corpus1) #look at the corpus a little
 #compute readability stats for items.
 readability_trial <- textstat_readability(corpus1,
                      measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
+
+readability <- write.csv(readability_trial, "readability_trial.csv")
 ```
+
+```{r}
+table(data$ABPOOR_2)
+table(data$ABPOOR_2_recoded)
+```
+

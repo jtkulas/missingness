@@ -6,7 +6,7 @@ output: word_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 options(digits=2)
 ```
 
@@ -489,6 +489,11 @@ readability_trial <- textstat_readability(corpus1,
                      measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
 
 readability <- write.csv(readability_trial, "readability_trial.csv")
+
+readability2 <- readability_trial[ which(!is.na(readability_trial$ELF) & !is.na(readability_trial$FOG.NRI)), ]
+
+write.csv(readability2, "readability_trial2.csv")
+
 ```
 
 ```{r}

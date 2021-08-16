@@ -1,11 +1,20 @@
 ###########################################
 #We have access to the 2020 data now! It's only available in Stata, but we can read that into R like this.
 
-install.packages("haven") #run if not installed already.
+#install.packages("haven") #run if not installed already.
 library(haven)
 library(tidyverse)
 
-data <- read_dta(file.choose()) #Look for gss2020panel_r1.dta #Loads ALL of the data. 
+#data <- read_sav(file.choose()) 
+
+#install.packages("foreign")
+library(foreign)
+
+data <- read.spss(file.choose(), use.missings = FALSE)
+
+data2 <- as.data.frame(data)  ## changes from list to dataframe
+
+#Look for gss2020panel_r1.dta #Loads ALL of the data. 
 
 #There's something fishy about the file...exploring 
 
@@ -31,14 +40,4 @@ count(data_2018) #Number of 2018 people in the whole sample.
 #Variables from 2020 (Wave 2) have _2 appended. 
 
 #Users can also track cases from 2016 and 2018, and reinterviews from 2020 with the variable SAMPTYPE. Figure 1 shows the relationship of 2016, 2018, and 2020 rounds of data collection for the 2016-2020 GSS Panel.
-
-####################################################################
-#So, this might allow us to make comparisons between pre and during covid if some similar variables were captured. Appears that they were largely not, but I am seeing job satisfaction. 
-
-table(data$satjob1_2)
-
-summary(data$satjob_2)
-summary("data$wrkhome_2")
-str(data$wrkhome_2)
-
 

@@ -76,10 +76,6 @@ test_d + test_n + test_s + test_i
 variablename <- data$ABANY_2
 abany_recoded <- missing_codes(variablename)
 
-table(abany_recoded) #This newly created variable should be the same as one below
-table(abany_r) #it worked
-table(data$ABANY_2)
-
 #Now, need a loop to do all of the variables this way
 #https://r4ds.had.co.nz/iteration.html
 #https://www.datacamp.com/community/tutorials/tutorial-on-loops-in-r
@@ -499,5 +495,10 @@ write.csv(readability2, "readability_trial2.csv")
 ```{r}
 table(data$ABPOOR_2)
 table(data$ABPOOR_2_recoded)
+```
+
+```{r SHORT}
+use_data <- data[, c(4296:4479)]
+
 ```
 

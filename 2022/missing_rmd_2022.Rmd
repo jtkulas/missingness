@@ -74,8 +74,8 @@ test_d + test_n + test_s + test_i
 
 ```{r apply_missing_function}
 #example of how we could recode all of them by variable name
-variablename <- data$ABANY_2
-abany_recoded <- missing_codes(variablename)
+#variablename <- data$ABANY_2
+#abany_recoded <- missing_codes(variablename)
 
 #Now, need a loop to do all of the variables this way
 #https://r4ds.had.co.nz/iteration.html

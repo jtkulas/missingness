@@ -23,6 +23,7 @@ library(plyr)
 library(quanteda)
 library(readtext)
 library(dplyr)
+library(psych)
 
 #https://tutorials.methodsconsultants.com/posts/reading-sas-spss-or-stata-files-into-r-using-haven/
 
@@ -259,8 +260,6 @@ variablename <- data$RACDIF4_2	;	RACDIF4_2_recoded <- missing_codes(variablename
 
 variablename <- data$RACDIF1_2	;	RACDIF1_2_recoded <- missing_codes(variablename)	;	table(RACDIF1_2_recoded)	;	data <- cbind(data,RACDIF1_2_recoded)	
 
-#variablename <- data$SPJew_2	;	SPJew_2_recoded <- missing_codes(variablename)	;	table(SPJew_2_recoded)	;	data <- cbind(data,SPJew_2_recoded)	
-
 variablename <- data$FINALTER_2	;	FINALTER_2_recoded <- missing_codes(variablename)	;	table(FINALTER_2_recoded)	;	data <- cbind(data,FINALTER_2_recoded)	
 
 variablename <- data$EARNRS_2	;	EARNRS_2_recoded <- missing_codes(variablename)	;	table(EARNRS_2_recoded)	;	data <- cbind(data,EARNRS_2_recoded)	
@@ -415,7 +414,6 @@ variablename <- data$MARHISP_2	;	MARHISP_2_recoded <- missing_codes(variablename
 
 variablename <- data$MARWHT_2	;	MARWHT_2_recoded <- missing_codes(variablename)	;	table(MARWHT_2_recoded)	;	data <- cbind(data,MARWHT_2_recoded)	
 
-#variablename <- data$MARAsian_2	;	MARAsian_2_recoded <- missing_codes(variablename)	;	table(MARAsian_2_recoded)	;	data <- cbind(data,MARAsian_2_recoded)	
 
 variablename <- data$HOMOSEX_2	;	HOMOSEX_2_recoded <- missing_codes(variablename)	;	table(HOMOSEX_2_recoded)	;	data <- cbind(data,HOMOSEX_2_recoded)	
 
@@ -461,6 +459,10 @@ variablename <- data$HEALTH_2	;	HEALTH_2_recoded <- missing_codes(variablename)	
 
 variablename <- data$INCOME16_2	;	INCOME16_2_recoded <- missing_codes(variablename)	;	table(INCOME16_2_recoded)	;	data <- cbind(data,INCOME16_2_recoded)
 
+variablename <- data$MARASIAN_2	;	MARASIAN_2_recoded <- missing_codes(variablename)	;	table(MARASIAN_2_recoded)	;	data <- cbind(data,MARASIAN_2_recoded)
+
+variablename <- data$SPJEW_2	;	SPJEW_2_recoded <- missing_codes(variablename)	;	table(SPJEW_2_recoded)	;	data <- cbind(data,SPJEW_2_recoded)
+
 data_clean <- write.csv(data, "data_clean.csv")
 
 ```
@@ -493,13 +495,27 @@ write.csv(readability2, "readability_trial2.csv")
 
 ```
 
-```{r}
-table(data$ABPOOR_2)
-table(data$ABPOOR_2_recoded)
+```{r determinewhichmissing, echo = FALSE}
+describe(data)
 ```
 
-```{r SHORT}
-use_data <- data[, c(4296:4479)]
+```{r SHORT, echo = FALSE}
+
+#this omits all unusable variables for matching purposes.
+use_data <- data[, c(4296:4481)]
 use_data <- use_data %>% select(order(colnames(use_data)))
+use_data <- select(use_data, -AGE_2_recoded, -COOP_2_recoded, -EARNRS_2_recoded)
+```
+
+```{r removesuffix, echo=FALSE}
+#omit the suffix to match this file to the readability index.
+
+colnames(use_data)<-gsub("_2_recoded","",colnames(use_data))
+glimpse(use_data)
+```
+
+```{r shortdatacheck}
+#only used to check against the readability variables.
+write.csv(use_data, "checkshortdataset.csv")
 ```
 

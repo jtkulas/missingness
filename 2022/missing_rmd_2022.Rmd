@@ -519,3 +519,26 @@ glimpse(use_data)
 write.csv(use_data, "checkshortdataset.csv")
 ```
 
+```{r transposematrix}
+use_data_transpose <- as.data.frame(t(as.matrix(use_data)))
+glimpse(use_data)
+glimpse(use_data_transpose)
+```
+
+```{r trycounting}
+#https://stackoverflow.com/questions/17030204/add-column-to-data-frame-that-shows-frequency-of-variable
+#https://www.tutorialspoint.com/how-to-add-a-new-column-in-an-r-data-frame-with-count-based-on-factor-column
+#https://www.rdocumentation.org/packages/sjmisc/versions/2.8.7/topics/row_count
+
+#install.packages("sjmisc")
+library(sjmisc)
+rowcount0s <- row_count(use_data_transpose, count = 0, var = "rowcount0s", append = FALSE)
+rowcount1s <- row_count(use_data_transpose, count = 1, var = "rowcount1s", append = FALSE)
+rowcount2s <- row_count(use_data_transpose, count = 2, var = "rowcount2s", append = FALSE)
+rowcount3s <- row_count(use_data_transpose, count = 3, var = "rowcount3s", append = FALSE)
+rowcount4s <- row_count(use_data_transpose, count = 4, var = "rowcount4s", append = FALSE)
+
+use_data_transpose <- cbind(use_data_transpose, rowcount0s, rowcount1s, rowcount2s, rowcount3s, rowcount4s)
+
+```
+

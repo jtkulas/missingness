@@ -6,7 +6,7 @@ output: word_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, include=FALSE)
 options(digits=2)
 ```
 
@@ -538,7 +538,11 @@ rowcount2s <- row_count(use_data_transpose, count = 2, var = "rowcount2s", appen
 rowcount3s <- row_count(use_data_transpose, count = 3, var = "rowcount3s", append = FALSE)
 rowcount4s <- row_count(use_data_transpose, count = 4, var = "rowcount4s", append = FALSE)
 
-use_data_transpose <- cbind(use_data_transpose, rowcount0s, rowcount1s, rowcount2s, rowcount3s, rowcount4s)
+items <- read.csv("readability_trial2.csv")
+
+use_data_transpose <- cbind(items, rowcount0s, rowcount1s, rowcount2s, rowcount3s, rowcount4s)
+
+write.csv(use_data_transpose, "items.csv")
 
 ```
 

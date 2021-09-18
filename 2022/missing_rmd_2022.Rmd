@@ -478,7 +478,7 @@ Note: in the 2020 survey administration, the codebook indicates a lot of terms w
 #This will work to generate the readability stats for each question. There are 183 potential questions for us to use out of the 4,295 listed in the original dataset.
 
 #I did not have a good solution to a space in the question where {response to fill} was inserted from another question. 
-
+library(quanteda.textstats)
 data1 <- readtext("data_prep.csv") #read in the text file
 corpus1 <- corpus(data1, docid_field = "text", text_field = "label")  # build a new corpus from the text file
 head(corpus1) #look at the corpus a little

@@ -542,7 +542,21 @@ items <- read.csv("readability_trial2.csv")
 
 use_data_transpose <- cbind(items, rowcount0s, rowcount1s, rowcount2s, rowcount3s, rowcount4s)
 
-write.csv(use_data_transpose, "items.csv")
+items_total <- write.csv(use_data_transpose, "items.csv")
 
+```
+
+```{r merge}
+
+# merge two data frames by ID
+install.packages("questionr")
+library(questionr)
+use_data_transpose <- rename.variable(use_data_transpose, "document", "Item")
+data_prep <- read.csv("data_prep.csv")
+data_prep <- rename.variable(data_prep, "ï..Item", "Item")
+
+total <- merge(use_data_transpose, data_prep, by="Item")
+
+write.csv(total, file="merged_complete_file.csv")
 ```
 

@@ -1906,7 +1906,7 @@ Looking at all `r nrow(data)` combined raters:
 
 ```{r toplot, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11, fig.height=6, fig.cap="*Figure 1.* Average response (1=Strongly Disagree; 5=Strongly Agree) by item desirability and rater type (*n* = 306 [102 each rater group])."}
 
-library(psych)
+library(psych); data <- read.csv("AliciaANOVAs.csv")
 toplot <- as.data.frame(describe(data[306:329]))
 self.p <- toplot[1:8,3:4]
 once.p <- toplot[9:16,3:4]
@@ -2728,7 +2728,31 @@ Because this chi-square does not adequately capture patterns of missingness, a r
 
 > Actually scrap this - elevated regression line simply means less knowledge of person - interesting pattern is elevation for socially undesirable for all 3 rater types <- this should be acknowledged somewhere... 
 
-```{r Figure4, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE, fig.width=11, fig.cap="*Figure 4*. Smoothed (regression-predicted) missing value estimates across social desirability strata."}
+```{r FigureNEW, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE, fig.width=11, fig.cap="Smoothed (regression-predicted) missing value estimates across social desirability strata."}
+
+self.r <- regress[c(1:8),]
+once.r <- regress[c(9:16),]
+twice.r <- regress[c(17:24),]
+
+allthree <- rbind(self.r,once.r,twice.r)
+
+all.reg <- lm(missing~sd, allthree)
+
+t <- ggplot(allthree, aes(x=sd, y=missing)) +
+  geom_point()+ 
+#   labs(linetype = "Rater Type") +
+#   scale_shape_manual(values=c(19,21,15)) +
+    theme_classic() +
+#   guides(linetype=FALSE) +
+    geom_smooth(method=lm, se=FALSE) +
+    scale_color_grey()
+
+t + scale_x_continuous(name="Social Desirability Stratum", breaks=c(1,3,6,8),
+        labels=c("Extremely Undesirable", "Moderately Undesirable", "Moderately Desirable","Extremely Desirable"))
+ 
+```
+
+```{r Figure4, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE, fig.width=11, fig.cap="Smoothed (regression-predicted) missing value estimates across social desirability strata and rater type."}
 
 self.r <- regress[c(1:8),]
 once.r <- regress[c(9:16),]
@@ -2739,8 +2763,10 @@ once.reg <- lm(missing~sd, once.r)
 twice.reg <- lm(missing~sd, twice.r)
 
 # plot(regress$sd,regress$missing)+abline(18.32, -2.15)+abline(16,-1.08)+abline(39.29,-2.95)
+regress$type[regress$type == "Once-removed"] <- "Self-nominated"
+regress$type[regress$type == "Twice-removed"] <- "NOT Self-nominated"
 
-regress$type <- factor(regress$type,levels = c("Self","Once-removed","Twice-removed"))
+regress$type <- factor(regress$type,levels = c("Self","Self-nominated","NOT Self-nominated"))
 
 t <- ggplot(regress, aes(x=sd, y=missing, color=type, linetype=type)) +
   geom_point()+ 
@@ -2762,8 +2788,8 @@ We want to expand this figure by including `quanteda` text analyses (or careless
 3) compute NA's (add up number of missing)
  
 ```{r quantedaself1}
-
 library(quanteda)
+library(quanteda.textstats)
 
 test <- read.csv("Observer-Rated Personality_ Self1 (Fall 2019) - Copy - Copy_December 3, 2019_13.53.csv") 
 

@@ -2719,12 +2719,14 @@ regress$sd <- as.numeric(as.character(regress$sd))
 regress$missing <- as.numeric(as.character(regress$missing))
 
 reg <- summary(lm(missing ~ type + sd + type*sd))
-
+reg2 <- summary(lm(missing ~ sd))
 
 ```
 
 
 Because this chi-square does not adequately capture patterns of missingness, a rater type x social desirability stratum regression was also applied to missing values ($R^2$ = `r round(reg$r.squared,3)`). Figure 4 presents these results visually, with similar patterns of missingness progressing along the social desirability continuum, but greater *numbers* of missing responses at extremely undesirable locations for twice-removed raters. Collectively, this suggests that others are less likely to endorse undesirable items for a target than are self-raters (and perhaps implicates the "self"-protective motive to be in fact stronger in others than in selves).
+
+The undifferentiated $R^2$ = `r round(reg2$r.squared,3)`
 
 > Actually scrap this - elevated regression line simply means less knowledge of person - interesting pattern is elevation for socially undesirable for all 3 rater types <- this should be acknowledged somewhere... 
 

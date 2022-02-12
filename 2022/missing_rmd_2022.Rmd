@@ -6,7 +6,7 @@ output: word_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning=FALSE, include=FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
 options(digits=2)
 ```
 
@@ -574,3 +574,23 @@ total <- merge(use_data_transpose, data_prep, by="Item")
 write.csv(total, file="merged_complete_file.csv")
 ```
 
+
+```{r}
+
+siop <- read.csv("merged_complete_file.csv")
+
+names(siop)[8] <- "Valid Response"
+names(siop)[9] <- "Do Not Know"
+names(siop)[10] <- "No Answer"
+names(siop)[11] <- "Skipped on the Web"
+names(siop)[12] <- "Not Applicable"
+
+library(ggplot2)
+library(tidyr)
+
+siop_long <- gather(siop, reason, number, `Do Not Know`:`Skipped on the Web`, factor_key=TRUE)
+  
+ggplot(siop_long, aes(x = number, fill=reason)) + 
+  geom_density(alpha = .5)
+
+```

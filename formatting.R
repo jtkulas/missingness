@@ -119,7 +119,7 @@ form4 <- rbind(form4_long_self, form4_long_once, form4_long_twice)
 
 ## Next step = add Quentada indices
 
-library(quanteda)
+library(quanteda.textstats)
 
 test <- read.csv("Observer-Rated Personality_ Self1 (Fall 2019) - Copy - Copy_December 3, 2019_13.53.csv") 
 
@@ -241,16 +241,16 @@ USETHIS$countc[USETHIS$countc == "1"] <- "Missing"
 USETHIS$countc[USETHIS$countc == "0"] <- "Valid Response"
 
 
-USETHIS$ZELF <- scale(USETHIS$ELF)
-USETHIS$ZFlesch.Kincaid <- scale(USETHIS$Flesch.Kincaid)
-USETHIS$ZDale.Chall <- scale(USETHIS$Dale.Chall)
-USETHIS$ZFOG.NRI <- scale(USETHIS$FOG.NRI)
-USETHIS$Zsd <- scale(USETHIS$SD)
+USETHIS$Elf <- scale(USETHIS$ELF)
+USETHIS$Fle <- scale(USETHIS$Flesch.Kincaid)
+USETHIS$Dal <- scale(USETHIS$Dale.Chall)
+USETHIS$Fog <- scale(USETHIS$FOG.NRI)
+USETHIS$Sd <- scale(USETHIS$SD)
 
 
 toplot2 <- USETHIS %>%                            
   group_by(countc) %>% 
-  summarise(flesch = mean(ZFlesch.Kincaid, na.rm=TRUE), elf = mean(ZELF, na.rm=TRUE), dale = mean(ZDale.Chall, na.rm=TRUE), fog = mean(ZFOG.NRI, na.rm=TRUE), sd = mean(Zsd, na.rm=TRUE))
+  summarise(flesch = mean(Fle, na.rm=TRUE), elf = mean(Elf, na.rm=TRUE), dale = mean(Dal, na.rm=TRUE), fog = mean(Fog, na.rm=TRUE), sd = mean(Sd, na.rm=TRUE))
 
 data_long <- gather(toplot2, index, value, flesch:sd, factor_key=TRUE)
 colnames(data_long)[1] <- "Response"
@@ -261,8 +261,9 @@ q <- ggplot(data_long, aes(x=index, y=value, fill=Response)) +
 q + coord_flip()
 
 
-long2 <- gather(USETHIS, index, value, ZELF:Zsd, factor_key=TRUE)
+long2 <- gather(USETHIS, index, value, Elf:Sd, factor_key=TRUE)
 colnames(long2)[13] <- "Response"
 
 ggplot(long2, aes(x=index, y=value, fill=Response)) + 
-  geom_boxplot() + ylim(-4,4)
+  geom_boxplot() + ylim(-4,4) + theme(axis.title.x = element_blank(), legend.title = element_text(size = 14), legend.text = element_text(size = 15), axis.text.x = element_text(size = 15), axis.text.y = element_text(size = 15), axis.title.y = element_blank())
+

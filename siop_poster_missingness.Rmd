@@ -2,40 +2,23 @@
 main_topsize: 0.2 #percent coverage of the poster
 main_bottomsize: 0.1
 #ESSENTIALS
-title: '**A Better Reproducible Poster Title**'
+title: '**Predictive Non-response via Item Characteristics**'
 author:
-  - name: '**W. Brent Thorne**'
+  - name: Alicia A. Stachowski
     affil: 1
     main: true
-    orcid: '0000-0002-1099-3857'
-    twitter: brentthorne18 
-    email: bthorne2@brocku.ca
-  - name: Another G. Contributor
+  - name: John T. Kulas
     affil: 2
     main: true
-    email: 'ag.con@posterdown.net'
-  - name: Person Three
-    affil: 3
-  - name: Person Four
-    affil: 2
-  - name: Person Five
-    affil: 3
-  - name: Person Six
-    affil: 3
-  - name: A. Seventh Author
-    affil: 2
 affiliation:
   - num: 1
-    address: Department of Earth Science, Brock University
+    address: University of Wisconsin - Stout
   - num: 2
-    address: Department of Graphics and Layouts, University of Posters; Canada
-  - num: 3
-    address: Another Institute of a place where work gets done, Earth, Milky Way
+    address: Montclair State University 
 main_findings:
-  - "Make **better posters** with RMarkdown + **posterdown**."
-logoleft_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png
-logoright_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png
-logocenter_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/qr-code-black.png
+  - "our take-away message meant to go here - was expecting title."
+logoleft_name: '![](Quill_White.png)'
+logoright_name: '![](https://www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg)'
 output: 
   posterdown::posterdown_betterport:
     self_contained: false
@@ -55,16 +38,3051 @@ knitr::opts_chunk$set(echo = FALSE,
 options(knitr.table.format = "html") 
 ```
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+```
+
+```{r data, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+
+## Trying to replicate "grabbing data.sps" file
+
+library(dplyr)
+
+self1 <- read.csv("Observer-Rated Personality_ Self1 (Fall 2019) - Copy - Copy_December 3, 2019_13.53.csv") 
+
+self1 <- self1 %>% 
+  rename(
+    item1=QID5362,
+    item2=QID5363,
+    item3=QID5364,
+    item4=QID5365,
+    item5=QID5366,
+    item6=QID5367,
+    item7=QID5368,
+    item8=QID5369,
+    item9=QID5370,
+    item10=QID5371,
+    item11=QID5372,
+    item12=QID5373,
+    item13=QID5374,
+    item14=QID5375,
+    item15=QID5376,
+    item16=QID5377,
+    item17=QID5378,
+    item18=QID5379,
+    item19=QID5380,
+    item20=QID5381,
+    item21=QID5382,
+    item22=QID5383,
+    item23=QID5384,
+    item24=QID5385,
+    item25=QID5386,
+    item26=QID5387,
+    item27=QID5388,
+    item28=QID5389,
+    item29=QID5390,
+    item30=QID5391,
+    item31=QID5392,
+    item32=QID5393,
+    item33=QID5394,
+    item34=QID5395,
+    item35=QID5396,
+    item36=QID5397,
+    item37=QID5398,
+    item38=QID5399,
+    item39=QID5400,
+    item40=QID5401,
+    item41=QID5402,
+    item42=QID5403,
+    item43=QID5404,
+    item44=QID5405,
+    item45=QID5406,
+    item46=QID5407,
+    item47=QID5408,
+    item48=QID5409,
+    item49=QID5410,
+    item50=QID5411,
+    item51=QID5412,
+    item52=QID5413,
+    item53=QID5414,
+    item54=QID5415,
+    item55=QID5416,
+    item56=QID5417,
+    item57=QID5418,
+    item58=QID5419,
+    item59=QID5420,
+    item60=QID5421,
+    item61=QID5422,
+    item62=QID5423,
+    item63=QID5424,
+    item64=QID5425,
+    item65=QID5426,
+    item66=QID5427,
+    item67=QID5428,
+    item68=QID5429,
+    item69=QID5430,
+    item70=QID5431,
+    item71=QID5432,
+    item72=QID5433,
+    item73=QID5434,
+    item74=QID5435,
+    item75=QID5436,
+    item76=QID5437,
+    item77=QID5438,
+    item78=QID5439,
+    item79=QID5440,
+    item80=QID5441,
+    first_rm=Q2365,
+    rated=Q2364
+  )
+
+self1$form <- 1
+
+self_1 <- self1[-c(1:2),c(18:97,103,101,102)]  ## Trying to replicate file in "grabbing data.sps"
+
+
+self2 <- read.csv("Observer-Rated Personality_ Self2 (Fall 2019) - Copy - Copy_December 8, 2019_09.37.csv") 
+
+self2 <- self2 %>% 
+  rename(
+item1	= QID5442,
+item2	= QID5443,
+item3	= QID5444,
+item4	= QID5445,
+item5	= QID5446,
+item6	= QID5447,
+item7	= QID5448,
+item8	= QID5449,
+item9	= QID5450,
+item10	= QID5451,
+item11	= QID5452,
+item12	= QID5453,
+item13	= QID5454,
+item14	= QID5455,
+item15	= QID5456,
+item16	= QID5457,
+item17	= QID5458,
+item18	= QID5459,
+item19	= QID5460,
+item20	= QID5461,
+item21	= QID5462,
+item22	= QID5463,
+item23	= QID5464,
+item24	= QID5465,
+item25	= QID5466,
+item26	= QID5467,
+item27	= QID5468,
+item28	= QID5469,
+item29	= QID5470,
+item30	= QID5471,
+item31	= QID5472,
+item32	= QID5473,
+item33	= QID5474,
+item34	= QID5475,
+item35	= QID5476,
+item36	= QID5477,
+item37	= QID5478,
+item38	= QID5479,
+item39	= QID5480,
+item40	= QID5481,
+item41	= QID5482,
+item42	= QID5483,
+item43	= QID5484,
+item44	= QID5485,
+item45	= QID5486,
+item46	= QID5487,
+item47	= QID5488,
+item48	= QID5489,
+item49	= QID5490,
+item50	= QID5491,
+item51	= QID5492,
+item52	= QID5493,
+item53	= QID5494,
+item54	= QID5495,
+item55	= QID5496,
+item56	= QID5497,
+item57	= QID5498,
+item58	= QID5499,
+item59	= QID5500,
+item60	= QID5501,
+item61	= QID5502,
+item62	= QID5503,
+item63	= QID5504,
+item64	= QID5505,
+item65	= QID5506,
+item66	= QID5507,
+item67	= QID5508,
+item68	= QID5509,
+item69	= QID5510,
+item70	= QID5511,
+item71	= QID5512,
+item72	= QID5513,
+item73	= QID5514,
+item74	= QID5515,
+item75	= QID5516,
+item76	= QID5517,
+item77	= QID5518,
+item78	= QID5519,
+item79	= QID5520,
+item80	= QID5521,
+first_rm = Q2365,
+rated = Q2364
+)
+
+self2$form <- 2
+
+# temp <- describe(self2)
+# write.csv(temp,"C:\\temp\\temp.csv")
+
+self_2 <- self2[-c(1:2),c(18:97,100,98,99)] 
+
+
+
+
+self3 <- read.csv("Observer-Rated Personality_ Self3 (Fall 2019) - Copy - Copy_December 8, 2019_09.45.csv") 
+
+self3 <- self3 %>% 
+  rename(
+    item1=	QID5522,
+    item2=	QID5523,
+    item3=	QID5524,
+    item4=	QID5525,
+    item5=	QID5526,
+    item6=	QID5527,
+    item7=	QID5528,
+    item8=	QID5529,
+    item9=	QID5530,
+    item10=	QID5531,
+    item11=	QID5532,
+    item12=	QID5533,
+    item13=	QID5534,
+    item14=	QID5535,
+    item15=	QID5536,
+    item16=	QID5537,
+    item17=	QID5538,
+    item18=	QID5539,
+    item19=	QID5540,
+    item20=	QID5541,
+    item21=	QID5542,
+    item22=	QID5543,
+    item23=	QID5544,
+    item24=	QID5545,
+    item25=	QID5546,
+    item26=	QID5547,
+    item27=	QID5548,
+    item28=	QID5549,
+    item29=	QID5550,
+    item30=	QID5551,
+    item31=	QID5552,
+    item32=	QID5553,
+    item33=	QID5554,
+    item34=	QID5555,
+    item35=	QID5556,
+    item36=	QID5557,
+    item37=	QID5558,
+    item38=	QID5559,
+    item39=	QID5560,
+    item40=	QID5561,
+    item41=	QID5562,
+    item42=	QID5563,
+    item43=	QID5564,
+    item44=	QID5565,
+    item45=	QID5566,
+    item46=	QID5567,
+    item47=	QID5568,
+    item48=	QID5569,
+    item49=	QID5570,
+    item50=	QID5571,
+    item51=	QID5572,
+    item52=	QID5573,
+    item53=	QID5574,
+    item54=	QID5575,
+    item55=	QID5576,
+    item56=	QID5577,
+    item57=	QID5578,
+    item58=	QID5579,
+    item59=	QID5580,
+    item60=	QID5581,
+    item61=	QID5582,
+    item62=	QID5583,
+    item63=	QID5584,
+    item64=	QID5585,
+    item65=	QID5586,
+    item66=	QID5587,
+    item67=	QID5588,
+    item68=	QID5589,
+    item69=	QID5590,
+    item70=	QID5591,
+    item71=	QID5592,
+    item72=	QID5593,
+    item73=	QID5594,
+    item74=	QID5595,
+    item75=	QID5596,
+    item76=	QID5597,
+    item77=	QID5598,
+    item78=	QID5599,
+    item79=	QID5600,
+    item80=	QID5601,
+    first_rm = Q2365,
+    rated=	Q2364
+  )
+
+self3$form <- 3
+
+# temp <- describe(self3)
+# write.csv(temp,"C:\\temp\\temp.csv")
+
+self_3 <- self3[-c(1:2),c(18:97,100,98,99)] 
+
+
+self4 <- read.csv("Observer-Rated Personality_ Self4 (Fall 2019) - Copy - Copy_December 8, 2019_09.54.csv") 
+
+self4 <- self4 %>% 
+  rename(
+    item1=	QID5602,
+    item2=	QID5603,
+    item3=	QID5604,
+    item4=	QID5605,
+    item5=	QID5606,
+    item6=	QID5607,
+    item7=	QID5608,
+    item8=	QID5609,
+    item9=	QID5610,
+    item10=	QID5611,
+    item11=	QID5612,
+    item12=	QID5613,
+    item13=	QID5614,
+    item14=	QID5615,
+    item15=	QID5616,
+    item16=	QID5617,
+    item17=	QID5618,
+    item18=	QID5619,
+    item19=	QID5620,
+    item20=	QID5621,
+    item21=	QID5622,
+    item22=	QID5623,
+    item23=	QID5624,
+    item24=	QID5625,
+    item25=	QID5626,
+    item26=	QID5627,
+    item27=	QID5628,
+    item28=	QID5629,
+    item29=	QID5630,
+    item30=	QID5631,
+    item31=	QID5632,
+    item32=	QID5633,
+    item33=	QID5634,
+    item34=	QID5635,
+    item35=	QID5636,
+    item36=	QID5637,
+    item37=	QID5638,
+    item38=	QID5639,
+    item39=	QID5640,
+    item40=	QID5641,
+    item41=	QID5642,
+    item42=	QID5643,
+    item43=	QID5644,
+    item44=	QID5645,
+    item45=	QID5646,
+    item46=	QID5647,
+    item47=	QID5648,
+    item48=	QID5649,
+    item49=	QID5650,
+    item50=	QID5651,
+    item51=	QID5652,
+    item52=	QID5653,
+    item53=	QID5654,
+    item54=	QID5655,
+    item55=	QID5656,
+    item56=	QID5657,
+    item57=	QID5658,
+    item58=	QID5659,
+    item59=	QID5660,
+    item60=	QID5661,
+    item61=	QID5662,
+    item62=	QID5663,
+    item63=	QID5664,
+    item64=	QID5665,
+    item65=	QID5666,
+    item66=	QID5667,
+    item67=	QID5668,
+    item68=	QID5669,
+    item69=	QID5670,
+    item70=	QID5671,
+    item71=	QID5672,
+    item72=	QID5673,
+    item73=	QID5674,
+    item74=	QID5675,
+    item75=	QID5676,
+    item76=	QID5677,
+    item77=	QID5678,
+    item78=	QID5679,
+    item79=	QID5680,
+    item80=	QID5681,
+    first_rm=	Q2365,
+    rated=	Q2364
+  )
+
+self4$form <- 4
+
+# temp <- describe(self4)
+# write.csv(temp,"C:\\temp\\temp.csv")
+
+self_4 <- self4[-c(1:2),c(18:97,100,98,99)] 
+
+self_together <- rbind(self_1,self_2,self_3,self_4)
+
+###############################################################################################
+###############################################################################################
+###############################################################################################
+###############################################################################################
+###############################################################################################
+###############################################################################################
+###############################################################################################
+###############################################################################################
+###############################################################################################
+###############################################################################################
+
+once1 <- read.csv("Observer-Rated+Personality_+Once+Removed+1+(Fall+2019)+-+Copy+-+Copy_December+13,+2019_10.30.csv") 
+
+once1 <- once1 %>% 
+  rename(
+    i1=QID5362,
+    i2=QID5363,
+    i3=QID5364,
+    i4=QID5365,
+    i5=QID5366,
+    i6=QID5367,
+    i7=QID5368,
+    i8=QID5369,
+    i9=QID5370,
+    i10=QID5371,
+    i11=QID5372,
+    i12=QID5373,
+    i13=QID5374,
+    i14=QID5375,
+    i15=QID5376,
+    i16=QID5377,
+    i17=QID5378,
+    i18=QID5379,
+    i19=QID5380,
+    i20=QID5381,
+    i21=QID5382,
+    i22=QID5383,
+    i23=QID5384,
+    i24=QID5385,
+    i25=QID5386,
+    i26=QID5387,
+    i27=QID5388,
+    i28=QID5389,
+    i29=QID5390,
+    i30=QID5391,
+    i31=QID5392,
+    i32=QID5393,
+    i33=QID5394,
+    i34=QID5395,
+    i35=QID5396,
+    i36=QID5397,
+    i37=QID5398,
+    i38=QID5399,
+    i39=QID5400,
+    i40=QID5401,
+    i41=QID5402,
+    i42=QID5403,
+    i43=QID5404,
+    i44=QID5405,
+    i45=QID5406,
+    i46=QID5407,
+    i47=QID5408,
+    i48=QID5409,
+    i49=QID5410,
+    i50=QID5411,
+    i51=QID5412,
+    i52=QID5413,
+    i53=QID5414,
+    i54=QID5415,
+    i55=QID5416,
+    i56=QID5417,
+    i57=QID5418,
+    i58=QID5419,
+    i59=QID5420,
+    i60=QID5421,
+    i61=QID5422,
+    i62=QID5423,
+    i63=QID5424,
+    i64=QID5425,
+    i65=QID5426,
+    i66=QID5427,
+    i67=QID5428,
+    i68=QID5429,
+    i69=QID5430,
+    i70=QID5431,
+    i71=QID5432,
+    i72=QID5433,
+    i73=QID5434,
+    i74=QID5435,
+    i75=QID5436,
+    i76=QID5437,
+    i77=QID5438,
+    i78=QID5439,
+    i79=QID5440,
+    i80=QID5441,
+    recommend2 = Q85,
+    twice2     = Q2365,
+    confirm2   = Q2364,
+    know2      = Q88,
+    freq2      = Q89
+  )
+
+once1$form2 <- 1
+# temp <- describe(once1)
+# write.csv(temp,"C:\\temp\\temp.csv")
+
+##    /keep=i1 to i80 form2 recommend2 twice2 confirm2 know2 freq2.
+once_1 <- once1[-c(1:2),c(19:98,105,18,99:102)]  ## Trying to replicate file in "grabbing data.sps"
+
+
+once2 <- read.csv("Observer-Rated+Personality_+Once+Removed+2+(Fall+2019)+-+Copy+-+Copy_December+13,+2019_10.30.csv") 
+
+once2 <- once2 %>% 
+  rename(
+    i1=	QID5443,
+    i2=	QID5444,
+    i3=	QID5445,
+    i4=	QID5446,
+    i5=	QID5447,
+    i6=	QID5448,
+    i7=	QID5449,
+    i8=	QID5450,
+    i9=	QID5451,
+    i10=	QID5452,
+    i11=	QID5453,
+    i12=	QID5454,
+    i13=	QID5455,
+    i14=	QID5456,
+    i15=	QID5457,
+    i16=	QID5458,
+    i17=	QID5459,
+    i18=	QID5460,
+    i19=	QID5461,
+    i20=	QID5462,
+    i21=	QID5463,
+    i22=	QID5464,
+    i23=	QID5465,
+    i24=	QID5466,
+    i25=	QID5467,
+    i26=	QID5468,
+    i27=	QID5469,
+    i28=	QID5470,
+    i29=	QID5471,
+    i30=	QID5472,
+    i31=	QID5473,
+    i32=	QID5474,
+    i33=	QID5475,
+    i34=	QID5476,
+    i35=	QID5477,
+    i36=	QID5478,
+    i37=	QID5479,
+    i38=	QID5480,
+    i39=	QID5481,
+    i40=	QID5482,
+    i41=	QID5483,
+    i42=	QID5484,
+    i43=	QID5485,
+    i44=	QID5486,
+    i45=	QID5487,
+    i46=	QID5488,
+    i47=	QID5489,
+    i48=	QID5490,
+    i49=	QID5491,
+    i50=	QID5492,
+    i51=	QID5493,
+    i52=	QID5494,
+    i53=	QID5495,
+    i54=	QID5496,
+    i55=	QID5497,
+    i56=	QID5498,
+    i57=	QID5499,
+    i58=	QID5500,
+    i59=	QID5501,
+    i60=	QID5502,
+    i61=	QID5503,
+    i62=	QID5504,
+    i63=	QID5505,
+    i64=	QID5506,
+    i65=	QID5507,
+    i66=	QID5508,
+    i67=	QID5509,
+    i68=	QID5510,
+    i69=	QID5511,
+    i70=	QID5512,
+    i71=	QID5513,
+    i72=	QID5514,
+    i73=	QID5515,
+    i74=	QID5516,
+    i75=	QID5517,
+    i76=	QID5518,
+    i77=	QID5519,
+    i78=	QID5520,
+    i79=	QID5521,
+    i80=	QID5522,
+    recommend2=	Q85,
+    twice2=	Q2365,
+    confirm2=	Q2364,
+    know2=	Q89,
+    freq2=	Q91
+  )
+
+once2$form2 <- 2
+
+# temp <- describe(once2)
+# write.csv(temp,"C:\\temp\\temp.csv")
+
+once_2 <- once2[-c(1:2),c(19:98,105,18,99:102)] 
+
+
+once3 <- read.csv("Observer-Rated+Personality_+Once+Removed+3+(Fall+2019)+-+Copy+-+Copy_December+13,+2019_10.29.csv") 
+
+once3 <- once3 %>% 
+  rename(
+    i1=	QID5523,
+    i2=	QID5524,
+    i3=	QID5525,
+    i4=	QID5526,
+    i5=	QID5527,
+    i6=	QID5528,
+    i7=	QID5529,
+    i8=	QID5530,
+    i9=	QID5531,
+    i10=	QID5532,
+    i11=	QID5533,
+    i12=	QID5534,
+    i13=	QID5535,
+    i14=	QID5536,
+    i15=	QID5537,
+    i16=	QID5538,
+    i17=	QID5539,
+    i18=	QID5540,
+    i19=	QID5541,
+    i20=	QID5542,
+    i21=	QID5543,
+    i22=	QID5544,
+    i23=	QID5545,
+    i24=	QID5546,
+    i25=	QID5547,
+    i26=	QID5548,
+    i27=	QID5549,
+    i28=	QID5550,
+    i29=	QID5551,
+    i30=	QID5552,
+    i31=	QID5553,
+    i32=	QID5554,
+    i33=	QID5555,
+    i34=	QID5556,
+    i35=	QID5557,
+    i36=	QID5558,
+    i37=	QID5559,
+    i38=	QID5560,
+    i39=	QID5561,
+    i40=	QID5562,
+    i41=	QID5563,
+    i42=	QID5564,
+    i43=	QID5565,
+    i44=	QID5566,
+    i45=	QID5567,
+    i46=	QID5568,
+    i47=	QID5569,
+    i48=	QID5570,
+    i49=	QID5571,
+    i50=	QID5572,
+    i51=	QID5573,
+    i52=	QID5574,
+    i53=	QID5575,
+    i54=	QID5576,
+    i55=	QID5577,
+    i56=	QID5578,
+    i57=	QID5579,
+    i58=	QID5580,
+    i59=	QID5581,
+    i60=	QID5582,
+    i61=	QID5583,
+    i62=	QID5584,
+    i63=	QID5585,
+    i64=	QID5586,
+    i65=	QID5587,
+    i66=	QID5588,
+    i67=	QID5589,
+    i68=	QID5590,
+    i69=	QID5591,
+    i70=	QID5592,
+    i71=	QID5593,
+    i72=	QID5594,
+    i73=	QID5595,
+    i74=	QID5596,
+    i75=	QID5597,
+    i76=	QID5598,
+    i77=	QID5599,
+    i78=	QID5600,
+    i79=	QID5601,
+    i80=	QID5602,
+    recommend2=	Q85,
+    twice2=	Q2365,
+    confirm2=	Q2364,
+    know2=	Q89,
+    freq2=	Q91
+  )
+
+once3$form2 <- 3
+
+# temp <- describe(once3)
+# write.csv(temp,"C:\\temp\\temp.csv")
+
+once_3 <- once3[-c(1:2),c(19:98,105,18,99:102)]  
+
+
+once4 <- read.csv("Observer-Rated Personality_ Once Removed 4 (Fall 2019) - Copy - Copy_December 8, 2019_10.36.csv") 
+
+once4 <- once4 %>% 
+  rename(
+    i1=	QID5603,
+    i2=	QID5604,
+    i3=	QID5605,
+    i4=	QID5606,
+    i5=	QID5607,
+    i6=	QID5608,
+    i7=	QID5609,
+    i8=	QID5610,
+    i9=	QID5611,
+    i10=	QID5612,
+    i11=	QID5613,
+    i12=	QID5614,
+    i13=	QID5615,
+    i14=	QID5616,
+    i15=	QID5617,
+    i16=	QID5618,
+    i17=	QID5619,
+    i18=	QID5620,
+    i19=	QID5621,
+    i20=	QID5622,
+    i21=	QID5623,
+    i22=	QID5624,
+    i23=	QID5625,
+    i24=	QID5626,
+    i25=	QID5627,
+    i26=	QID5628,
+    i27=	QID5629,
+    i28=	QID5630,
+    i29=	QID5631,
+    i30=	QID5632,
+    i31=	QID5633,
+    i32=	QID5634,
+    i33=	QID5635,
+    i34=	QID5636,
+    i35=	QID5637,
+    i36=	QID5638,
+    i37=	QID5639,
+    i38=	QID5640,
+    i39=	QID5641,
+    i40=	QID5642,
+    i41=	QID5643,
+    i42=	QID5644,
+    i43=	QID5645,
+    i44=	QID5646,
+    i45=	QID5647,
+    i46=	QID5648,
+    i47=	QID5649,
+    i48=	QID5650,
+    i49=	QID5651,
+    i50=	QID5652,
+    i51=	QID5653,
+    i52=	QID5654,
+    i53=	QID5655,
+    i54=	QID5656,
+    i55=	QID5657,
+    i56=	QID5658,
+    i57=	QID5659,
+    i58=	QID5660,
+    i59=	QID5661,
+    i60=	QID5662,
+    i61=	QID5663,
+    i62=	QID5664,
+    i63=	QID5665,
+    i64=	QID5666,
+    i65=	QID5667,
+    i66=	QID5668,
+    i67=	QID5669,
+    i68=	QID5670,
+    i69=	QID5671,
+    i70=	QID5672,
+    i71=	QID5673,
+    i72=	QID5674,
+    i73=	QID5675,
+    i74=	QID5676,
+    i75=	QID5677,
+    i76=	QID5678,
+    i77=	QID5679,
+    i78=	QID5680,
+    i79=	QID5681,
+    i80=	QID5682,
+    recommend2=	Q85,
+    twice2=	Q2365,
+    confirm2=	Q2364,
+    know2=	Q89,
+    freq2=	Q91
+  )
+
+once4$form2 <- 4
+
+# temp <- describe(once4)
+# write.csv(temp,"C:\\temp\\temp.csv")
+
+once_4 <- once4[-c(1:2),c(19:98,105,18,99:102)]
+
+once_removed_together <- rbind(once_1,once_2,once_3,once_4)
+
+
+###############################################################################################
+###############################################################################################
+###############################################################################################
+###############################################################################################
+###############################################################################################
+###############################################################################################
+###############################################################################################
+###############################################################################################
+###############################################################################################
+###############################################################################################
+
+
+twice1 <- read.csv("Observer-Rated+Personality_+Twice+Removed+1+(Fall+2019)+-+Copy+-+Copy_December+11,+2019_15.11.csv") 
+
+twice1 <- twice1 %>% 
+  rename(
+qx1=	QID5362,
+qx2=	QID5363,
+qx3=	QID5364,
+qx4=	QID5365,
+qx5=	QID5366,
+qx6=	QID5367,
+qx7=	QID5368,
+qx8=	QID5369,
+qx9=	QID5370,
+qx10=	QID5371,
+qx11=	QID5372,
+qx12=	QID5373,
+qx13=	QID5374,
+qx14=	QID5375,
+qx15=	QID5376,
+qx16=	QID5377,
+qx17=	QID5378,
+qx18=	QID5379,
+qx19=	QID5380,
+qx20=	QID5381,
+qx21=	QID5382,
+qx22=	QID5383,
+qx23=	QID5384,
+qx24=	QID5385,
+qx25=	QID5386,
+qx26=	QID5387,
+qx27=	QID5388,
+qx28=	QID5389,
+qx29=	QID5390,
+qx30=	QID5391,
+qx31=	QID5392,
+qx32=	QID5393,
+qx33=	QID5394,
+qx34=	QID5395,
+qx35=	QID5396,
+qx36=	QID5397,
+qx37=	QID5398,
+qx38=	QID5399,
+qx39=	QID5400,
+qx40=	QID5401,
+qx41=	QID5402,
+qx42=	QID5403,
+qx43=	QID5404,
+qx44=	QID5405,
+qx45=	QID5406,
+qx46=	QID5407,
+qx47=	QID5408,
+qx48=	QID5409,
+qx49=	QID5410,
+qx50=	QID5411,
+qx51=	QID5412,
+qx52=	QID5413,
+qx53=	QID5414,
+qx54=	QID5415,
+qx55=	QID5416,
+qx56=	QID5417,
+qx57=	QID5418,
+qx58=	QID5419,
+qx59=	QID5420,
+qx60=	QID5421,
+qx61=	QID5422,
+qx62=	QID5423,
+qx63=	QID5424,
+qx64=	QID5425,
+qx65=	QID5426,
+qx66=	QID5427,
+qx67=	QID5428,
+qx68=	QID5429,
+qx69=	QID5430,
+qx70=	QID5431,
+qx71=	QID5432,
+qx72=	QID5433,
+qx73=	QID5434,
+qx74=	QID5435,
+qx75=	QID5436,
+qx76=	QID5437,
+qx77=	QID5438,
+qx78=	QID5439,
+qx79=	QID5440,
+qx80=	QID5441,
+recommend3=Q85,
+confirm3=Q87,
+know3=	Q91,
+freq3=	Q93
+)
+
+twice1$form3 <- 1
+
+# temp <- describe(twice1)
+# write.csv(temp,"temp.csv")
+
+twice_1 <- twice1[-c(1:2),c(19:98,104,18,99:101)]
+
+
+
+twice2 <- read.csv("Observer-Rated+Personality_+Twice+Removed+2+(Fall+2019)+-+Copy+-+Copy_December+11,+2019_15.11.csv") 
+
+twice2 <- twice2 %>% 
+  rename(
+qx1=	QID5443,
+qx2=	QID5444,
+qx3=	QID5445,
+qx4=	QID5446,
+qx5=	QID5447,
+qx6=	QID5448,
+qx7=	QID5449,
+qx8=	QID5450,
+qx9=	QID5451,
+qx10=	QID5452,
+qx11=	QID5453,
+qx12=	QID5454,
+qx13=	QID5455,
+qx14=	QID5456,
+qx15=	QID5457,
+qx16=	QID5458,
+qx17=	QID5459,
+qx18=	QID5460,
+qx19=	QID5461,
+qx20=	QID5462,
+qx21=	QID5463,
+qx22=	QID5464,
+qx23=	QID5465,
+qx24=	QID5466,
+qx25=	QID5467,
+qx26=	QID5468,
+qx27=	QID5469,
+qx28=	QID5470,
+qx29=	QID5471,
+qx30=	QID5472,
+qx31=	QID5473,
+qx32=	QID5474,
+qx33=	QID5475,
+qx34=	QID5476,
+qx35=	QID5477,
+qx36=	QID5478,
+qx37=	QID5479,
+qx38=	QID5480,
+qx39=	QID5481,
+qx40=	QID5482,
+qx41=	QID5483,
+qx42=	QID5484,
+qx43=	QID5485,
+qx44=	QID5486,
+qx45=	QID5487,
+qx46=	QID5488,
+qx47=	QID5489,
+qx48=	QID5490,
+qx49=	QID5491,
+qx50=	QID5492,
+qx51=	QID5493,
+qx52=	QID5494,
+qx53=	QID5495,
+qx54=	QID5496,
+qx55=	QID5497,
+qx56=	QID5498,
+qx57=	QID5499,
+qx58=	QID5500,
+qx59=	QID5501,
+qx60=	QID5502,
+qx61=	QID5503,
+qx62=	QID5504,
+qx63=	QID5505,
+qx64=	QID5506,
+qx65=	QID5507,
+qx66=	QID5508,
+qx67=	QID5509,
+qx68=	QID5510,
+qx69=	QID5511,
+qx70=	QID5512,
+qx71=	QID5513,
+qx72=	QID5514,
+qx73=	QID5515,
+qx74=	QID5516,
+qx75=	QID5517,
+qx76=	QID5518,
+qx77=	QID5519,
+qx78=	QID5520,
+qx79=	QID5521,
+qx80=	QID5522,
+recommend3=Q85,
+confirm3=Q165,
+know3=Q88,
+freq3=Q90
+)
+
+twice2$form3 <- 2
+
+# temp <- describe(twice2)
+# write.csv(temp,"temp.csv")
+
+twice_2 <- twice2[-c(1:2),c(19:98,104,18,99:101)]
+
+twice3 <- read.csv("Observer-Rated+Personality_+Twice+Removed+3+(Fall+2019)+-+Copy+-+Copy_December+11,+2019_15.12.csv") 
+
+twice3 <- twice3 %>% 
+  rename(
+qx1=	QID5523,
+qx2=	QID5524,
+qx3=	QID5525,
+qx4=	QID5526,
+qx5=	QID5527,
+qx6=	QID5528,
+qx7=	QID5529,
+qx8=	QID5530,
+qx9=	QID5531,
+qx10=	QID5532,
+qx11=	QID5533,
+qx12=	QID5534,
+qx13=	QID5535,
+qx14=	QID5536,
+qx15=	QID5537,
+qx16=	QID5538,
+qx17=	QID5539,
+qx18=	QID5540,
+qx19=	QID5541,
+qx20=	QID5542,
+qx21=	QID5543,
+qx22=	QID5544,
+qx23=	QID5545,
+qx24=	QID5546,
+qx25=	QID5547,
+qx26=	QID5548,
+qx27=	QID5549,
+qx28=	QID5550,
+qx29=	QID5551,
+qx30=	QID5552,
+qx31=	QID5553,
+qx32=	QID5554,
+qx33=	QID5555,
+qx34=	QID5556,
+qx35=	QID5557,
+qx36=	QID5558,
+qx37=	QID5559,
+qx38=	QID5560,
+qx39=	QID5561,
+qx40=	QID5562,
+qx41=	QID5563,
+qx42=	QID5564,
+qx43=	QID5565,
+qx44=	QID5566,
+qx45=	QID5567,
+qx46=	QID5568,
+qx47=	QID5569,
+qx48=	QID5570,
+qx49=	QID5571,
+qx50=	QID5572,
+qx51=	QID5573,
+qx52=	QID5574,
+qx53=	QID5575,
+qx54=	QID5576,
+qx55=	QID5577,
+qx56=	QID5578,
+qx57=	QID5579,
+qx58=	QID5580,
+qx59=	QID5581,
+qx60=	QID5582,
+qx61=	QID5583,
+qx62=	QID5584,
+qx63=	QID5585,
+qx64=	QID5586,
+qx65=	QID5587,
+qx66=	QID5588,
+qx67=	QID5589,
+qx68=	QID5590,
+qx69=	QID5591,
+qx70=	QID5592,
+qx71=	QID5593,
+qx72=	QID5594,
+qx73=	QID5595,
+qx74=	QID5596,
+qx75=	QID5597,
+qx76=	QID5598,
+qx77=	QID5599,
+qx78=	QID5600,
+qx79=	QID5601,
+qx80=	QID5602,
+recommend3=Q85,
+confirm3=Q245,
+know3=Q88,
+freq3=Q90
+)
+
+twice3$form3 <- 3
+
+# temp <- describe(twice3)
+# write.csv(temp,"temp.csv")
+
+twice_3 <- twice3[-c(1:2),c(19:98,104,18,99:101)]
+
+twice4 <- read.csv("Observer-Rated+Personality_+Twice+Removed+4+(Fall+2019)+-+Copy+-+Copy_December+11,+2019_15.12.csv") 
+
+twice4 <- twice4 %>% 
+  rename(
+qx1=	QID5603,
+qx2=	QID5604,
+qx3=	QID5605,
+qx4=	QID5606,
+qx5=	QID5607,
+qx6=	QID5608,
+qx7=	QID5609,
+qx8=	QID5610,
+qx9=	QID5611,
+qx10=	QID5612,
+qx11=	QID5613,
+qx12=	QID5614,
+qx13=	QID5615,
+qx14=	QID5616,
+qx15=	QID5617,
+qx16=	QID5618,
+qx17=	QID5619,
+qx18=	QID5620,
+qx19=	QID5621,
+qx20=	QID5622,
+qx21=	QID5623,
+qx22=	QID5624,
+qx23=	QID5625,
+qx24=	QID5626,
+qx25=	QID5627,
+qx26=	QID5628,
+qx27=	QID5629,
+qx28=	QID5630,
+qx29=	QID5631,
+qx30=	QID5632,
+qx31=	QID5633,
+qx32=	QID5634,
+qx33=	QID5635,
+qx34=	QID5636,
+qx35=	QID5637,
+qx36=	QID5638,
+qx37=	QID5639,
+qx38=	QID5640,
+qx39=	QID5641,
+qx40=	QID5642,
+qx41=	QID5643,
+qx42=	QID5644,
+qx43=	QID5645,
+qx44=	QID5646,
+qx45=	QID5647,
+qx46=	QID5648,
+qx47=	QID5649,
+qx48=	QID5650,
+qx49=	QID5651,
+qx50=	QID5652,
+qx51=	QID5653,
+qx52=	QID5654,
+qx53=	QID5655,
+qx54=	QID5656,
+qx55=	QID5657,
+qx56=	QID5658,
+qx57=	QID5659,
+qx58=	QID5660,
+qx59=	QID5661,
+qx60=	QID5662,
+qx61=	QID5663,
+qx62=	QID5664,
+qx63=	QID5665,
+qx64=	QID5666,
+qx65=	QID5667,
+qx66=	QID5668,
+qx67=	QID5669,
+qx68=	QID5670,
+qx69=	QID5671,
+qx70=	QID5672,
+qx71=	QID5673,
+qx72=	QID5674,
+qx73=	QID5675,
+qx74=	QID5676,
+qx75=	QID5677,
+qx76=	QID5678,
+qx77=	QID5679,
+qx78=	QID5680,
+qx79=	QID5681,
+qx80=	QID5682,
+recommend3=Q85,
+confirm3=Q325,
+know3=Q88,
+freq3=Q90
+)
+
+twice4$form3 <- 4
+
+# temp <- describe(twice4)
+# write.csv(temp,"temp.csv")
+
+twice_4 <- twice4[-c(1:2),c(19:98,104,18,99:101)]
+
+
+twice_removed_together <- rbind(twice_1,twice_2,twice_3,twice_4)
+
+
+## describe(twice_removed_together); describe(self_together)
+
+write.csv(twice_removed_together[81:83],"twice_check.csv")
+write.csv(once_removed_together[81:83],"once_check.csv")
+write.csv(self_together[81:83],"self_check.csv")
+
+## getting rid of those who don't confirm (only conflicts - NAs left in 12/12/19)
+
+use_two <- subset(twice_removed_together, confirm3 != "Vincent Napoli" &
+                    confirm3 != "JENnilee Lorito" & 
+                    confirm3 != "Brittany herring " &
+                                        recommend3 != "Sabrina Cheek" &
+                                        recommend3 != "Marnea Wise " &
+                    recommend3 != "Cindy Falco" &
+                    recommend3 != "Natalie Herrera " &
+                    confirm3 != "Bernard Cheek" &
+                    recommend3 != "Syeda Rida Batool" &
+                    recommend3 != "" &
+                    recommend3 != " "
+)
+
+write.csv(use_two[81:83],"twice_check2.csv")
+
+use_one <- subset(once_removed_together, recommend2 == "Angel Ayala" | 
+                    recommend2 == "bianca soto" |
+                    recommend2 == "Cassidy Hinkle" |
+                    recommend2 == "Evelyn Mozo" |
+                    recommend2 == "farida soliman" |
+                    recommend2 == "Gina DeCroce" |
+                    recommend2 == "Hailee Donne" |
+                    recommend2 == "Jennifer Lopez" |
+                    recommend2 == "Jennifer Siaba " |
+                    recommend2 == "Jonathan Chaves " |                      
+                    recommend2 == "Kate Ascuas" |                  
+                    recommend2 == "Laila Hamade" |
+                    recommend2 == "Lisa Squeo" |
+                    recommend2 == "McKenna Mandarino" |
+                    recommend2 == "Nafisa Humyra" |
+                    recommend2 == "Natalie Velez" |
+                    recommend2 == "Nielky Liriano " |
+                    recommend2 == "Rebecca Williams" |
+                    recommend2 == "Sam Mandara" & form2 == 3 |
+                    recommend2 == "Sarah Sierra" |
+                  recommend2 == "Sophia Caparros " |
+                  recommend2 == "Stefan Poposki" |
+                  recommend2 == "Syeda Zuha Batool" & form2 == 2 |
+                  recommend2 == "Ty-Janay Smith " |
+                  recommend2 == "Urszula Molesztak" |
+                  recommend2 == "Weronika Mysliwiec " |
+#                  recommend2 == "Sabrina Cheek" |
+#                  recommend2 == "Mar Wise" & i80 == "4" |
+                  recommend2 == "Dylan flood" #|
+#                  confirm2 == "Syeda Rida Batool"
+)                 
+
+
+use_self <- subset(self_together, rated == "Angel Ayala " | 
+                    rated == "Bianca Soto" |
+                    rated == "Cassidy Hinkle" |
+                    rated == "Evelyn Mozo" |
+                    rated == "Farida Soliman" |
+                    rated == "Gina DeCroce" |
+                    rated == "Hailee Donne" |
+                   rated == "Jennifer Lopez" |
+                   rated == "Jennifer Siaba" |
+                   rated == "Jonathan Chaves" |
+                   rated == "Kate Ascuas" |
+                   rated == "Laila Hamade" |
+                   rated == "Lisa Squeo" |
+                   rated == "McKenna Mandarino" |
+                   rated == "Nafisa Humyra" |
+                   rated == "Natalie Velez" & first_rm == "sotob1@montclair.edu" |
+                   rated == "Nielky Liriano" |
+                   rated == "Rebecca Williams" |
+                   rated == "Sam Mandara" & form == "3" |
+                   rated == "Sarah Sierra" |
+                   rated == "Sophia Caparros" |
+                   rated == "Stefan Poposki" |
+                     rated == "Syeda Zuha Batool" |
+                     rated == "Ty-Janay Smith" |
+                     rated == "Urszula Molesztak" |
+                     rated == "Weronika Mysliwiec" |
+#                     rated == "sabrina cheek" |
+#                     rated == "Marnea Wise" |
+                     rated == "Dylan Flood" #|
+#                    rated == "Syeda Rida Batool"
+)
+
+write.csv(use_two,"twice.csv")
+write.csv(use_one,"once.csv")
+write.csv(use_self,"self.csv")
+
+
+use_self$try <- NA
+use_self$try[use_self$rated=="Angel Ayala "] <- as.character("Angel Ayala")
+use_self$try[use_self$rated=="Bianca Soto"] <- as.character("bianca soto")
+use_self$try[use_self$rated=="Cassidy Hinkle"] <- as.character("Cassidy Hinkle")
+use_self$try[use_self$rated=="Dylan Flood"] <- as.character("Dylan flood")
+use_self$try[use_self$rated=="Evelyn Mozo"] <- as.character("Evelyn Mozo")
+use_self$try[use_self$rated=="Farida Soliman"] <- as.character("farida soliman")
+use_self$try[use_self$rated=="Gina DeCroce"] <- as.character("Gina DeCroce")
+use_self$try[use_self$rated=="Hailee Donne"] <- as.character("Hailee Donne")
+use_self$try[use_self$rated=="Jennifer Lopez"] <- as.character("Jennifer Lopez")
+use_self$try[use_self$rated=="Jennifer Siaba"] <- as.character("Jennifer Siaba ")
+use_self$try[use_self$rated=="Jonathan Chaves"] <- as.character("Jonathan Chaves ")
+use_self$try[use_self$rated=="Kate Ascuas"] <- as.character("Kate Ascuas")
+use_self$try[use_self$rated=="Laila Hamade"] <- as.character("Laila Hamade")
+use_self$try[use_self$rated=="Lisa Squeo"] <- as.character("Lisa Squeo")
+#use_self$try[use_self$rated=="Marnea Wise"] <-"Mar Wise"
+use_self$try[use_self$rated=="McKenna Mandarino"] <- as.character("McKenna Mandarino")
+use_self$try[use_self$rated=="Nafisa Humyra"] <- as.character("Nafisa Humyra")
+use_self$try[use_self$rated=="Natalie Velez"] <- as.character("Natalie Velez")
+use_self$try[use_self$rated=="Nielky Liriano"] <- as.character("Nielky Liriano ")
+use_self$try[use_self$rated=="Rebecca Williams"] <- as.character("Rebecca Williams")
+#use_self$try[use_self$rated=="sabrina cheek"] <-"Sabrina Cheek"
+use_self$try[use_self$rated=="Sam Mandara"] <- as.character("Sam Mandara")
+use_self$try[use_self$rated=="Sarah Sierra"] <- as.character("Sarah Sierra")
+use_self$try[use_self$rated=="Sophia Caparros"] <- as.character("Sophia Caparros ")
+use_self$try[use_self$rated=="Stefan Poposki"] <- as.character("Stefan Poposki")
+use_self$try[use_self$rated=="Syeda Zuha Batool"] <- as.character("Syeda Zuha Batool")
+use_self$try[use_self$rated=="Ty-Janay Smith"] <- as.character("Ty-Janay Smith ")
+use_self$try[use_self$rated=="Urszula Molesztak"] <- as.character("Urszula Molesztak")
+use_self$try[use_self$rated=="Weronika Mysliwiec"] <- as.character("Weronika Mysliwiec ")
+
+self_one_cleaned <-merge(use_self, use_one, by.x = "try", by.y = "recommend2", all.x = TRUE)
+
+use_two$try2 <- NA
+use_two$try2[use_two$recommend3=="Angel Ayala"] <- as.character("Angel Ayala")
+use_two$try2[use_two$recommend3=="Bianca Soto "] <- as.character("bianca soto")
+use_two$try2[use_two$recommend3=="Cassidy Hinkle"] <- as.character("Cassidy Hinkle")
+use_two$try2[use_two$recommend3=="Dylan Flood"] <- as.character("Dylan flood")
+use_two$try2[use_two$recommend3=="Evelyn Mozo"] <- as.character("Evelyn Mozo")
+use_two$try2[use_two$recommend3=="Farida Soliman"] <- as.character("farida soliman")
+use_two$try2[use_two$recommend3=="Gina DeCroce"] <- as.character("Gina DeCroce")
+use_two$try2[use_two$recommend3=="Hailee Donne"] <- as.character("Hailee Donne")
+use_two$try2[use_two$recommend3=="Jennifer Lopez "] <- as.character("Jennifer Lopez")
+use_two$try2[use_two$recommend3=="Jennifer Siaba"] <- as.character("Jennifer Siaba ")
+use_two$try2[use_two$recommend3=="Jonathan Chaves"] <- as.character("Jonathan Chaves ")
+use_two$try2[use_two$recommend3=="Kate Ascuas"] <- as.character("Kate Ascuas")
+use_two$try2[use_two$recommend3=="Laila Hamade"] <- as.character("Laila Hamade")
+use_two$try2[use_two$recommend3=="Lisa Squeo"] <- as.character("Lisa Squeo")
+use_two$try2[use_two$recommend3=="McKenna Mandarino "] <- as.character("McKenna Mandarino")
+use_two$try2[use_two$recommend3=="Nafisa Humyra"] <- as.character("Nafisa Humyra")
+use_two$try2[use_two$recommend3=="Natalie Velez"] <- as.character("Natalie Velez")
+use_two$try2[use_two$recommend3=="Nielky Liriano "] <- as.character("Nielky Liriano ")
+use_two$try2[use_two$recommend3=="Rebecca Williams"] <- as.character("Rebecca Williams")
+use_two$try2[use_two$recommend3=="Sam Mandara"] <- as.character("Sam Mandara")
+use_two$try2[use_two$recommend3=="Sarah Sierra"] <- as.character("Sarah Sierra")
+use_two$try2[use_two$recommend3=="Sophia Caparros"] <- as.character("Sophia Caparros ")
+use_two$try2[use_two$recommend3=="Stefan Poposki"] <- as.character("Stefan Poposki")
+use_two$try2[use_two$recommend3=="Syeda Zuha Batool"] <- as.character("Syeda Zuha Batool")
+use_two$try2[use_two$recommend3=="Tyjanay Smith "] <- as.character("Ty-Janay Smith ")
+use_two$try2[use_two$recommend3=="Urszula Molesztak"] <- as.character("Urszula Molesztak")
+use_two$try2[use_two$recommend3=="Weronika Mysliwiec"] <- as.character("Weronika Mysliwiec ")
+
+## Cindy Falco, Natalie Herrera, Bernard Cheek, Syeda Rida Batool all missing
+
+#use_two <- subset(use_two, recommend3 != "Cindy Falco" & 
+#  recommend3 != "Natalie Herrera" & 
+#  recommend3 != "Bernard Cheek" & 
+#  recommend3 != "Syeda Rida Batool"
+#)
+
+together_cleaned <-merge(self_one_cleaned, use_two, by.x = "try", by.y = "try2", all = TRUE)
+write.csv(together_cleaned, "notrecoded.csv")
+
+
+clean_missing <- as.data.frame(apply(together_cleaned, 2, function(x) {x[x == "6"] <- NA; x}))
+write.csv(clean_missing, "recoded.csv")
+
+## library(psych)
+## tab <- describe(clean_missing)
+## write.csv(tab,"clean_missing.csv")
+
+```
+
+```{r replicatingspss, echo=FALSE, warning=FALSE, message=FALSE, include=FALSE}
+
+self_miss <- sum(is.na(clean_missing[,c(2:81)]))
+once_miss <- sum(is.na(clean_missing[,c(85:164)]))
+twice_miss <- sum(is.na(clean_missing[,c(170:249)]))
+
+miss_1_self <- sum(is.na(clean_missing[,c(2:11)]))
+miss_2_self <- sum(is.na(clean_missing[,c(12:21)]))
+miss_3_self <- sum(is.na(clean_missing[,c(22:31)]))
+miss_4_self <- sum(is.na(clean_missing[,c(32:41)]))
+miss_5_self <- sum(is.na(clean_missing[,c(42:51)]))
+miss_6_self <- sum(is.na(clean_missing[,c(52:61)]))
+miss_7_self <- sum(is.na(clean_missing[,c(62:71)]))
+miss_8_self <- sum(is.na(clean_missing[,c(72:81)]))
+
+miss_1_once <- sum(is.na(clean_missing[,c(85:94)]))
+miss_2_once <- sum(is.na(clean_missing[,c(95:104)]))
+miss_3_once <- sum(is.na(clean_missing[,c(105:114)]))
+miss_4_once <- sum(is.na(clean_missing[,c(115:124)]))
+miss_5_once <- sum(is.na(clean_missing[,c(125:134)]))
+miss_6_once <- sum(is.na(clean_missing[,c(135:144)]))
+miss_7_once <- sum(is.na(clean_missing[,c(145:154)]))
+miss_8_once <- sum(is.na(clean_missing[,c(155:164)]))
+
+miss_1_twice <- sum(is.na(clean_missing[,c(170:179)]))
+miss_2_twice <- sum(is.na(clean_missing[,c(180:189)]))
+miss_3_twice <- sum(is.na(clean_missing[,c(190:199)]))
+miss_4_twice <- sum(is.na(clean_missing[,c(200:209)]))
+miss_5_twice <- sum(is.na(clean_missing[,c(210:219)]))
+miss_6_twice <- sum(is.na(clean_missing[,c(220:229)]))
+miss_7_twice <- sum(is.na(clean_missing[,c(230:239)]))
+miss_8_twice <- sum(is.na(clean_missing[,c(240:249)]))
+
+
+clean_missing[,c(2:81,85:164,170:249)]= apply(clean_missing[,c(2:81,85:164,170:249)], 2, function(x) as.numeric(as.character(x)))
+
+```
+
+```{r getting_together, warning=FALSE, echo=FALSE, message=FALSE, include=FALSE}
+
+
+clean_missing$RATED0 <- as.factor(NA)
+clean_missing$RATED1 <- as.factor(NA)
+clean_missing$RATED2 <- as.factor(NA)
+clean_missing$RATED3 <- as.factor(NA)
+clean_missing$RATED4 <- as.factor(NA)
+clean_missing$RATED5 <- as.factor(NA)
+clean_missing$RATED6 <- as.factor(NA)
+
+clean_missing$CONFI7 <- as.factor(NA)
+clean_missing$CONFI8 <- as.factor(NA)
+clean_missing$CONFI9 <- as.factor(NA)
+clean_missing$CONFIA <- as.factor(NA)
+clean_missing$CONFIB <- as.factor(NA)
+clean_missing$CONFIC <- as.factor(NA)
+clean_missing$CONFID <- as.factor(NA)
+
+clean_missing$recommend2 <- clean_missing$confirm2
+
+clean_missing$RECOM7 <- as.factor(NA)
+clean_missing$RECOM8 <- as.factor(NA)
+clean_missing$RECOM9 <- as.factor(NA)
+clean_missing$RECOMA <- as.factor(NA)
+clean_missing$RECOMB <- as.factor(NA)
+clean_missing$RECOMC <- as.factor(NA)
+clean_missing$RECOMD <- as.factor(NA)
+
+clean_missing$CONFI0 <- as.factor(NA)
+clean_missing$CONFI1 <- as.factor(NA)
+clean_missing$CONFI2 <- as.factor(NA)
+clean_missing$CONFI3 <- as.factor(NA)
+clean_missing$CONFI4 <- as.factor(NA)
+clean_missing$CONFI5 <- as.factor(NA)
+clean_missing$CONFI6 <- as.factor(NA)
+
+clean_missing$RECOM0 <- as.factor(NA)
+clean_missing$RECOM1 <- as.factor(NA)
+clean_missing$RECOM2 <- as.factor(NA)
+clean_missing$RECOM3 <- as.factor(NA)
+clean_missing$RECOM4 <- as.factor(NA)
+clean_missing$RECOM5 <- as.factor(NA)
+clean_missing$RECOM6 <- as.factor(NA)
+
+clean_missing$form <- as.numeric(as.character(clean_missing$form))
+clean_missing$form2 <- as.numeric(as.character(clean_missing$form2))
+clean_missing$form3 <- as.numeric(as.character(clean_missing$form3))
+
+clean_missing$first.rm <- clean_missing$first_rm
+
+clean_missing$FIRST0 <- as.factor(NA)
+clean_missing$FIRST1 <- as.factor(NA)
+clean_missing$FIRST2 <- as.factor(NA)
+clean_missing$FIRST3 <- as.factor(NA)
+clean_missing$FIRST4 <- as.factor(NA)
+clean_missing$FIRST5 <- as.factor(NA)
+clean_missing$FIRST6 <- as.factor(NA)
+
+clean_missing$TWICE0 <- as.factor(NA)
+clean_missing$TWICE1 <- as.factor(NA)
+clean_missing$TWICE2 <- as.factor(NA)
+clean_missing$TWICE3 <- as.factor(NA)
+clean_missing$TWICE4 <- as.factor(NA)
+clean_missing$TWICE5 <- as.factor(NA)
+clean_missing$TWICE6 <- as.factor(NA)
+clean_missing$TWICE7 <- as.factor(NA)
+
+clean_missing$know2 <- as.numeric(as.character(clean_missing$know2))
+clean_missing$freq2 <- as.numeric(as.character(clean_missing$freq2))
+clean_missing$know3 <- as.numeric(as.character(clean_missing$know3))
+clean_missing$freq3 <- as.numeric(as.character(clean_missing$freq3))
+
+clean_missing$casenum <- as.numeric(NA)
+clean_missing$yup <- as.numeric(NA)
+
+## again <- describe(clean_missing)
+## write.csv(again, "last_check.csv")
+
+tomerge <- clean_missing[,c(84,255:261,167,262:268,269:276,252,277:283,251,284:290,82,165,250,291:298,166,299:300,302:306,2:81,85:164,170:249,168,169,253,254,307,308)]
+
+## again <- describe(tomerge)
+## write.csv(again, "last_check.csv")
+
+library(Hmisc)
+data.temp <- spss.get("use_scrubbed.sav", use.value.labels = FALSE)
+
+## data2 <- data[,c(1,9,17,25,33,41,52,60:304)]            ## Need keep .sav format because Furr analyses
+# tab <- describe(data)
+# write.csv(tab, "tomatch.csv")
+
+## oldform <- clean_missing[,c()]
+
+data <- rbind(data.temp,tomerge)
+write.csv(data,"useFurr.csv")
+
+```
+
+```{r salvaged, eval=FALSE, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+
+data$item1[data$item1 == 6] <- NA
+data$item2[data$item2 == 6] <- NA
+data$item3[data$item3 == 6] <- NA
+data$item4[data$item4 == 6] <- NA
+data$item5[data$item5 == 6] <- NA
+data$item6[data$item6 == 6] <- NA
+data$item7[data$item7 == 6] <- NA
+data$item8[data$item8 == 6] <- NA
+data$item9[data$item9 == 6] <- NA
+data$item10[data$item10 == 6] <- NA
+
+data$item11[data$item11 == 6] <- NA
+data$item12[data$item12 == 6] <- NA
+data$item13[data$item13 == 6] <- NA
+data$item14[data$item14 == 6] <- NA
+data$item15[data$item15 == 6] <- NA
+data$item16[data$item16 == 6] <- NA
+data$item17[data$item17 == 6] <- NA
+data$item18[data$item18 == 6] <- NA
+data$item19[data$item19 == 6] <- NA
+data$item20[data$item20 == 6] <- NA
+
+data$item21[data$item21 == 6] <- NA
+data$item22[data$item22 == 6] <- NA
+data$item23[data$item23 == 6] <- NA
+data$item24[data$item24 == 6] <- NA
+data$item25[data$item25 == 6] <- NA
+data$item26[data$item26 == 6] <- NA
+data$item27[data$item27 == 6] <- NA
+data$item28[data$item28 == 6] <- NA
+data$item29[data$item29 == 6] <- NA
+data$item30[data$item30 == 6] <- NA
+
+data$item31[data$item31 == 6] <- NA
+data$item32[data$item32 == 6] <- NA
+data$item33[data$item33 == 6] <- NA
+data$item34[data$item34 == 6] <- NA
+data$item35[data$item35 == 6] <- NA
+data$item36[data$item36 == 6] <- NA
+data$item37[data$item37 == 6] <- NA
+data$item38[data$item38 == 6] <- NA
+data$item39[data$item39 == 6] <- NA
+data$item40[data$item40 == 6] <- NA
+
+data$item41[data$item41 == 6] <- NA
+data$item42[data$item42 == 6] <- NA
+data$item43[data$item43 == 6] <- NA
+data$item44[data$item44 == 6] <- NA
+data$item45[data$item45 == 6] <- NA
+data$item46[data$item46 == 6] <- NA
+data$item47[data$item47 == 6] <- NA
+data$item48[data$item48 == 6] <- NA
+data$item49[data$item49 == 6] <- NA
+data$item50[data$item50 == 6] <- NA
+
+data$item51[data$item51 == 6] <- NA
+data$item52[data$item52 == 6] <- NA
+data$item53[data$item53 == 6] <- NA
+data$item54[data$item54 == 6] <- NA
+data$item55[data$item55 == 6] <- NA
+data$item56[data$item56 == 6] <- NA
+data$item57[data$item57 == 6] <- NA
+data$item58[data$item58 == 6] <- NA
+data$item59[data$item59 == 6] <- NA
+data$item60[data$item60 == 6] <- NA
+
+data$item61[data$item61 == 6] <- NA
+data$item62[data$item62 == 6] <- NA
+data$item63[data$item63 == 6] <- NA
+data$item64[data$item64 == 6] <- NA
+data$item65[data$item65 == 6] <- NA
+data$item66[data$item66 == 6] <- NA
+data$item67[data$item67 == 6] <- NA
+data$item68[data$item68 == 6] <- NA
+data$item69[data$item69 == 6] <- NA
+data$item70[data$item70 == 6] <- NA
+
+data$item71[data$item71 == 6] <- NA
+data$item72[data$item72 == 6] <- NA
+data$item73[data$item73 == 6] <- NA
+data$item74[data$item74 == 6] <- NA
+data$item75[data$item75 == 6] <- NA
+data$item76[data$item76 == 6] <- NA
+data$item77[data$item77 == 6] <- NA
+data$item78[data$item78 == 6] <- NA
+data$item79[data$item79 == 6] <- NA
+data$item80[data$item80 == 6] <- NA
+
+data$i1[data$i1 == 6] <- NA
+data$i2[data$i2 == 6] <- NA
+data$i3[data$i3 == 6] <- NA
+data$i4[data$i4 == 6] <- NA
+data$i5[data$i5 == 6] <- NA
+data$i6[data$i6 == 6] <- NA
+data$i7[data$i7 == 6] <- NA
+data$i8[data$i8 == 6] <- NA
+data$i9[data$i9 == 6] <- NA
+data$i10[data$i10 == 6] <- NA
+
+data$i11[data$i11 == 6] <- NA
+data$i12[data$i12 == 6] <- NA
+data$i13[data$i13 == 6] <- NA
+data$i14[data$i14 == 6] <- NA
+data$i15[data$i15 == 6] <- NA
+data$i16[data$i16 == 6] <- NA
+data$i17[data$i17 == 6] <- NA
+data$i18[data$i18 == 6] <- NA
+data$i19[data$i19 == 6] <- NA
+data$i20[data$i20 == 6] <- NA
+
+data$i21[data$i21 == 6] <- NA
+data$i22[data$i22 == 6] <- NA
+data$i23[data$i23 == 6] <- NA
+data$i24[data$i24 == 6] <- NA
+data$i25[data$i25 == 6] <- NA
+data$i26[data$i26 == 6] <- NA
+data$i27[data$i27 == 6] <- NA
+data$i28[data$i28 == 6] <- NA
+data$i29[data$i29 == 6] <- NA
+data$i30[data$i30 == 6] <- NA
+
+data$i31[data$i31 == 6] <- NA
+data$i32[data$i32 == 6] <- NA
+data$i33[data$i33 == 6] <- NA
+data$i34[data$i34 == 6] <- NA
+data$i35[data$i35 == 6] <- NA
+data$i36[data$i36 == 6] <- NA
+data$i37[data$i37 == 6] <- NA
+data$i38[data$i38 == 6] <- NA
+data$i39[data$i39 == 6] <- NA
+data$i40[data$i40 == 6] <- NA
+
+data$i41[data$i41 == 6] <- NA
+data$i42[data$i42 == 6] <- NA
+data$i43[data$i43 == 6] <- NA
+data$i44[data$i44 == 6] <- NA
+data$i45[data$i45 == 6] <- NA
+data$i46[data$i46 == 6] <- NA
+data$i47[data$i47 == 6] <- NA
+data$i48[data$i48 == 6] <- NA
+data$i49[data$i49 == 6] <- NA
+data$i50[data$i50 == 6] <- NA
+
+data$i51[data$i51 == 6] <- NA
+data$i52[data$i52 == 6] <- NA
+data$i53[data$i53 == 6] <- NA
+data$i54[data$i54 == 6] <- NA
+data$i55[data$i55 == 6] <- NA
+data$i56[data$i56 == 6] <- NA
+data$i57[data$i57 == 6] <- NA
+data$i58[data$i58 == 6] <- NA
+data$i59[data$i59 == 6] <- NA
+data$i60[data$i60 == 6] <- NA
+
+data$i61[data$i61 == 6] <- NA
+data$i62[data$i62 == 6] <- NA
+data$i63[data$i63 == 6] <- NA
+data$i64[data$i64 == 6] <- NA
+data$i65[data$i65 == 6] <- NA
+data$i66[data$i66 == 6] <- NA
+data$i67[data$i67 == 6] <- NA
+data$i68[data$i68 == 6] <- NA
+data$i69[data$i69 == 6] <- NA
+data$i70[data$i70 == 6] <- NA
+
+data$i71[data$i71 == 6] <- NA
+data$i72[data$i72 == 6] <- NA
+data$i73[data$i73 == 6] <- NA
+data$i74[data$i74 == 6] <- NA
+data$i75[data$i75 == 6] <- NA
+data$i76[data$i76 == 6] <- NA
+data$i77[data$i77 == 6] <- NA
+data$i78[data$i78 == 6] <- NA
+data$i79[data$i79 == 6] <- NA
+data$i80[data$i80 == 6] <- NA
+
+data$qx1[data$qx1 == 6] <- NA
+data$qx2[data$qx2 == 6] <- NA
+data$qx3[data$qx3 == 6] <- NA
+data$qx4[data$qx4 == 6] <- NA
+data$qx5[data$qx5 == 6] <- NA
+data$qx6[data$qx6 == 6] <- NA
+data$qx7[data$qx7 == 6] <- NA
+data$qx8[data$qx8 == 6] <- NA
+data$qx9[data$qx9 == 6] <- NA
+data$qx10[data$qx10 == 6] <- NA
+
+data$qx11[data$qx11 == 6] <- NA
+data$qx12[data$qx12 == 6] <- NA
+data$qx13[data$qx13 == 6] <- NA
+data$qx14[data$qx14 == 6] <- NA
+data$qx15[data$qx15 == 6] <- NA
+data$qx16[data$qx16 == 6] <- NA
+data$qx17[data$qx17 == 6] <- NA
+data$qx18[data$qx18 == 6] <- NA
+data$qx19[data$qx19 == 6] <- NA
+data$qx20[data$qx20 == 6] <- NA
+
+data$qx21[data$qx21 == 6] <- NA
+data$qx22[data$qx22 == 6] <- NA
+data$qx23[data$qx23 == 6] <- NA
+data$qx24[data$qx24 == 6] <- NA
+data$qx25[data$qx25 == 6] <- NA
+data$qx26[data$qx26 == 6] <- NA
+data$qx27[data$qx27 == 6] <- NA
+data$qx28[data$qx28 == 6] <- NA
+data$qx29[data$qx29 == 6] <- NA
+data$qx30[data$qx30 == 6] <- NA
+
+data$qx31[data$qx31 == 6] <- NA
+data$qx32[data$qx32 == 6] <- NA
+data$qx33[data$qx33 == 6] <- NA
+data$qx34[data$qx34 == 6] <- NA
+data$qx35[data$qx35 == 6] <- NA
+data$qx36[data$qx36 == 6] <- NA
+data$qx37[data$qx37 == 6] <- NA
+data$qx38[data$qx38 == 6] <- NA
+data$qx39[data$qx39 == 6] <- NA
+data$qx40[data$qx40 == 6] <- NA
+
+data$qx41[data$qx41 == 6] <- NA
+data$qx42[data$qx42 == 6] <- NA
+data$qx43[data$qx43 == 6] <- NA
+data$qx44[data$qx44 == 6] <- NA
+data$qx45[data$qx45 == 6] <- NA
+data$qx46[data$qx46 == 6] <- NA
+data$qx47[data$qx47 == 6] <- NA
+data$qx48[data$qx48 == 6] <- NA
+data$qx49[data$qx49 == 6] <- NA
+data$qx50[data$qx50 == 6] <- NA
+
+data$qx51[data$qx51 == 6] <- NA
+data$qx52[data$qx52 == 6] <- NA
+data$qx53[data$qx53 == 6] <- NA
+data$qx54[data$qx54 == 6] <- NA
+data$qx55[data$qx55 == 6] <- NA
+data$qx56[data$qx56 == 6] <- NA
+data$qx57[data$qx57 == 6] <- NA
+data$qx58[data$qx58 == 6] <- NA
+data$qx59[data$qx59 == 6] <- NA
+data$qx60[data$qx60 == 6] <- NA
+
+data$qx61[data$qx61 == 6] <- NA
+data$qx62[data$qx62 == 6] <- NA
+data$qx63[data$qx63 == 6] <- NA
+data$qx64[data$qx64 == 6] <- NA
+data$qx65[data$qx65 == 6] <- NA
+data$qx66[data$qx66 == 6] <- NA
+data$qx67[data$qx67 == 6] <- NA
+data$qx68[data$qx68 == 6] <- NA
+data$qx69[data$qx69 == 6] <- NA
+data$qx70[data$qx70 == 6] <- NA
+
+data$qx71[data$qx71 == 6] <- NA
+data$qx72[data$qx72 == 6] <- NA
+data$qx73[data$qx73 == 6] <- NA
+data$qx74[data$qx74 == 6] <- NA
+data$qx75[data$qx75 == 6] <- NA
+data$qx76[data$qx76 == 6] <- NA
+data$qx77[data$qx77 == 6] <- NA
+data$qx78[data$qx78 == 6] <- NA
+data$qx79[data$qx79 == 6] <- NA
+data$qx80[data$qx80 == 6] <- NA
+
+#recode item1 to second80 (6=sysmiss).
+## Not doing the below (9/27/19)
+
+
+data$sd_1_self <- rowMeans(data[60:69], na.rm=TRUE)
+data$sd_2_self <- rowMeans(data[70:79], na.rm=TRUE)
+data$sd_3_self <- rowMeans(data[80:89], na.rm=TRUE)
+data$sd_4_self <- rowMeans(data[90:99], na.rm=TRUE)
+data$sd_5_self <- rowMeans(data[100:109], na.rm=TRUE)
+data$sd_6_self <- rowMeans(data[110:119], na.rm=TRUE)
+data$sd_7_self <- rowMeans(data[120:129], na.rm=TRUE)
+data$sd_8_self <- rowMeans(data[130:139], na.rm=TRUE)
+
+data$sd_1_once <- rowMeans(data[140:149], na.rm=TRUE)
+data$sd_2_once <- rowMeans(data[150:159], na.rm=TRUE)
+data$sd_3_once <- rowMeans(data[160:169], na.rm=TRUE)
+data$sd_4_once <- rowMeans(data[170:179], na.rm=TRUE)
+data$sd_5_once <- rowMeans(data[180:189], na.rm=TRUE)
+data$sd_6_once <- rowMeans(data[190:199], na.rm=TRUE)
+data$sd_7_once <- rowMeans(data[200:209], na.rm=TRUE)
+data$sd_8_once <- rowMeans(data[210:219], na.rm=TRUE)
+
+data$sd_1_twice <- rowMeans(data[220:229], na.rm=TRUE)
+data$sd_2_twice <- rowMeans(data[230:239], na.rm=TRUE)
+data$sd_3_twice <- rowMeans(data[240:249], na.rm=TRUE)
+data$sd_4_twice <- rowMeans(data[250:259], na.rm=TRUE)
+data$sd_5_twice <- rowMeans(data[260:269], na.rm=TRUE)
+data$sd_6_twice <- rowMeans(data[270:279], na.rm=TRUE)
+data$sd_7_twice <- rowMeans(data[280:289], na.rm=TRUE)
+data$sd_8_twice <- rowMeans(data[290:299], na.rm=TRUE)
+
+data1 <- data[ which(data$form == 1),]
+data2 <- data[ which(data$form == 2),]
+data3 <- data[ which(data$form == 3),]
+data4 <- data[ which(data$form == 4),]
+
+write.csv(data, "AliciaANOVAs.csv")
+
+
+```
+
+```{r all.data, echo=FALSE, warning=FALSE, message=FALSE, include=FALSE}
+
+tot_1_self <- sum(is.na(data[,c(60:69)]))
+tot_2_self <- sum(is.na(data[,c(70:79)]))
+tot_3_self <- sum(is.na(data[,c(80:89)]))
+tot_4_self <- sum(is.na(data[,c(90:99)]))
+tot_5_self <- sum(is.na(data[,c(100:109)]))
+tot_6_self <- sum(is.na(data[,c(110:119)]))
+tot_7_self <- sum(is.na(data[,c(120:129)]))
+tot_8_self <- sum(is.na(data[,c(130:139)]))
+
+tot_1_once <- sum(is.na(data[,c(140:149)]))
+tot_2_once <- sum(is.na(data[,c(150:159)]))
+tot_3_once <- sum(is.na(data[,c(160:169)]))
+tot_4_once <- sum(is.na(data[,c(170:179)]))
+tot_5_once <- sum(is.na(data[,c(180:189)]))
+tot_6_once <- sum(is.na(data[,c(190:199)]))
+tot_7_once <- sum(is.na(data[,c(200:209)]))
+tot_8_once <- sum(is.na(data[,c(210:219)]))
+
+tot_1_twice <- sum(is.na(data[,c(220:229)]))
+tot_2_twice <- sum(is.na(data[,c(230:239)]))
+tot_3_twice <- sum(is.na(data[,c(240:249)]))
+tot_4_twice <- sum(is.na(data[,c(250:259)]))
+tot_5_twice <- sum(is.na(data[,c(260:269)]))
+tot_6_twice <- sum(is.na(data[,c(270:279)]))
+tot_7_twice <- sum(is.na(data[,c(280:289)]))
+tot_8_twice <- sum(is.na(data[,c(290:299)]))
+
+```
+
+```{r toplot, echo=FALSE, warning=FALSE, message=FALSE, include=FALSE, fig.width=11, fig.height=6, fig.cap="*Figure 1.* Average response (1=Strongly Disagree; 5=Strongly Agree) by item desirability and rater type (*n* = 306 [102 each rater group])."}
+
+library(psych); data <- read.csv("AliciaANOVAs.csv")
+toplot <- as.data.frame(describe(data[306:329]))
+self.p <- toplot[1:8,3:4]
+once.p <- toplot[9:16,3:4]
+twice.p <- toplot[17:24,3:4]
+
+self.p$rater <- rep("Self",8)
+once.p$rater <- rep("Once-Removed",8)
+twice.p$rater <- rep("Twice-Removed",8)
+
+self.p$cond <- c("Extremely Undesirable", "Very Undersirable","Moderately Undesirable", "Somewhat Undesirable", "Somewhat Desirable", "Moderately Desirable", "Very Desirable", "Extremely Desirable")
+once.p$cond <- c("Extremely Undesirable", "Very Undersirable","Moderately Undesirable", "Somewhat Undesirable", "Somewhat Desirable", "Moderately Desirable", "Very Desirable", "Extremely Desirable")
+twice.p$cond <- c("Extremely Undesirable", "Very Undersirable","Moderately Undesirable", "Somewhat Undesirable", "Somewhat Desirable", "Moderately Desirable", "Very Desirable", "Extremely Desirable")
+
+together <- rbind(self.p,once.p,twice.p)
+
+together$cond <- factor(together$cond,levels = c("Extremely Undesirable", "Very Undersirable","Moderately Undesirable", "Somewhat Undesirable", "Somewhat Desirable", "Moderately Desirable", "Very Desirable", "Extremely Desirable"))
+
+
+together$rater <- factor(together$rater,levels = c("Self", "Once-Removed", "Twice-Removed"))
+
+q <- ggplot(data=together, aes(x=cond, y=mean, fill=rater)) +
+        geom_bar(colour="black", stat="identity", position=position_dodge()) +
+          geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2, position=position_dodge(.9)) +
+          scale_fill_manual(values=c('black','white', 'lightgray')) +
+          geom_hline(aes(yintercept=3), linetype="dashed") +
+          theme_classic() +
+          theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.caption = element_text(hjust = 0)) +
+          ylab("Average Agreement") +
+          xlab("Edwards Category") +
+          labs(caption=("Note. Error bars represent plus and minus one standard deviation"), hjust = 0)
+
+q + coord_cartesian(ylim=c(1.5,4.5))
+
+## SDs look different across groups - might be interesting to look at but running out of time - 12/30/19
+
+```
+
+```{r agreement, echo=FALSE, warning=FALSE, message=FALSE, include=FALSE, fig.width=11, fig.height=6, fig.cap="*Figure 2.* Rater consistency of agreement across socially desirable item groupings (all 3 agree or all 3 disagree)."}
+## Agreement counts - replicating figures 3 through 5
+
+data$ag1 <- ifelse(data$item1 > 3 & data$i1 > 3 & data$qx1 > 3, 1, 0)
+data$ag2 <- ifelse(data$item2 > 3 & data$i2 > 3 & data$qx2 > 3, 1, 0)
+data$ag3 <- ifelse(data$item3 > 3 & data$i3 > 3 & data$qx3 > 3, 1, 0)
+data$ag4 <- ifelse(data$item4 > 3 & data$i4 > 3 & data$qx4 > 3, 1, 0)
+data$ag5 <- ifelse(data$item5 > 3 & data$i5 > 3 & data$qx5 > 3, 1, 0)
+data$ag6 <- ifelse(data$item6 > 3 & data$i6 > 3 & data$qx6 > 3, 1, 0)
+data$ag7 <- ifelse(data$item7 > 3 & data$i7 > 3 & data$qx7 > 3, 1, 0)
+data$ag8 <- ifelse(data$item8 > 3 & data$i8 > 3 & data$qx8 > 3, 1, 0)
+data$ag9 <- ifelse(data$item9 > 3 & data$i9 > 3 & data$qx9 > 3, 1, 0)
+data$ag10 <- ifelse(data$item10 > 3 & data$i10 > 3 & data$qx10 > 3, 1, 0)
+
+data$ag11 <- ifelse(data$item11 > 3 & data$i11 > 3 & data$qx11 > 3, 1, 0)
+data$ag12 <- ifelse(data$item12 > 3 & data$i12 > 3 & data$qx12 > 3, 1, 0)
+data$ag13 <- ifelse(data$item13 > 3 & data$i13 > 3 & data$qx13 > 3, 1, 0)
+data$ag14 <- ifelse(data$item14 > 3 & data$i14 > 3 & data$qx14 > 3, 1, 0)
+data$ag15 <- ifelse(data$item15 > 3 & data$i15 > 3 & data$qx15 > 3, 1, 0)
+data$ag16 <- ifelse(data$item16 > 3 & data$i16 > 3 & data$qx16 > 3, 1, 0)
+data$ag17 <- ifelse(data$item17 > 3 & data$i17 > 3 & data$qx17 > 3, 1, 0)
+data$ag18 <- ifelse(data$item18 > 3 & data$i18 > 3 & data$qx18 > 3, 1, 0)
+data$ag19 <- ifelse(data$item19 > 3 & data$i19 > 3 & data$qx19 > 3, 1, 0)
+data$ag20 <- ifelse(data$item20 > 3 & data$i20 > 3 & data$qx20 > 3, 1, 0)
+
+data$ag21 <- ifelse(data$item21 > 3 & data$i21 > 3 & data$qx21 > 3, 1, 0)
+data$ag22 <- ifelse(data$item22 > 3 & data$i22 > 3 & data$qx22 > 3, 1, 0)
+data$ag23 <- ifelse(data$item23 > 3 & data$i23 > 3 & data$qx23 > 3, 1, 0)
+data$ag24 <- ifelse(data$item24 > 3 & data$i24 > 3 & data$qx24 > 3, 1, 0)
+data$ag25 <- ifelse(data$item25 > 3 & data$i25 > 3 & data$qx25 > 3, 1, 0)
+data$ag26 <- ifelse(data$item26 > 3 & data$i26 > 3 & data$qx26 > 3, 1, 0)
+data$ag27 <- ifelse(data$item27 > 3 & data$i27 > 3 & data$qx27 > 3, 1, 0)
+data$ag28 <- ifelse(data$item28 > 3 & data$i28 > 3 & data$qx28 > 3, 1, 0)
+data$ag29 <- ifelse(data$item29 > 3 & data$i29 > 3 & data$qx29 > 3, 1, 0)
+data$ag30 <- ifelse(data$item30 > 3 & data$i30 > 3 & data$qx30 > 3, 1, 0)
+
+data$ag31 <- ifelse(data$item31 > 3 & data$i31 > 3 & data$qx31 > 3, 1, 0)
+data$ag32 <- ifelse(data$item32 > 3 & data$i32 > 3 & data$qx32 > 3, 1, 0)
+data$ag33 <- ifelse(data$item33 > 3 & data$i33 > 3 & data$qx33 > 3, 1, 0)
+data$ag34 <- ifelse(data$item34 > 3 & data$i34 > 3 & data$qx34 > 3, 1, 0)
+data$ag35 <- ifelse(data$item35 > 3 & data$i35 > 3 & data$qx35 > 3, 1, 0)
+data$ag36 <- ifelse(data$item36 > 3 & data$i36 > 3 & data$qx36 > 3, 1, 0)
+data$ag37 <- ifelse(data$item37 > 3 & data$i37 > 3 & data$qx37 > 3, 1, 0)
+data$ag38 <- ifelse(data$item38 > 3 & data$i38 > 3 & data$qx38 > 3, 1, 0)
+data$ag39 <- ifelse(data$item39 > 3 & data$i39 > 3 & data$qx39 > 3, 1, 0)
+data$ag40 <- ifelse(data$item40 > 3 & data$i40 > 3 & data$qx40 > 3, 1, 0)
+
+data$ag41 <- ifelse(data$item41 > 3 & data$i41 > 3 & data$qx41 > 3, 1, 0)
+data$ag42 <- ifelse(data$item42 > 3 & data$i42 > 3 & data$qx42 > 3, 1, 0)
+data$ag43 <- ifelse(data$item43 > 3 & data$i43 > 3 & data$qx43 > 3, 1, 0)
+data$ag44 <- ifelse(data$item44 > 3 & data$i44 > 3 & data$qx44 > 3, 1, 0)
+data$ag45 <- ifelse(data$item45 > 3 & data$i45 > 3 & data$qx45 > 3, 1, 0)
+data$ag46 <- ifelse(data$item46 > 3 & data$i46 > 3 & data$qx46 > 3, 1, 0)
+data$ag47 <- ifelse(data$item47 > 3 & data$i47 > 3 & data$qx47 > 3, 1, 0)
+data$ag48 <- ifelse(data$item48 > 3 & data$i48 > 3 & data$qx48 > 3, 1, 0)
+data$ag49 <- ifelse(data$item49 > 3 & data$i49 > 3 & data$qx49 > 3, 1, 0)
+data$ag50 <- ifelse(data$item50 > 3 & data$i50 > 3 & data$qx50 > 3, 1, 0)
+
+data$ag51 <- ifelse(data$item51 > 3 & data$i51 > 3 & data$qx51 > 3, 1, 0)
+data$ag52 <- ifelse(data$item52 > 3 & data$i52 > 3 & data$qx52 > 3, 1, 0)
+data$ag53 <- ifelse(data$item53 > 3 & data$i53 > 3 & data$qx53 > 3, 1, 0)
+data$ag54 <- ifelse(data$item54 > 3 & data$i54 > 3 & data$qx54 > 3, 1, 0)
+data$ag55 <- ifelse(data$item55 > 3 & data$i55 > 3 & data$qx55 > 3, 1, 0)
+data$ag56 <- ifelse(data$item56 > 3 & data$i56 > 3 & data$qx56 > 3, 1, 0)
+data$ag57 <- ifelse(data$item57 > 3 & data$i57 > 3 & data$qx57 > 3, 1, 0)
+data$ag58 <- ifelse(data$item58 > 3 & data$i58 > 3 & data$qx58 > 3, 1, 0)
+data$ag59 <- ifelse(data$item59 > 3 & data$i59 > 3 & data$qx59 > 3, 1, 0)
+data$ag60 <- ifelse(data$item60 > 3 & data$i60 > 3 & data$qx60 > 3, 1, 0)
+
+data$ag61 <- ifelse(data$item61 > 3 & data$i61 > 3 & data$qx61 > 3, 1, 0)
+data$ag62 <- ifelse(data$item62 > 3 & data$i62 > 3 & data$qx62 > 3, 1, 0)
+data$ag63 <- ifelse(data$item63 > 3 & data$i63 > 3 & data$qx63 > 3, 1, 0)
+data$ag64 <- ifelse(data$item64 > 3 & data$i64 > 3 & data$qx64 > 3, 1, 0)
+data$ag65 <- ifelse(data$item65 > 3 & data$i65 > 3 & data$qx65 > 3, 1, 0)
+data$ag66 <- ifelse(data$item66 > 3 & data$i66 > 3 & data$qx66 > 3, 1, 0)
+data$ag67 <- ifelse(data$item67 > 3 & data$i67 > 3 & data$qx67 > 3, 1, 0)
+data$ag68 <- ifelse(data$item68 > 3 & data$i68 > 3 & data$qx68 > 3, 1, 0)
+data$ag69 <- ifelse(data$item69 > 3 & data$i69 > 3 & data$qx69 > 3, 1, 0)
+data$ag70 <- ifelse(data$item70 > 3 & data$i70 > 3 & data$qx70 > 3, 1, 0)
+
+data$ag71 <- ifelse(data$item71 > 3 & data$i71 > 3 & data$qx71 > 3, 1, 0)
+data$ag72 <- ifelse(data$item72 > 3 & data$i72 > 3 & data$qx72 > 3, 1, 0)
+data$ag73 <- ifelse(data$item73 > 3 & data$i73 > 3 & data$qx73 > 3, 1, 0)
+data$ag74 <- ifelse(data$item74 > 3 & data$i74 > 3 & data$qx74 > 3, 1, 0)
+data$ag75 <- ifelse(data$item75 > 3 & data$i75 > 3 & data$qx75 > 3, 1, 0)
+data$ag76 <- ifelse(data$item76 > 3 & data$i76 > 3 & data$qx76 > 3, 1, 0)
+data$ag77 <- ifelse(data$item77 > 3 & data$i77 > 3 & data$qx77 > 3, 1, 0)
+data$ag78 <- ifelse(data$item78 > 3 & data$i78 > 3 & data$qx78 > 3, 1, 0)
+data$ag79 <- ifelse(data$item79 > 3 & data$i79 > 3 & data$qx79 > 3, 1, 0)
+data$ag80 <- ifelse(data$item80 > 3 & data$i80 > 3 & data$qx80 > 3, 1, 0)
+
+
+data$disag1 <- ifelse(data$item1 < 3 & data$i1 < 3 & data$qx1 < 3, 1, 0)
+data$disag2 <- ifelse(data$item2 < 3 & data$i2 < 3 & data$qx2 < 3, 1, 0)
+data$disag3 <- ifelse(data$item3 < 3 & data$i3 < 3 & data$qx3 < 3, 1, 0)
+data$disag4 <- ifelse(data$item4 < 3 & data$i4 < 3 & data$qx4 < 3, 1, 0)
+data$disag5 <- ifelse(data$item5 < 3 & data$i5 < 3 & data$qx5 < 3, 1, 0)
+data$disag6 <- ifelse(data$item6 < 3 & data$i6 < 3 & data$qx6 < 3, 1, 0)
+data$disag7 <- ifelse(data$item7 < 3 & data$i7 < 3 & data$qx7 < 3, 1, 0)
+data$disag8 <- ifelse(data$item8 < 3 & data$i8 < 3 & data$qx8 < 3, 1, 0)
+data$disag9 <- ifelse(data$item9 < 3 & data$i9 < 3 & data$qx9 < 3, 1, 0)
+data$disag10 <- ifelse(data$item10 < 3 & data$i10 < 3 & data$qx10 < 3, 1, 0)
+
+data$disag11 <- ifelse(data$item11 < 3 & data$i11 < 3 & data$qx11 < 3, 1, 0)
+data$disag12 <- ifelse(data$item12 < 3 & data$i12 < 3 & data$qx12 < 3, 1, 0)
+data$disag13 <- ifelse(data$item13 < 3 & data$i13 < 3 & data$qx13 < 3, 1, 0)
+data$disag14 <- ifelse(data$item14 < 3 & data$i14 < 3 & data$qx14 < 3, 1, 0)
+data$disag15 <- ifelse(data$item15 < 3 & data$i15 < 3 & data$qx15 < 3, 1, 0)
+data$disag16 <- ifelse(data$item16 < 3 & data$i16 < 3 & data$qx16 < 3, 1, 0)
+data$disag17 <- ifelse(data$item17 < 3 & data$i17 < 3 & data$qx17 < 3, 1, 0)
+data$disag18 <- ifelse(data$item18 < 3 & data$i18 < 3 & data$qx18 < 3, 1, 0)
+data$disag19 <- ifelse(data$item19 < 3 & data$i19 < 3 & data$qx19 < 3, 1, 0)
+data$disag20 <- ifelse(data$item20 < 3 & data$i20 < 3 & data$qx20 < 3, 1, 0)
+
+data$disag21 <- ifelse(data$item21 < 3 & data$i21 < 3 & data$qx21 < 3, 1, 0)
+data$disag22 <- ifelse(data$item22 < 3 & data$i22 < 3 & data$qx22 < 3, 1, 0)
+data$disag23 <- ifelse(data$item23 < 3 & data$i23 < 3 & data$qx23 < 3, 1, 0)
+data$disag24 <- ifelse(data$item24 < 3 & data$i24 < 3 & data$qx24 < 3, 1, 0)
+data$disag25 <- ifelse(data$item25 < 3 & data$i25 < 3 & data$qx25 < 3, 1, 0)
+data$disag26 <- ifelse(data$item26 < 3 & data$i26 < 3 & data$qx26 < 3, 1, 0)
+data$disag27 <- ifelse(data$item27 < 3 & data$i27 < 3 & data$qx27 < 3, 1, 0)
+data$disag28 <- ifelse(data$item28 < 3 & data$i28 < 3 & data$qx28 < 3, 1, 0)
+data$disag29 <- ifelse(data$item29 < 3 & data$i29 < 3 & data$qx29 < 3, 1, 0)
+data$disag30 <- ifelse(data$item30 < 3 & data$i30 < 3 & data$qx30 < 3, 1, 0)
+
+data$disag31 <- ifelse(data$item31 < 3 & data$i31 < 3 & data$qx31 < 3, 1, 0)
+data$disag32 <- ifelse(data$item32 < 3 & data$i32 < 3 & data$qx32 < 3, 1, 0)
+data$disag33 <- ifelse(data$item33 < 3 & data$i33 < 3 & data$qx33 < 3, 1, 0)
+data$disag34 <- ifelse(data$item34 < 3 & data$i34 < 3 & data$qx34 < 3, 1, 0)
+data$disag35 <- ifelse(data$item35 < 3 & data$i35 < 3 & data$qx35 < 3, 1, 0)
+data$disag36 <- ifelse(data$item36 < 3 & data$i36 < 3 & data$qx36 < 3, 1, 0)
+data$disag37 <- ifelse(data$item37 < 3 & data$i37 < 3 & data$qx37 < 3, 1, 0)
+data$disag38 <- ifelse(data$item38 < 3 & data$i38 < 3 & data$qx38 < 3, 1, 0)
+data$disag39 <- ifelse(data$item39 < 3 & data$i39 < 3 & data$qx39 < 3, 1, 0)
+data$disag40 <- ifelse(data$item40 < 3 & data$i40 < 3 & data$qx40 < 3, 1, 0)
+
+data$disag41 <- ifelse(data$item41 < 3 & data$i41 < 3 & data$qx41 < 3, 1, 0)
+data$disag42 <- ifelse(data$item42 < 3 & data$i42 < 3 & data$qx42 < 3, 1, 0)
+data$disag43 <- ifelse(data$item43 < 3 & data$i43 < 3 & data$qx43 < 3, 1, 0)
+data$disag44 <- ifelse(data$item44 < 3 & data$i44 < 3 & data$qx44 < 3, 1, 0)
+data$disag45 <- ifelse(data$item45 < 3 & data$i45 < 3 & data$qx45 < 3, 1, 0)
+data$disag46 <- ifelse(data$item46 < 3 & data$i46 < 3 & data$qx46 < 3, 1, 0)
+data$disag47 <- ifelse(data$item47 < 3 & data$i47 < 3 & data$qx47 < 3, 1, 0)
+data$disag48 <- ifelse(data$item48 < 3 & data$i48 < 3 & data$qx48 < 3, 1, 0)
+data$disag49 <- ifelse(data$item49 < 3 & data$i49 < 3 & data$qx49 < 3, 1, 0)
+data$disag50 <- ifelse(data$item50 < 3 & data$i50 < 3 & data$qx50 < 3, 1, 0)
+
+data$disag51 <- ifelse(data$item51 < 3 & data$i51 < 3 & data$qx51 < 3, 1, 0)
+data$disag52 <- ifelse(data$item52 < 3 & data$i52 < 3 & data$qx52 < 3, 1, 0)
+data$disag53 <- ifelse(data$item53 < 3 & data$i53 < 3 & data$qx53 < 3, 1, 0)
+data$disag54 <- ifelse(data$item54 < 3 & data$i54 < 3 & data$qx54 < 3, 1, 0)
+data$disag55 <- ifelse(data$item55 < 3 & data$i55 < 3 & data$qx55 < 3, 1, 0)
+data$disag56 <- ifelse(data$item56 < 3 & data$i56 < 3 & data$qx56 < 3, 1, 0)
+data$disag57 <- ifelse(data$item57 < 3 & data$i57 < 3 & data$qx57 < 3, 1, 0)
+data$disag58 <- ifelse(data$item58 < 3 & data$i58 < 3 & data$qx58 < 3, 1, 0)
+data$disag59 <- ifelse(data$item59 < 3 & data$i59 < 3 & data$qx59 < 3, 1, 0)
+data$disag60 <- ifelse(data$item60 < 3 & data$i60 < 3 & data$qx60 < 3, 1, 0)
+
+data$disag61 <- ifelse(data$item61 < 3 & data$i61 < 3 & data$qx61 < 3, 1, 0)
+data$disag62 <- ifelse(data$item62 < 3 & data$i62 < 3 & data$qx62 < 3, 1, 0)
+data$disag63 <- ifelse(data$item63 < 3 & data$i63 < 3 & data$qx63 < 3, 1, 0)
+data$disag64 <- ifelse(data$item64 < 3 & data$i64 < 3 & data$qx64 < 3, 1, 0)
+data$disag65 <- ifelse(data$item65 < 3 & data$i65 < 3 & data$qx65 < 3, 1, 0)
+data$disag66 <- ifelse(data$item66 < 3 & data$i66 < 3 & data$qx66 < 3, 1, 0)
+data$disag67 <- ifelse(data$item67 < 3 & data$i67 < 3 & data$qx67 < 3, 1, 0)
+data$disag68 <- ifelse(data$item68 < 3 & data$i68 < 3 & data$qx68 < 3, 1, 0)
+data$disag69 <- ifelse(data$item69 < 3 & data$i69 < 3 & data$qx69 < 3, 1, 0)
+data$disag70 <- ifelse(data$item70 < 3 & data$i70 < 3 & data$qx70 < 3, 1, 0)
+
+data$disag71 <- ifelse(data$item71 < 3 & data$i71 < 3 & data$qx71 < 3, 1, 0)
+data$disag72 <- ifelse(data$item72 < 3 & data$i72 < 3 & data$qx72 < 3, 1, 0)
+data$disag73 <- ifelse(data$item73 < 3 & data$i73 < 3 & data$qx73 < 3, 1, 0)
+data$disag74 <- ifelse(data$item74 < 3 & data$i74 < 3 & data$qx74 < 3, 1, 0)
+data$disag75 <- ifelse(data$item75 < 3 & data$i75 < 3 & data$qx75 < 3, 1, 0)
+data$disag76 <- ifelse(data$item76 < 3 & data$i76 < 3 & data$qx76 < 3, 1, 0)
+data$disag77 <- ifelse(data$item77 < 3 & data$i77 < 3 & data$qx77 < 3, 1, 0)
+data$disag78 <- ifelse(data$item78 < 3 & data$i78 < 3 & data$qx78 < 3, 1, 0)
+data$disag79 <- ifelse(data$item79 < 3 & data$i79 < 3 & data$qx79 < 3, 1, 0)
+data$disag80 <- ifelse(data$item80 < 3 & data$i80 < 3 & data$qx80 < 3, 1, 0)
+
+data$ag_1 <- rowSums((data[,c(330:339)]))
+data$ag_2 <- rowSums((data[,c(340:349)]))
+data$ag_3 <- rowSums((data[,c(350:359)]))
+data$ag_4 <- rowSums((data[,c(360:369)]))
+data$ag_5 <- rowSums((data[,c(370:379)]))
+data$ag_6 <- rowSums((data[,c(380:389)]))
+data$ag_7 <- rowSums((data[,c(390:399)]))
+data$ag_8 <- rowSums((data[,c(400:409)]))
+
+data$disag_1 <- rowSums((data[,c(410:419)]))
+data$disag_2 <- rowSums((data[,c(420:429)]))
+data$disag_3 <- rowSums((data[,c(430:439)]))
+data$disag_4 <- rowSums((data[,c(440:449)]))
+data$disag_5 <- rowSums((data[,c(450:459)]))
+data$disag_6 <- rowSums((data[,c(460:469)]))
+data$disag_7 <- rowSums((data[,c(470:479)]))
+data$disag_8 <- rowSums((data[,c(480:489)]))
+
+
+toplot2 <- as.data.frame(describe(data[490:505]))
+toplot2$sum <- toplot2$n*toplot2$mean
+
+agree <- as.data.frame(toplot2[1:8,14])
+disagree <- as.data.frame(toplot2[9:16,14])
+
+agree$agree <- rep("All Agree", 8)
+disagree$agree <- rep("All Disagree", 8)
+
+agree$cond <- c("Extremely Undesirable", "Very Undersirable","Moderately Undesirable", "Somewhat Undesirable", "Somewhat Desirable", "Moderately Desirable", "Very Desirable", "Extremely Desirable")
+disagree$cond <- c("Extremely Undesirable", "Very Undersirable","Moderately Undesirable", "Somewhat Undesirable", "Somewhat Desirable", "Moderately Desirable", "Very Desirable", "Extremely Desirable")
+
+colnames(agree)[1] <- 'sum'
+colnames(disagree)[1] <- 'sum'
+
+together <- rbind(agree,disagree)
+
+together$cond <- factor(together$cond,levels = c("Extremely Undesirable", "Very Undersirable","Moderately Undesirable", "Somewhat Undesirable", "Somewhat Desirable", "Moderately Desirable", "Very Desirable", "Extremely Desirable"))
+
+ggplot(data=together, aes(x=cond, y=sum, fill=agree)) +
+        geom_bar(colour="black", stat="identity", position=position_dodge()) +
+        scale_fill_manual(values=c('black','white')) +
+         labs(fill = "Agreement") +
+          theme_classic() +
+          theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+          ylab("Freqency") +
+          xlab("Edwards Category")
+
+#data$ag2 <- ifelse(data$a == 2 & (data$b == 1 | data$c == 1), 1, 0)
+
+```
+
+```{r Disagreements, warning=FALSE, echo=FALSE, message=FALSE, include=FALSE, fig.width=11, fig.height=6, fig.cap="*Figure 3.* Patterns of *dis*agreement across rater source.", fig.show="hide"}
+## other deviation from self - to facet with above (12/30/19)
+
+
+## Self agrees - both others disagree
+
+data$saod1 <- ifelse(data$item1 > 3 & (data$i1 < 3 & data$qx1 < 3), 1, 0)
+data$saod2 <- ifelse(data$item2 > 3 & (data$i2 < 3 & data$qx2 < 3), 1, 0)
+data$saod3 <- ifelse(data$item3 > 3 & (data$i3 < 3 & data$qx3 < 3), 1, 0)
+data$saod4 <- ifelse(data$item4 > 3 & (data$i4 < 3 & data$qx4 < 3), 1, 0)
+data$saod5 <- ifelse(data$item5 > 3 & (data$i5 < 3 & data$qx5 < 3), 1, 0)
+data$saod6 <- ifelse(data$item6 > 3 & (data$i6 < 3 & data$qx6 < 3), 1, 0)
+data$saod7 <- ifelse(data$item7 > 3 & (data$i7 < 3 & data$qx7 < 3), 1, 0)
+data$saod8 <- ifelse(data$item8 > 3 & (data$i8 < 3 & data$qx8 < 3), 1, 0)
+data$saod9 <- ifelse(data$item9 > 3 & (data$i9 < 3 & data$qx9 < 3), 1, 0)
+data$saod10 <- ifelse(data$item10 > 3 & (data$i10 < 3 & data$qx10 < 3), 1, 0)
+
+data$saod11 <- ifelse(data$item11 > 3 & (data$i11 < 3 & data$qx11 < 3), 1, 0)
+data$saod12 <- ifelse(data$item12 > 3 & (data$i12 < 3 & data$qx12 < 3), 1, 0)
+data$saod13 <- ifelse(data$item13 > 3 & (data$i13 < 3 & data$qx13 < 3), 1, 0)
+data$saod14 <- ifelse(data$item14 > 3 & (data$i14 < 3 & data$qx14 < 3), 1, 0)
+data$saod15 <- ifelse(data$item15 > 3 & (data$i15 < 3 & data$qx15 < 3), 1, 0)
+data$saod16 <- ifelse(data$item16 > 3 & (data$i16 < 3 & data$qx16 < 3), 1, 0)
+data$saod17 <- ifelse(data$item17 > 3 & (data$i17 < 3 & data$qx17 < 3), 1, 0)
+data$saod18 <- ifelse(data$item18 > 3 & (data$i18 < 3 & data$qx18 < 3), 1, 0)
+data$saod19 <- ifelse(data$item19 > 3 & (data$i19 < 3 & data$qx19 < 3), 1, 0)
+data$saod20 <- ifelse(data$item20 > 3 & (data$i20 < 3 & data$qx20 < 3), 1, 0)
+
+data$saod21 <- ifelse(data$item21 > 3 & (data$i21 < 3 & data$qx21 < 3), 1, 0)
+data$saod22 <- ifelse(data$item22 > 3 & (data$i22 < 3 & data$qx22 < 3), 1, 0)
+data$saod23 <- ifelse(data$item23 > 3 & (data$i23 < 3 & data$qx23 < 3), 1, 0)
+data$saod24 <- ifelse(data$item24 > 3 & (data$i24 < 3 & data$qx24 < 3), 1, 0)
+data$saod25 <- ifelse(data$item25 > 3 & (data$i25 < 3 & data$qx25 < 3), 1, 0)
+data$saod26 <- ifelse(data$item26 > 3 & (data$i26 < 3 & data$qx26 < 3), 1, 0)
+data$saod27 <- ifelse(data$item27 > 3 & (data$i27 < 3 & data$qx27 < 3), 1, 0)
+data$saod28 <- ifelse(data$item28 > 3 & (data$i28 < 3 & data$qx28 < 3), 1, 0)
+data$saod29 <- ifelse(data$item29 > 3 & (data$i29 < 3 & data$qx29 < 3), 1, 0)
+data$saod30 <- ifelse(data$item30 > 3 & (data$i30 < 3 & data$qx30 < 3), 1, 0)
+
+data$saod31 <- ifelse(data$item31 > 3 & (data$i31 < 3 & data$qx31 < 3), 1, 0)
+data$saod32 <- ifelse(data$item32 > 3 & (data$i32 < 3 & data$qx32 < 3), 1, 0)
+data$saod33 <- ifelse(data$item33 > 3 & (data$i33 < 3 & data$qx33 < 3), 1, 0)
+data$saod34 <- ifelse(data$item34 > 3 & (data$i34 < 3 & data$qx34 < 3), 1, 0)
+data$saod35 <- ifelse(data$item35 > 3 & (data$i35 < 3 & data$qx35 < 3), 1, 0)
+data$saod36 <- ifelse(data$item36 > 3 & (data$i36 < 3 & data$qx36 < 3), 1, 0)
+data$saod37 <- ifelse(data$item37 > 3 & (data$i37 < 3 & data$qx37 < 3), 1, 0)
+data$saod38 <- ifelse(data$item38 > 3 & (data$i38 < 3 & data$qx38 < 3), 1, 0)
+data$saod39 <- ifelse(data$item39 > 3 & (data$i39 < 3 & data$qx39 < 3), 1, 0)
+data$saod40 <- ifelse(data$item40 > 3 & (data$i40 < 3 & data$qx40 < 3), 1, 0)
+
+data$saod41 <- ifelse(data$item41 > 3 & (data$i41 < 3 & data$qx41 < 3), 1, 0)
+data$saod42 <- ifelse(data$item42 > 3 & (data$i42 < 3 & data$qx42 < 3), 1, 0)
+data$saod43 <- ifelse(data$item43 > 3 & (data$i43 < 3 & data$qx43 < 3), 1, 0)
+data$saod44 <- ifelse(data$item44 > 3 & (data$i44 < 3 & data$qx44 < 3), 1, 0)
+data$saod45 <- ifelse(data$item45 > 3 & (data$i45 < 3 & data$qx45 < 3), 1, 0)
+data$saod46 <- ifelse(data$item46 > 3 & (data$i46 < 3 & data$qx46 < 3), 1, 0)
+data$saod47 <- ifelse(data$item47 > 3 & (data$i47 < 3 & data$qx47 < 3), 1, 0)
+data$saod48 <- ifelse(data$item48 > 3 & (data$i48 < 3 & data$qx48 < 3), 1, 0)
+data$saod49 <- ifelse(data$item49 > 3 & (data$i49 < 3 & data$qx49 < 3), 1, 0)
+data$saod50 <- ifelse(data$item50 > 3 & (data$i50 < 3 & data$qx50 < 3), 1, 0)
+
+data$saod51 <- ifelse(data$item51 > 3 & (data$i51 < 3 & data$qx51 < 3), 1, 0)
+data$saod52 <- ifelse(data$item52 > 3 & (data$i52 < 3 & data$qx52 < 3), 1, 0)
+data$saod53 <- ifelse(data$item53 > 3 & (data$i53 < 3 & data$qx53 < 3), 1, 0)
+data$saod54 <- ifelse(data$item54 > 3 & (data$i54 < 3 & data$qx54 < 3), 1, 0)
+data$saod55 <- ifelse(data$item55 > 3 & (data$i55 < 3 & data$qx55 < 3), 1, 0)
+data$saod56 <- ifelse(data$item56 > 3 & (data$i56 < 3 & data$qx56 < 3), 1, 0)
+data$saod57 <- ifelse(data$item57 > 3 & (data$i57 < 3 & data$qx57 < 3), 1, 0)
+data$saod58 <- ifelse(data$item58 > 3 & (data$i58 < 3 & data$qx58 < 3), 1, 0)
+data$saod59 <- ifelse(data$item59 > 3 & (data$i59 < 3 & data$qx59 < 3), 1, 0)
+data$saod60 <- ifelse(data$item60 > 3 & (data$i60 < 3 & data$qx60 < 3), 1, 0)
+
+data$saod61 <- ifelse(data$item61 > 3 & (data$i61 < 3 & data$qx61 < 3), 1, 0)
+data$saod62 <- ifelse(data$item62 > 3 & (data$i62 < 3 & data$qx62 < 3), 1, 0)
+data$saod63 <- ifelse(data$item63 > 3 & (data$i63 < 3 & data$qx63 < 3), 1, 0)
+data$saod64 <- ifelse(data$item64 > 3 & (data$i64 < 3 & data$qx64 < 3), 1, 0)
+data$saod65 <- ifelse(data$item65 > 3 & (data$i65 < 3 & data$qx65 < 3), 1, 0)
+data$saod66 <- ifelse(data$item66 > 3 & (data$i66 < 3 & data$qx66 < 3), 1, 0)
+data$saod67 <- ifelse(data$item67 > 3 & (data$i67 < 3 & data$qx67 < 3), 1, 0)
+data$saod68 <- ifelse(data$item68 > 3 & (data$i68 < 3 & data$qx68 < 3), 1, 0)
+data$saod69 <- ifelse(data$item69 > 3 & (data$i69 < 3 & data$qx69 < 3), 1, 0)
+data$saod70 <- ifelse(data$item70 > 3 & (data$i70 < 3 & data$qx70 < 3), 1, 0)
+
+data$saod71 <- ifelse(data$item71 > 3 & (data$i71 < 3 & data$qx71 < 3), 1, 0)
+data$saod72 <- ifelse(data$item72 > 3 & (data$i72 < 3 & data$qx72 < 3), 1, 0)
+data$saod73 <- ifelse(data$item73 > 3 & (data$i73 < 3 & data$qx73 < 3), 1, 0)
+data$saod74 <- ifelse(data$item74 > 3 & (data$i74 < 3 & data$qx74 < 3), 1, 0)
+data$saod75 <- ifelse(data$item75 > 3 & (data$i75 < 3 & data$qx75 < 3), 1, 0)
+data$saod76 <- ifelse(data$item76 > 3 & (data$i76 < 3 & data$qx76 < 3), 1, 0)
+data$saod77 <- ifelse(data$item77 > 3 & (data$i77 < 3 & data$qx77 < 3), 1, 0)
+data$saod78 <- ifelse(data$item78 > 3 & (data$i78 < 3 & data$qx78 < 3), 1, 0)
+data$saod79 <- ifelse(data$item79 > 3 & (data$i79 < 3 & data$qx79 < 3), 1, 0)
+data$saod80 <- ifelse(data$item80 > 3 & (data$i80 < 3 & data$qx80 < 3), 1, 0)
+
+## Self agreees - others split
+
+data$saos1 <- ifelse(data$item1 > 3 & ((data$i1 > 3 & data$qx1 < 3) | (data$i1 < 3 & data$qx1 > 3)), 1, 0)
+data$saos2 <- ifelse(data$item2 > 3 & ((data$i2 > 3 & data$qx2 < 3) | (data$i2 < 3 & data$qx2 > 3)), 1, 0)
+data$saos3 <- ifelse(data$item3 > 3 & ((data$i3 > 3 & data$qx3 < 3) | (data$i3 < 3 & data$qx3 > 3)), 1, 0)
+data$saos4 <- ifelse(data$item4 > 3 & ((data$i4 > 3 & data$qx4 < 3) | (data$i4 < 3 & data$qx4 > 3)), 1, 0)
+data$saos5 <- ifelse(data$item5 > 3 & ((data$i5 > 3 & data$qx5 < 3) | (data$i5 < 3 & data$qx5 > 3)), 1, 0)
+data$saos6 <- ifelse(data$item6 > 3 & ((data$i6 > 3 & data$qx6 < 3) | (data$i6 < 3 & data$qx6 > 3)), 1, 0)
+data$saos7 <- ifelse(data$item7 > 3 & ((data$i7 > 3 & data$qx7 < 3) | (data$i7 < 3 & data$qx7 > 3)), 1, 0)
+data$saos8 <- ifelse(data$item8 > 3 & ((data$i8 > 3 & data$qx8 < 3) | (data$i8 < 3 & data$qx8 > 3)), 1, 0)
+data$saos9 <- ifelse(data$item9 > 3 & ((data$i9 > 3 & data$qx9 < 3) | (data$i9 < 3 & data$qx9 > 3)), 1, 0)
+data$saos10 <- ifelse(data$item10 > 3 & ((data$i10 > 3 & data$qx10 < 3) | (data$i10 < 3 & data$qx10 > 3)), 1, 0)
+
+data$saos11 <- ifelse(data$item11 > 3 & ((data$i11 > 3 & data$qx11 < 3) | (data$i11 < 3 & data$qx11 > 3)), 1, 0)
+data$saos12 <- ifelse(data$item12 > 3 & ((data$i12 > 3 & data$qx12 < 3) | (data$i12 < 3 & data$qx12 > 3)), 1, 0)
+data$saos13 <- ifelse(data$item13 > 3 & ((data$i13 > 3 & data$qx13 < 3) | (data$i13 < 3 & data$qx13 > 3)), 1, 0)
+data$saos14 <- ifelse(data$item14 > 3 & ((data$i14 > 3 & data$qx14 < 3) | (data$i14 < 3 & data$qx14 > 3)), 1, 0)
+data$saos15 <- ifelse(data$item15 > 3 & ((data$i15 > 3 & data$qx15 < 3) | (data$i15 < 3 & data$qx15 > 3)), 1, 0)
+data$saos16 <- ifelse(data$item16 > 3 & ((data$i16 > 3 & data$qx16 < 3) | (data$i16 < 3 & data$qx16 > 3)), 1, 0)
+data$saos17 <- ifelse(data$item17 > 3 & ((data$i17 > 3 & data$qx17 < 3) | (data$i17 < 3 & data$qx17 > 3)), 1, 0)
+data$saos18 <- ifelse(data$item18 > 3 & ((data$i18 > 3 & data$qx18 < 3) | (data$i18 < 3 & data$qx18 > 3)), 1, 0)
+data$saos19 <- ifelse(data$item19 > 3 & ((data$i19 > 3 & data$qx19 < 3) | (data$i19 < 3 & data$qx19 > 3)), 1, 0)
+data$saos20 <- ifelse(data$item20 > 3 & ((data$i20 > 3 & data$qx20 < 3) | (data$i20 < 3 & data$qx20 > 3)), 1, 0)
+
+data$saos21 <- ifelse(data$item21 > 3 & ((data$i21 > 3 & data$qx21 < 3) | (data$i21 < 3 & data$qx21 > 3)), 1, 0)
+data$saos22 <- ifelse(data$item22 > 3 & ((data$i22 > 3 & data$qx22 < 3) | (data$i22 < 3 & data$qx22 > 3)), 1, 0)
+data$saos23 <- ifelse(data$item23 > 3 & ((data$i23 > 3 & data$qx23 < 3) | (data$i23 < 3 & data$qx23 > 3)), 1, 0)
+data$saos24 <- ifelse(data$item24 > 3 & ((data$i24 > 3 & data$qx24 < 3) | (data$i24 < 3 & data$qx24 > 3)), 1, 0)
+data$saos25 <- ifelse(data$item25 > 3 & ((data$i25 > 3 & data$qx25 < 3) | (data$i25 < 3 & data$qx25 > 3)), 1, 0)
+data$saos26 <- ifelse(data$item26 > 3 & ((data$i26 > 3 & data$qx26 < 3) | (data$i26 < 3 & data$qx26 > 3)), 1, 0)
+data$saos27 <- ifelse(data$item27 > 3 & ((data$i27 > 3 & data$qx27 < 3) | (data$i27 < 3 & data$qx27 > 3)), 1, 0)
+data$saos28 <- ifelse(data$item28 > 3 & ((data$i28 > 3 & data$qx28 < 3) | (data$i28 < 3 & data$qx28 > 3)), 1, 0)
+data$saos29 <- ifelse(data$item29 > 3 & ((data$i29 > 3 & data$qx29 < 3) | (data$i29 < 3 & data$qx29 > 3)), 1, 0)
+data$saos30 <- ifelse(data$item30 > 3 & ((data$i30 > 3 & data$qx30 < 3) | (data$i30 < 3 & data$qx30 > 3)), 1, 0)
+
+data$saos31 <- ifelse(data$item31 > 3 & ((data$i31 > 3 & data$qx31 < 3) | (data$i31 < 3 & data$qx31 > 3)), 1, 0)
+data$saos32 <- ifelse(data$item32 > 3 & ((data$i32 > 3 & data$qx32 < 3) | (data$i32 < 3 & data$qx32 > 3)), 1, 0)
+data$saos33 <- ifelse(data$item33 > 3 & ((data$i33 > 3 & data$qx33 < 3) | (data$i33 < 3 & data$qx33 > 3)), 1, 0)
+data$saos34 <- ifelse(data$item34 > 3 & ((data$i34 > 3 & data$qx34 < 3) | (data$i34 < 3 & data$qx34 > 3)), 1, 0)
+data$saos35 <- ifelse(data$item35 > 3 & ((data$i35 > 3 & data$qx35 < 3) | (data$i35 < 3 & data$qx35 > 3)), 1, 0)
+data$saos36 <- ifelse(data$item36 > 3 & ((data$i36 > 3 & data$qx36 < 3) | (data$i36 < 3 & data$qx36 > 3)), 1, 0)
+data$saos37 <- ifelse(data$item37 > 3 & ((data$i37 > 3 & data$qx37 < 3) | (data$i37 < 3 & data$qx37 > 3)), 1, 0)
+data$saos38 <- ifelse(data$item38 > 3 & ((data$i38 > 3 & data$qx38 < 3) | (data$i38 < 3 & data$qx38 > 3)), 1, 0)
+data$saos39 <- ifelse(data$item39 > 3 & ((data$i39 > 3 & data$qx39 < 3) | (data$i39 < 3 & data$qx39 > 3)), 1, 0)
+data$saos40 <- ifelse(data$item40 > 3 & ((data$i40 > 3 & data$qx40 < 3) | (data$i40 < 3 & data$qx40 > 3)), 1, 0)
+
+data$saos41 <- ifelse(data$item41 > 3 & ((data$i41 > 3 & data$qx41 < 3) | (data$i41 < 3 & data$qx41 > 3)), 1, 0)
+data$saos42 <- ifelse(data$item42 > 3 & ((data$i42 > 3 & data$qx42 < 3) | (data$i42 < 3 & data$qx42 > 3)), 1, 0)
+data$saos43 <- ifelse(data$item43 > 3 & ((data$i43 > 3 & data$qx43 < 3) | (data$i43 < 3 & data$qx43 > 3)), 1, 0)
+data$saos44 <- ifelse(data$item44 > 3 & ((data$i44 > 3 & data$qx44 < 3) | (data$i44 < 3 & data$qx44 > 3)), 1, 0)
+data$saos45 <- ifelse(data$item45 > 3 & ((data$i45 > 3 & data$qx45 < 3) | (data$i45 < 3 & data$qx45 > 3)), 1, 0)
+data$saos46 <- ifelse(data$item46 > 3 & ((data$i46 > 3 & data$qx46 < 3) | (data$i46 < 3 & data$qx46 > 3)), 1, 0)
+data$saos47 <- ifelse(data$item47 > 3 & ((data$i47 > 3 & data$qx47 < 3) | (data$i47 < 3 & data$qx47 > 3)), 1, 0)
+data$saos48 <- ifelse(data$item48 > 3 & ((data$i48 > 3 & data$qx48 < 3) | (data$i48 < 3 & data$qx48 > 3)), 1, 0)
+data$saos49 <- ifelse(data$item49 > 3 & ((data$i49 > 3 & data$qx49 < 3) | (data$i49 < 3 & data$qx49 > 3)), 1, 0)
+data$saos50 <- ifelse(data$item50 > 3 & ((data$i50 > 3 & data$qx50 < 3) | (data$i50 < 3 & data$qx50 > 3)), 1, 0)
+
+data$saos51 <- ifelse(data$item51 > 3 & ((data$i51 > 3 & data$qx51 < 3) | (data$i51 < 3 & data$qx51 > 3)), 1, 0)
+data$saos52 <- ifelse(data$item52 > 3 & ((data$i52 > 3 & data$qx52 < 3) | (data$i52 < 3 & data$qx52 > 3)), 1, 0)
+data$saos53 <- ifelse(data$item53 > 3 & ((data$i53 > 3 & data$qx53 < 3) | (data$i53 < 3 & data$qx53 > 3)), 1, 0)
+data$saos54 <- ifelse(data$item54 > 3 & ((data$i54 > 3 & data$qx54 < 3) | (data$i54 < 3 & data$qx54 > 3)), 1, 0)
+data$saos55 <- ifelse(data$item55 > 3 & ((data$i55 > 3 & data$qx55 < 3) | (data$i55 < 3 & data$qx55 > 3)), 1, 0)
+data$saos56 <- ifelse(data$item56 > 3 & ((data$i56 > 3 & data$qx56 < 3) | (data$i56 < 3 & data$qx56 > 3)), 1, 0)
+data$saos57 <- ifelse(data$item57 > 3 & ((data$i57 > 3 & data$qx57 < 3) | (data$i57 < 3 & data$qx57 > 3)), 1, 0)
+data$saos58 <- ifelse(data$item58 > 3 & ((data$i58 > 3 & data$qx58 < 3) | (data$i58 < 3 & data$qx58 > 3)), 1, 0)
+data$saos59 <- ifelse(data$item59 > 3 & ((data$i59 > 3 & data$qx59 < 3) | (data$i59 < 3 & data$qx59 > 3)), 1, 0)
+data$saos60 <- ifelse(data$item60 > 3 & ((data$i60 > 3 & data$qx60 < 3) | (data$i60 < 3 & data$qx60 > 3)), 1, 0)
+
+data$saos61 <- ifelse(data$item61 > 3 & ((data$i61 > 3 & data$qx61 < 3) | (data$i61 < 3 & data$qx61 > 3)), 1, 0)
+data$saos62 <- ifelse(data$item62 > 3 & ((data$i62 > 3 & data$qx62 < 3) | (data$i62 < 3 & data$qx62 > 3)), 1, 0)
+data$saos63 <- ifelse(data$item63 > 3 & ((data$i63 > 3 & data$qx63 < 3) | (data$i63 < 3 & data$qx63 > 3)), 1, 0)
+data$saos64 <- ifelse(data$item64 > 3 & ((data$i64 > 3 & data$qx64 < 3) | (data$i64 < 3 & data$qx64 > 3)), 1, 0)
+data$saos65 <- ifelse(data$item65 > 3 & ((data$i65 > 3 & data$qx65 < 3) | (data$i65 < 3 & data$qx65 > 3)), 1, 0)
+data$saos66 <- ifelse(data$item66 > 3 & ((data$i66 > 3 & data$qx66 < 3) | (data$i66 < 3 & data$qx66 > 3)), 1, 0)
+data$saos67 <- ifelse(data$item67 > 3 & ((data$i67 > 3 & data$qx67 < 3) | (data$i67 < 3 & data$qx67 > 3)), 1, 0)
+data$saos68 <- ifelse(data$item68 > 3 & ((data$i68 > 3 & data$qx68 < 3) | (data$i68 < 3 & data$qx68 > 3)), 1, 0)
+data$saos69 <- ifelse(data$item69 > 3 & ((data$i69 > 3 & data$qx69 < 3) | (data$i69 < 3 & data$qx69 > 3)), 1, 0)
+data$saos70 <- ifelse(data$item70 > 3 & ((data$i70 > 3 & data$qx70 < 3) | (data$i70 < 3 & data$qx70 > 3)), 1, 0)
+
+data$saos71 <- ifelse(data$item71 > 3 & ((data$i71 > 3 & data$qx71 < 3) | (data$i71 < 3 & data$qx71 > 3)), 1, 0)
+data$saos72 <- ifelse(data$item72 > 3 & ((data$i72 > 3 & data$qx72 < 3) | (data$i72 < 3 & data$qx72 > 3)), 1, 0)
+data$saos73 <- ifelse(data$item73 > 3 & ((data$i73 > 3 & data$qx73 < 3) | (data$i73 < 3 & data$qx73 > 3)), 1, 0)
+data$saos74 <- ifelse(data$item74 > 3 & ((data$i74 > 3 & data$qx74 < 3) | (data$i74 < 3 & data$qx74 > 3)), 1, 0)
+data$saos75 <- ifelse(data$item75 > 3 & ((data$i75 > 3 & data$qx75 < 3) | (data$i75 < 3 & data$qx75 > 3)), 1, 0)
+data$saos76 <- ifelse(data$item76 > 3 & ((data$i76 > 3 & data$qx76 < 3) | (data$i76 < 3 & data$qx76 > 3)), 1, 0)
+data$saos77 <- ifelse(data$item77 > 3 & ((data$i77 > 3 & data$qx77 < 3) | (data$i77 < 3 & data$qx77 > 3)), 1, 0)
+data$saos78 <- ifelse(data$item78 > 3 & ((data$i78 > 3 & data$qx78 < 3) | (data$i78 < 3 & data$qx78 > 3)), 1, 0)
+data$saos79 <- ifelse(data$item79 > 3 & ((data$i79 > 3 & data$qx79 < 3) | (data$i79 < 3 & data$qx79 > 3)), 1, 0)
+data$saos80 <- ifelse(data$item80 > 3 & ((data$i80 > 3 & data$qx80 < 3) | (data$i80 < 3 & data$qx80 > 3)), 1, 0)
+
+## Self disagree, others agree
+
+data$sdoa1 <- ifelse(data$item1 < 3 & (data$i1 > 3 & data$qx1 > 3), 1, 0)
+data$sdoa2 <- ifelse(data$item2 < 3 & (data$i2 > 3 & data$qx2 > 3), 1, 0)
+data$sdoa3 <- ifelse(data$item3 < 3 & (data$i3 > 3 & data$qx3 > 3), 1, 0)
+data$sdoa4 <- ifelse(data$item4 < 3 & (data$i4 > 3 & data$qx4 > 3), 1, 0)
+data$sdoa5 <- ifelse(data$item5 < 3 & (data$i5 > 3 & data$qx5 > 3), 1, 0)
+data$sdoa6 <- ifelse(data$item6 < 3 & (data$i6 > 3 & data$qx6 > 3), 1, 0)
+data$sdoa7 <- ifelse(data$item7 < 3 & (data$i7 > 3 & data$qx7 > 3), 1, 0)
+data$sdoa8 <- ifelse(data$item8 < 3 & (data$i8 > 3 & data$qx8 > 3), 1, 0)
+data$sdoa9 <- ifelse(data$item9 < 3 & (data$i9 > 3 & data$qx9 > 3), 1, 0)
+data$sdoa10 <- ifelse(data$item10 < 3 & (data$i10 > 3 & data$qx10 > 3), 1, 0)
+
+data$sdoa11 <- ifelse(data$item11 < 3 & (data$i11 > 3 & data$qx11 > 3), 1, 0)
+data$sdoa12 <- ifelse(data$item12 < 3 & (data$i12 > 3 & data$qx12 > 3), 1, 0)
+data$sdoa13 <- ifelse(data$item13 < 3 & (data$i13 > 3 & data$qx13 > 3), 1, 0)
+data$sdoa14 <- ifelse(data$item14 < 3 & (data$i14 > 3 & data$qx14 > 3), 1, 0)
+data$sdoa15 <- ifelse(data$item15 < 3 & (data$i15 > 3 & data$qx15 > 3), 1, 0)
+data$sdoa16 <- ifelse(data$item16 < 3 & (data$i16 > 3 & data$qx16 > 3), 1, 0)
+data$sdoa17 <- ifelse(data$item17 < 3 & (data$i17 > 3 & data$qx17 > 3), 1, 0)
+data$sdoa18 <- ifelse(data$item18 < 3 & (data$i18 > 3 & data$qx18 > 3), 1, 0)
+data$sdoa19 <- ifelse(data$item19 < 3 & (data$i19 > 3 & data$qx19 > 3), 1, 0)
+data$sdoa20 <- ifelse(data$item20 < 3 & (data$i20 > 3 & data$qx20 > 3), 1, 0)
+
+data$sdoa21 <- ifelse(data$item21 < 3 & (data$i21 > 3 & data$qx21 > 3), 1, 0)
+data$sdoa22 <- ifelse(data$item22 < 3 & (data$i22 > 3 & data$qx22 > 3), 1, 0)
+data$sdoa23 <- ifelse(data$item23 < 3 & (data$i23 > 3 & data$qx23 > 3), 1, 0)
+data$sdoa24 <- ifelse(data$item24 < 3 & (data$i24 > 3 & data$qx24 > 3), 1, 0)
+data$sdoa25 <- ifelse(data$item25 < 3 & (data$i25 > 3 & data$qx25 > 3), 1, 0)
+data$sdoa26 <- ifelse(data$item26 < 3 & (data$i26 > 3 & data$qx26 > 3), 1, 0)
+data$sdoa27 <- ifelse(data$item27 < 3 & (data$i27 > 3 & data$qx27 > 3), 1, 0)
+data$sdoa28 <- ifelse(data$item28 < 3 & (data$i28 > 3 & data$qx28 > 3), 1, 0)
+data$sdoa29 <- ifelse(data$item29 < 3 & (data$i29 > 3 & data$qx29 > 3), 1, 0)
+data$sdoa30 <- ifelse(data$item30 < 3 & (data$i30 > 3 & data$qx30 > 3), 1, 0)
+
+data$sdoa31 <- ifelse(data$item31 < 3 & (data$i31 > 3 & data$qx31 > 3), 1, 0)
+data$sdoa32 <- ifelse(data$item32 < 3 & (data$i32 > 3 & data$qx32 > 3), 1, 0)
+data$sdoa33 <- ifelse(data$item33 < 3 & (data$i33 > 3 & data$qx33 > 3), 1, 0)
+data$sdoa34 <- ifelse(data$item34 < 3 & (data$i34 > 3 & data$qx34 > 3), 1, 0)
+data$sdoa35 <- ifelse(data$item35 < 3 & (data$i35 > 3 & data$qx35 > 3), 1, 0)
+data$sdoa36 <- ifelse(data$item36 < 3 & (data$i36 > 3 & data$qx36 > 3), 1, 0)
+data$sdoa37 <- ifelse(data$item37 < 3 & (data$i37 > 3 & data$qx37 > 3), 1, 0)
+data$sdoa38 <- ifelse(data$item38 < 3 & (data$i38 > 3 & data$qx38 > 3), 1, 0)
+data$sdoa39 <- ifelse(data$item39 < 3 & (data$i39 > 3 & data$qx39 > 3), 1, 0)
+data$sdoa40 <- ifelse(data$item40 < 3 & (data$i40 > 3 & data$qx40 > 3), 1, 0)
+
+data$sdoa41 <- ifelse(data$item41 < 3 & (data$i41 > 3 & data$qx41 > 3), 1, 0)
+data$sdoa42 <- ifelse(data$item42 < 3 & (data$i42 > 3 & data$qx42 > 3), 1, 0)
+data$sdoa43 <- ifelse(data$item43 < 3 & (data$i43 > 3 & data$qx43 > 3), 1, 0)
+data$sdoa44 <- ifelse(data$item44 < 3 & (data$i44 > 3 & data$qx44 > 3), 1, 0)
+data$sdoa45 <- ifelse(data$item45 < 3 & (data$i45 > 3 & data$qx45 > 3), 1, 0)
+data$sdoa46 <- ifelse(data$item46 < 3 & (data$i46 > 3 & data$qx46 > 3), 1, 0)
+data$sdoa47 <- ifelse(data$item47 < 3 & (data$i47 > 3 & data$qx47 > 3), 1, 0)
+data$sdoa48 <- ifelse(data$item48 < 3 & (data$i48 > 3 & data$qx48 > 3), 1, 0)
+data$sdoa49 <- ifelse(data$item49 < 3 & (data$i49 > 3 & data$qx49 > 3), 1, 0)
+data$sdoa50 <- ifelse(data$item50 < 3 & (data$i50 > 3 & data$qx50 > 3), 1, 0)
+
+data$sdoa51 <- ifelse(data$item51 < 3 & (data$i51 > 3 & data$qx51 > 3), 1, 0)
+data$sdoa52 <- ifelse(data$item52 < 3 & (data$i52 > 3 & data$qx52 > 3), 1, 0)
+data$sdoa53 <- ifelse(data$item53 < 3 & (data$i53 > 3 & data$qx53 > 3), 1, 0)
+data$sdoa54 <- ifelse(data$item54 < 3 & (data$i54 > 3 & data$qx54 > 3), 1, 0)
+data$sdoa55 <- ifelse(data$item55 < 3 & (data$i55 > 3 & data$qx55 > 3), 1, 0)
+data$sdoa56 <- ifelse(data$item56 < 3 & (data$i56 > 3 & data$qx56 > 3), 1, 0)
+data$sdoa57 <- ifelse(data$item57 < 3 & (data$i57 > 3 & data$qx57 > 3), 1, 0)
+data$sdoa58 <- ifelse(data$item58 < 3 & (data$i58 > 3 & data$qx58 > 3), 1, 0)
+data$sdoa59 <- ifelse(data$item59 < 3 & (data$i59 > 3 & data$qx59 > 3), 1, 0)
+data$sdoa60 <- ifelse(data$item60 < 3 & (data$i60 > 3 & data$qx60 > 3), 1, 0)
+
+data$sdoa61 <- ifelse(data$item61 < 3 & (data$i61 > 3 & data$qx61 > 3), 1, 0)
+data$sdoa62 <- ifelse(data$item62 < 3 & (data$i62 > 3 & data$qx62 > 3), 1, 0)
+data$sdoa63 <- ifelse(data$item63 < 3 & (data$i63 > 3 & data$qx63 > 3), 1, 0)
+data$sdoa64 <- ifelse(data$item64 < 3 & (data$i64 > 3 & data$qx64 > 3), 1, 0)
+data$sdoa65 <- ifelse(data$item65 < 3 & (data$i65 > 3 & data$qx65 > 3), 1, 0)
+data$sdoa66 <- ifelse(data$item66 < 3 & (data$i66 > 3 & data$qx66 > 3), 1, 0)
+data$sdoa67 <- ifelse(data$item67 < 3 & (data$i67 > 3 & data$qx67 > 3), 1, 0)
+data$sdoa68 <- ifelse(data$item68 < 3 & (data$i68 > 3 & data$qx68 > 3), 1, 0)
+data$sdoa69 <- ifelse(data$item69 < 3 & (data$i69 > 3 & data$qx69 > 3), 1, 0)
+data$sdoa70 <- ifelse(data$item70 < 3 & (data$i70 > 3 & data$qx70 > 3), 1, 0)
+
+data$sdoa71 <- ifelse(data$item71 < 3 & (data$i71 > 3 & data$qx71 > 3), 1, 0)
+data$sdoa72 <- ifelse(data$item72 < 3 & (data$i72 > 3 & data$qx72 > 3), 1, 0)
+data$sdoa73 <- ifelse(data$item73 < 3 & (data$i73 > 3 & data$qx73 > 3), 1, 0)
+data$sdoa74 <- ifelse(data$item74 < 3 & (data$i74 > 3 & data$qx74 > 3), 1, 0)
+data$sdoa75 <- ifelse(data$item75 < 3 & (data$i75 > 3 & data$qx75 > 3), 1, 0)
+data$sdoa76 <- ifelse(data$item76 < 3 & (data$i76 > 3 & data$qx76 > 3), 1, 0)
+data$sdoa77 <- ifelse(data$item77 < 3 & (data$i77 > 3 & data$qx77 > 3), 1, 0)
+data$sdoa78 <- ifelse(data$item78 < 3 & (data$i78 > 3 & data$qx78 > 3), 1, 0)
+data$sdoa79 <- ifelse(data$item79 < 3 & (data$i79 > 3 & data$qx79 > 3), 1, 0)
+data$sdoa80 <- ifelse(data$item80 < 3 & (data$i80 > 3 & data$qx80 > 3), 1, 0)
+
+## Self disagree, others split
+
+
+data$sdos1 <- ifelse(data$item1 < 3 & ((data$i1 > 3 & data$qx1 < 3) | (data$i1 < 3 & data$qx1 > 3)), 1, 0)
+data$sdos2 <- ifelse(data$item2 < 3 & ((data$i2 > 3 & data$qx2 < 3) | (data$i2 < 3 & data$qx2 > 3)), 1, 0)
+data$sdos3 <- ifelse(data$item3 < 3 & ((data$i3 > 3 & data$qx3 < 3) | (data$i3 < 3 & data$qx3 > 3)), 1, 0)
+data$sdos4 <- ifelse(data$item4 < 3 & ((data$i4 > 3 & data$qx4 < 3) | (data$i4 < 3 & data$qx4 > 3)), 1, 0)
+data$sdos5 <- ifelse(data$item5 < 3 & ((data$i5 > 3 & data$qx5 < 3) | (data$i5 < 3 & data$qx5 > 3)), 1, 0)
+data$sdos6 <- ifelse(data$item6 < 3 & ((data$i6 > 3 & data$qx6 < 3) | (data$i6 < 3 & data$qx6 > 3)), 1, 0)
+data$sdos7 <- ifelse(data$item7 < 3 & ((data$i7 > 3 & data$qx7 < 3) | (data$i7 < 3 & data$qx7 > 3)), 1, 0)
+data$sdos8 <- ifelse(data$item8 < 3 & ((data$i8 > 3 & data$qx8 < 3) | (data$i8 < 3 & data$qx8 > 3)), 1, 0)
+data$sdos9 <- ifelse(data$item9 < 3 & ((data$i9 > 3 & data$qx9 < 3) | (data$i9 < 3 & data$qx9 > 3)), 1, 0)
+data$sdos10 <- ifelse(data$item10 < 3 & ((data$i10 > 3 & data$qx10 < 3) | (data$i10 < 3 & data$qx10 > 3)), 1, 0)
+
+data$sdos11 <- ifelse(data$item11 < 3 & ((data$i11 > 3 & data$qx11 < 3) | (data$i11 < 3 & data$qx11 > 3)), 1, 0)
+data$sdos12 <- ifelse(data$item12 < 3 & ((data$i12 > 3 & data$qx12 < 3) | (data$i12 < 3 & data$qx12 > 3)), 1, 0)
+data$sdos13 <- ifelse(data$item13 < 3 & ((data$i13 > 3 & data$qx13 < 3) | (data$i13 < 3 & data$qx13 > 3)), 1, 0)
+data$sdos14 <- ifelse(data$item14 < 3 & ((data$i14 > 3 & data$qx14 < 3) | (data$i14 < 3 & data$qx14 > 3)), 1, 0)
+data$sdos15 <- ifelse(data$item15 < 3 & ((data$i15 > 3 & data$qx15 < 3) | (data$i15 < 3 & data$qx15 > 3)), 1, 0)
+data$sdos16 <- ifelse(data$item16 < 3 & ((data$i16 > 3 & data$qx16 < 3) | (data$i16 < 3 & data$qx16 > 3)), 1, 0)
+data$sdos17 <- ifelse(data$item17 < 3 & ((data$i17 > 3 & data$qx17 < 3) | (data$i17 < 3 & data$qx17 > 3)), 1, 0)
+data$sdos18 <- ifelse(data$item18 < 3 & ((data$i18 > 3 & data$qx18 < 3) | (data$i18 < 3 & data$qx18 > 3)), 1, 0)
+data$sdos19 <- ifelse(data$item19 < 3 & ((data$i19 > 3 & data$qx19 < 3) | (data$i19 < 3 & data$qx19 > 3)), 1, 0)
+data$sdos20 <- ifelse(data$item20 < 3 & ((data$i20 > 3 & data$qx20 < 3) | (data$i20 < 3 & data$qx20 > 3)), 1, 0)
+
+data$sdos21 <- ifelse(data$item21 < 3 & ((data$i21 > 3 & data$qx21 < 3) | (data$i21 < 3 & data$qx21 > 3)), 1, 0)
+data$sdos22 <- ifelse(data$item22 < 3 & ((data$i22 > 3 & data$qx22 < 3) | (data$i22 < 3 & data$qx22 > 3)), 1, 0)
+data$sdos23 <- ifelse(data$item23 < 3 & ((data$i23 > 3 & data$qx23 < 3) | (data$i23 < 3 & data$qx23 > 3)), 1, 0)
+data$sdos24 <- ifelse(data$item24 < 3 & ((data$i24 > 3 & data$qx24 < 3) | (data$i24 < 3 & data$qx24 > 3)), 1, 0)
+data$sdos25 <- ifelse(data$item25 < 3 & ((data$i25 > 3 & data$qx25 < 3) | (data$i25 < 3 & data$qx25 > 3)), 1, 0)
+data$sdos26 <- ifelse(data$item26 < 3 & ((data$i26 > 3 & data$qx26 < 3) | (data$i26 < 3 & data$qx26 > 3)), 1, 0)
+data$sdos27 <- ifelse(data$item27 < 3 & ((data$i27 > 3 & data$qx27 < 3) | (data$i27 < 3 & data$qx27 > 3)), 1, 0)
+data$sdos28 <- ifelse(data$item28 < 3 & ((data$i28 > 3 & data$qx28 < 3) | (data$i28 < 3 & data$qx28 > 3)), 1, 0)
+data$sdos29 <- ifelse(data$item29 < 3 & ((data$i29 > 3 & data$qx29 < 3) | (data$i29 < 3 & data$qx29 > 3)), 1, 0)
+data$sdos30 <- ifelse(data$item30 < 3 & ((data$i30 > 3 & data$qx30 < 3) | (data$i30 < 3 & data$qx30 > 3)), 1, 0)
+
+data$sdos31 <- ifelse(data$item31 < 3 & ((data$i31 > 3 & data$qx31 < 3) | (data$i31 < 3 & data$qx31 > 3)), 1, 0)
+data$sdos32 <- ifelse(data$item32 < 3 & ((data$i32 > 3 & data$qx32 < 3) | (data$i32 < 3 & data$qx32 > 3)), 1, 0)
+data$sdos33 <- ifelse(data$item33 < 3 & ((data$i33 > 3 & data$qx33 < 3) | (data$i33 < 3 & data$qx33 > 3)), 1, 0)
+data$sdos34 <- ifelse(data$item34 < 3 & ((data$i34 > 3 & data$qx34 < 3) | (data$i34 < 3 & data$qx34 > 3)), 1, 0)
+data$sdos35 <- ifelse(data$item35 < 3 & ((data$i35 > 3 & data$qx35 < 3) | (data$i35 < 3 & data$qx35 > 3)), 1, 0)
+data$sdos36 <- ifelse(data$item36 < 3 & ((data$i36 > 3 & data$qx36 < 3) | (data$i36 < 3 & data$qx36 > 3)), 1, 0)
+data$sdos37 <- ifelse(data$item37 < 3 & ((data$i37 > 3 & data$qx37 < 3) | (data$i37 < 3 & data$qx37 > 3)), 1, 0)
+data$sdos38 <- ifelse(data$item38 < 3 & ((data$i38 > 3 & data$qx38 < 3) | (data$i38 < 3 & data$qx38 > 3)), 1, 0)
+data$sdos39 <- ifelse(data$item39 < 3 & ((data$i39 > 3 & data$qx39 < 3) | (data$i39 < 3 & data$qx39 > 3)), 1, 0)
+data$sdos40 <- ifelse(data$item40 < 3 & ((data$i40 > 3 & data$qx40 < 3) | (data$i40 < 3 & data$qx40 > 3)), 1, 0)
+
+data$sdos41 <- ifelse(data$item41 < 3 & ((data$i41 > 3 & data$qx41 < 3) | (data$i41 < 3 & data$qx41 > 3)), 1, 0)
+data$sdos42 <- ifelse(data$item42 < 3 & ((data$i42 > 3 & data$qx42 < 3) | (data$i42 < 3 & data$qx42 > 3)), 1, 0)
+data$sdos43 <- ifelse(data$item43 < 3 & ((data$i43 > 3 & data$qx43 < 3) | (data$i43 < 3 & data$qx43 > 3)), 1, 0)
+data$sdos44 <- ifelse(data$item44 < 3 & ((data$i44 > 3 & data$qx44 < 3) | (data$i44 < 3 & data$qx44 > 3)), 1, 0)
+data$sdos45 <- ifelse(data$item45 < 3 & ((data$i45 > 3 & data$qx45 < 3) | (data$i45 < 3 & data$qx45 > 3)), 1, 0)
+data$sdos46 <- ifelse(data$item46 < 3 & ((data$i46 > 3 & data$qx46 < 3) | (data$i46 < 3 & data$qx46 > 3)), 1, 0)
+data$sdos47 <- ifelse(data$item47 < 3 & ((data$i47 > 3 & data$qx47 < 3) | (data$i47 < 3 & data$qx47 > 3)), 1, 0)
+data$sdos48 <- ifelse(data$item48 < 3 & ((data$i48 > 3 & data$qx48 < 3) | (data$i48 < 3 & data$qx48 > 3)), 1, 0)
+data$sdos49 <- ifelse(data$item49 < 3 & ((data$i49 > 3 & data$qx49 < 3) | (data$i49 < 3 & data$qx49 > 3)), 1, 0)
+data$sdos50 <- ifelse(data$item50 < 3 & ((data$i50 > 3 & data$qx50 < 3) | (data$i50 < 3 & data$qx50 > 3)), 1, 0)
+
+data$sdos51 <- ifelse(data$item51 < 3 & ((data$i51 > 3 & data$qx51 < 3) | (data$i51 < 3 & data$qx51 > 3)), 1, 0)
+data$sdos52 <- ifelse(data$item52 < 3 & ((data$i52 > 3 & data$qx52 < 3) | (data$i52 < 3 & data$qx52 > 3)), 1, 0)
+data$sdos53 <- ifelse(data$item53 < 3 & ((data$i53 > 3 & data$qx53 < 3) | (data$i53 < 3 & data$qx53 > 3)), 1, 0)
+data$sdos54 <- ifelse(data$item54 < 3 & ((data$i54 > 3 & data$qx54 < 3) | (data$i54 < 3 & data$qx54 > 3)), 1, 0)
+data$sdos55 <- ifelse(data$item55 < 3 & ((data$i55 > 3 & data$qx55 < 3) | (data$i55 < 3 & data$qx55 > 3)), 1, 0)
+data$sdos56 <- ifelse(data$item56 < 3 & ((data$i56 > 3 & data$qx56 < 3) | (data$i56 < 3 & data$qx56 > 3)), 1, 0)
+data$sdos57 <- ifelse(data$item57 < 3 & ((data$i57 > 3 & data$qx57 < 3) | (data$i57 < 3 & data$qx57 > 3)), 1, 0)
+data$sdos58 <- ifelse(data$item58 < 3 & ((data$i58 > 3 & data$qx58 < 3) | (data$i58 < 3 & data$qx58 > 3)), 1, 0)
+data$sdos59 <- ifelse(data$item59 < 3 & ((data$i59 > 3 & data$qx59 < 3) | (data$i59 < 3 & data$qx59 > 3)), 1, 0)
+data$sdos60 <- ifelse(data$item60 < 3 & ((data$i60 > 3 & data$qx60 < 3) | (data$i60 < 3 & data$qx60 > 3)), 1, 0)
+
+data$sdos61 <- ifelse(data$item61 < 3 & ((data$i61 > 3 & data$qx61 < 3) | (data$i61 < 3 & data$qx61 > 3)), 1, 0)
+data$sdos62 <- ifelse(data$item62 < 3 & ((data$i62 > 3 & data$qx62 < 3) | (data$i62 < 3 & data$qx62 > 3)), 1, 0)
+data$sdos63 <- ifelse(data$item63 < 3 & ((data$i63 > 3 & data$qx63 < 3) | (data$i63 < 3 & data$qx63 > 3)), 1, 0)
+data$sdos64 <- ifelse(data$item64 < 3 & ((data$i64 > 3 & data$qx64 < 3) | (data$i64 < 3 & data$qx64 > 3)), 1, 0)
+data$sdos65 <- ifelse(data$item65 < 3 & ((data$i65 > 3 & data$qx65 < 3) | (data$i65 < 3 & data$qx65 > 3)), 1, 0)
+data$sdos66 <- ifelse(data$item66 < 3 & ((data$i66 > 3 & data$qx66 < 3) | (data$i66 < 3 & data$qx66 > 3)), 1, 0)
+data$sdos67 <- ifelse(data$item67 < 3 & ((data$i67 > 3 & data$qx67 < 3) | (data$i67 < 3 & data$qx67 > 3)), 1, 0)
+data$sdos68 <- ifelse(data$item68 < 3 & ((data$i68 > 3 & data$qx68 < 3) | (data$i68 < 3 & data$qx68 > 3)), 1, 0)
+data$sdos69 <- ifelse(data$item69 < 3 & ((data$i69 > 3 & data$qx69 < 3) | (data$i69 < 3 & data$qx69 > 3)), 1, 0)
+data$sdos70 <- ifelse(data$item70 < 3 & ((data$i70 > 3 & data$qx70 < 3) | (data$i70 < 3 & data$qx70 > 3)), 1, 0)
+
+data$sdos71 <- ifelse(data$item71 < 3 & ((data$i71 > 3 & data$qx71 < 3) | (data$i71 < 3 & data$qx71 > 3)), 1, 0)
+data$sdos72 <- ifelse(data$item72 < 3 & ((data$i72 > 3 & data$qx72 < 3) | (data$i72 < 3 & data$qx72 > 3)), 1, 0)
+data$sdos73 <- ifelse(data$item73 < 3 & ((data$i73 > 3 & data$qx73 < 3) | (data$i73 < 3 & data$qx73 > 3)), 1, 0)
+data$sdos74 <- ifelse(data$item74 < 3 & ((data$i74 > 3 & data$qx74 < 3) | (data$i74 < 3 & data$qx74 > 3)), 1, 0)
+data$sdos75 <- ifelse(data$item75 < 3 & ((data$i75 > 3 & data$qx75 < 3) | (data$i75 < 3 & data$qx75 > 3)), 1, 0)
+data$sdos76 <- ifelse(data$item76 < 3 & ((data$i76 > 3 & data$qx76 < 3) | (data$i76 < 3 & data$qx76 > 3)), 1, 0)
+data$sdos77 <- ifelse(data$item77 < 3 & ((data$i77 > 3 & data$qx77 < 3) | (data$i77 < 3 & data$qx77 > 3)), 1, 0)
+data$sdos78 <- ifelse(data$item78 < 3 & ((data$i78 > 3 & data$qx78 < 3) | (data$i78 < 3 & data$qx78 > 3)), 1, 0)
+data$sdos79 <- ifelse(data$item79 < 3 & ((data$i79 > 3 & data$qx79 < 3) | (data$i79 < 3 & data$qx79 > 3)), 1, 0)
+data$sdos80 <- ifelse(data$item80 < 3 & ((data$i80 > 3 & data$qx80 < 3) | (data$i80 < 3 & data$qx80 > 3)), 1, 0)
+
+# tab <- describe(data)
+# write.csv(tab,"checkingagain.csv")    ## k = 825
+
+data$saod_1 <- rowSums((data[,c(506:515)]))
+data$saod_2 <- rowSums((data[,c(516:525)]))
+data$saod_3 <- rowSums((data[,c(526:535)]))
+data$saod_4 <- rowSums((data[,c(536:545)]))
+data$saod_5 <- rowSums((data[,c(546:555)]))
+data$saod_6 <- rowSums((data[,c(556:565)]))
+data$saod_7 <- rowSums((data[,c(566:575)]))
+data$saod_8 <- rowSums((data[,c(576:585)]))
+
+data$saos_1 <- rowSums((data[,c(586:595)]))
+data$saos_2 <- rowSums((data[,c(596:605)]))
+data$saos_3 <- rowSums((data[,c(606:615)]))
+data$saos_4 <- rowSums((data[,c(616:625)]))
+data$saos_5 <- rowSums((data[,c(626:635)]))
+data$saos_6 <- rowSums((data[,c(636:645)]))
+data$saos_7 <- rowSums((data[,c(646:655)]))
+data$saos_8 <- rowSums((data[,c(656:665)]))
+
+data$sdoa_1 <- rowSums((data[,c(666:675)]))
+data$sdoa_2 <- rowSums((data[,c(676:685)]))
+data$sdoa_3 <- rowSums((data[,c(686:695)]))
+data$sdoa_4 <- rowSums((data[,c(696:705)]))
+data$sdoa_5 <- rowSums((data[,c(706:715)]))
+data$sdoa_6 <- rowSums((data[,c(716:725)]))
+data$sdoa_7 <- rowSums((data[,c(726:735)]))
+data$sdoa_8 <- rowSums((data[,c(736:745)]))
+
+data$sdos_1 <- rowSums((data[,c(746:755)]))
+data$sdos_2 <- rowSums((data[,c(756:765)]))
+data$sdos_3 <- rowSums((data[,c(766:775)]))
+data$sdos_4 <- rowSums((data[,c(776:785)]))
+data$sdos_5 <- rowSums((data[,c(786:795)]))
+data$sdos_6 <- rowSums((data[,c(796:805)]))
+data$sdos_7 <- rowSums((data[,c(806:815)]))
+data$sdos_8 <- rowSums((data[,c(816:825)]))
+
+toplot3 <- as.data.frame(describe(data[826:857]))
+toplot3$sum <- toplot3$n*toplot3$mean
+
+saod <- as.data.frame(toplot3[1:8,14])
+saos <- as.data.frame(toplot3[9:16,14])
+sdoa <- as.data.frame(toplot3[17:24,14])
+sdos <- as.data.frame(toplot3[25:32,14])
+
+
+saod$agree <- rep("Self Agrees, Others Disagree", 8)
+saos$agree <- rep("Self Agrees, Others Split", 8)
+sdoa$agree <- rep("Self Disagrees, Others Agree", 8)
+sdos$agree <- rep("Self Disagrees, Others Split", 8)
+
+saod$cond <- c("Extremely Undesirable", "Very Undersirable","Moderately Undesirable", "Somewhat Undesirable", "Somewhat Desirable", "Moderately Desirable", "Very Desirable", "Extremely Desirable")
+saos$cond <- c("Extremely Undesirable", "Very Undersirable","Moderately Undesirable", "Somewhat Undesirable", "Somewhat Desirable", "Moderately Desirable", "Very Desirable", "Extremely Desirable")
+sdoa$cond <- c("Extremely Undesirable", "Very Undersirable","Moderately Undesirable", "Somewhat Undesirable", "Somewhat Desirable", "Moderately Desirable", "Very Desirable", "Extremely Desirable")
+sdos$cond <- c("Extremely Undesirable", "Very Undersirable","Moderately Undesirable", "Somewhat Undesirable", "Somewhat Desirable", "Moderately Desirable", "Very Desirable", "Extremely Desirable")
+
+colnames(saod)[1] <- 'sum'
+colnames(saos)[1] <- 'sum'
+colnames(sdoa)[1] <- 'sum'
+colnames(sdos)[1] <- 'sum'
+
+together <- rbind(saod,saos,sdoa,sdos)
+
+together$cond <- factor(together$cond,levels = c("Extremely Undesirable", "Very Undersirable","Moderately Undesirable", "Somewhat Undesirable", "Somewhat Desirable", "Moderately Desirable", "Very Desirable", "Extremely Desirable"))
+
+r <- ggplot(data=together, aes(x=cond, y=sum, fill=agree)) +
+        geom_bar(colour="black", stat="identity", position=position_dodge()) +
+        scale_fill_manual(values=c('black','grey38','grey90','white')) +
+          theme_classic() +
+          labs(fill = "Agreement") +
+          theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+                                           
+#r
+
+```
+
+```{r line, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11, include=FALSE, fig.cap="*Figure 3.* Patterns of divergence from self ratings."}
+
+ggplot(data=together, aes(x=cond, y=sum, group=agree, shape=agree)) +
+    geom_line(aes(linetype=agree)) +
+    geom_point(size=3) +
+    scale_linetype_manual(values=c("solid", "dotted", "solid", "dotted")) +
+    labs(shape = "Agreement") +
+    scale_shape_manual(values=c(19,21,15,22)) +
+    theme_classic() +
+    guides(linetype=FALSE) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+          ylab("Freqency") +
+          xlab("Edwards Category")
+
+```
+
+
+```{r analyses, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE, fig.show="hide", include=FALSE}
+
+## Nope - need make side-by-side frequencies not contingency table
+
+# tbl <- table(data$know2, data$know3) 
+# know <- chisq.test(tbl) 
+
+# tbl2 <- table(data$freq2, data$freq3) 
+# frequ <- chisq.test(tbl2)
+
+
+
+library(descr)
+a <- freq(data$know2)
+percentknow2 <- sum(a[c(1:2),3])
+
+b <- freq(data$know3)
+percentknow3  <- sum(b[c(1:2),3])
+
+c <- freq(data$freq2)
+percentfreq2 <- sum(c[c(1:2),3])
+
+d <- freq(data$freq3)
+percentfreq3 <- sum(d[c(1:2),3])
+
+a.1 <- c(69,15,3,1)      ## missing cells in some throwing off
+b.1 <- c(52,24,11,0)
+tab <- cbind(a.1,b.1)
+
+know <- chisq.test(tab) 
+
+c.1 <- c(1,1,9,77)
+d.1 <- c(2,10,21,53)
+tab2 <- cbind(c.1,d.1)
+
+frequ <- chisq.test(tab2)
+
+## NAs taken from above
+
+NAself <- c(18,15,8,10,9,3,3,3)
+NAonce <- c(12,10,17,12,19,10,3,6)
+NAtwice <- c(39,29,28,31,23,27,18,13)
+
+NAself.old <- c(15,11,7,5,7,2,3,2)
+NAonce.old <- c(9,6,12,8,12,10,2,4)
+NAtwice.old <- c(27,26,20,23,17,23,15,13)
+
+tab3 <- cbind(NAself,NAonce,NAtwice)
+checking <- chisq.test(tab3)
+
+library(questionr)
+resid <- chisq.residuals(tab3, std=TRUE)
+
+# cbind(tab3,resid)
+
+```
+
+```{r regress, echo=FALSE, warning=FALSE, message=FALSE, include=FALSE}
+
+missing <- c(18,15,8,10,9,3,3,3,12,10,17,12,19,10,3,6,39,29,28,31,23,27,18,13)
+type <- c(rep("Self",8),rep("Once-removed",8),rep("Twice-removed",8))
+sd <- c(rep(1:8,3))
+
+regress <- as.data.frame(cbind(type,sd,missing))
+regress$sd <- as.numeric(as.character(regress$sd))
+regress$missing <- as.numeric(as.character(regress$missing))
+
+reg <- summary(lm(missing ~ sd))
+reg2 <- summary(lm(missing ~ sd))
+reg
+```
+
+
+```{r FigureNEW_old, echo=FALSE, warning=FALSE, message=FALSE, include=FALSE, results=FALSE, fig.width=11, fig.cap="Smoothed (regression-predicted) missing value estimates across social desirability strata."}
+
+self.r <- regress[c(1:8),]
+once.r <- regress[c(9:16),]
+twice.r <- regress[c(17:24),]
+
+allthree <- rbind(self.r,once.r,twice.r)
+
+all.reg <- lm(missing~sd, allthree)
+
+t <- ggplot(allthree, aes(x=sd, y=missing)) +
+  geom_point()+ 
+#   labs(linetype = "Rater Type") +
+#   scale_shape_manual(values=c(19,21,15)) +
+    theme_classic() +
+#   guides(linetype=FALSE) +
+    geom_smooth(method=lm, se=FALSE) +
+    scale_color_grey()
+
+tlarger <- t + theme(axis.text = element_text(size = 9), axis.title = element_text(size = 20))
+
+tlarger + scale_x_continuous(name="Social Desirability Stratum", breaks=c(1,3,6,8),
+        labels=c("Extremely Undesirable", "Moderately Undesirable", "Moderately Desirable","Extremely Desirable"))
+ 
+```
+
+```{r Figure4_old, echo=FALSE, warning=FALSE, message=FALSE, include=FALSE, results=FALSE, fig.width=11, fig.cap="Smoothed (regression-predicted) missing value estimates across social desirability strata and rater type."}
+
+self.r <- regress[c(1:8),]
+once.r <- regress[c(9:16),]
+twice.r <- regress[c(17:24),]
+
+self.reg <- lm(missing~sd, self.r)
+once.reg <- lm(missing~sd, once.r)
+twice.reg <- lm(missing~sd, twice.r)
+
+# plot(regress$sd,regress$missing)+abline(18.32, -2.15)+abline(16,-1.08)+abline(39.29,-2.95)
+regress$type[regress$type == "Once-removed"] <- "Self-nominated"
+regress$type[regress$type == "Twice-removed"] <- "NOT Self-nominated"
+
+regress$type <- factor(regress$type,levels = c("Self","Self-nominated","NOT Self-nominated"))
+
+t <- ggplot(regress, aes(x=sd, y=missing, color=type, linetype=type)) +
+  geom_point()+ 
+#   labs(linetype = "Rater Type") +
+#   scale_shape_manual(values=c(19,21,15)) +
+    theme_classic() +
+#   guides(linetype=FALSE) +
+    geom_smooth(method=lm, se=FALSE) +
+    scale_color_grey()
+
+tmod <- t + theme(axis.text = element_text(size = 13), axis.title = element_text(size = 20), legend.title = element_text(size = 20), legend.text = element_text(size = 15))
+
+tmod + scale_x_continuous(name="Social Desirability Stratum", breaks=c(1,3,6,8),
+        labels=c("Extremely Undesirable", "Moderately Undesirable", "Moderately Desirable","Extremely Desirable"))
+ 
+```
+ 
+```{r quantedaself1, include=FALSE}
+library(quanteda)
+library(quanteda.textstats)
+
+test <- read.csv("Observer-Rated Personality_ Self1 (Fall 2019) - Copy - Copy_December 3, 2019_13.53.csv") 
+
+temp <- as.data.frame(t(test))   ## Duplicate item
+temp2 <- temp[-c(1:17),]
+temp3 <- temp2[-c(81:85),]
+
+data2 <- corpus(temp3, docid_field = "V1",
+  text_field = "V1")
+
+tab2 <- textstat_readability(data2,
+                     measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
+
+#write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/self1_quanteda.csv", row.names = TRUE)
+```
+
+```{r quantedaself2, include=FALSE}
+
+library(quanteda)
+
+test <- read.csv("Observer-Rated Personality_ Self2 (Fall 2019) - Copy - Copy_December 8, 2019_09.37.csv") 
+
+temp <- as.data.frame(t(test))   ## Duplicate item
+temp2 <- temp[-c(1:17),]
+temp3 <- temp2[-c(81:85),]
+
+data2 <- corpus(temp3, docid_field = "V1",
+  text_field = "V1")
+
+tab2 <- textstat_readability(data2,
+                     measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
+
+#write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/self2_quanteda.csv", row.names = TRUE)
+```
+
+```{r quantedaself3, include=FALSE}
+
+library(quanteda)
+
+test <- read.csv("Observer-Rated Personality_ Self3 (Fall 2019) - Copy - Copy_December 8, 2019_09.45.csv") 
+
+temp <- as.data.frame(t(test))   ## Duplicate item
+temp2 <- temp[-c(1:17),]
+temp3 <- temp2[-c(81:85),]
+
+data2 <- corpus(temp3, docid_field = "V1",
+  text_field = "V1")
+
+tab2 <- textstat_readability(data2,
+                     measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
+
+#write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/self3_quanteda.csv", row.names = TRUE)
+```
+
+```{r quantedaself4, include=FALSE}
+
+library(quanteda)
+
+test <- read.csv("Observer-Rated Personality_ Self4 (Fall 2019) - Copy - Copy_December 8, 2019_09.54.csv") 
+
+temp <- as.data.frame(t(test))   ## Duplicate item
+temp2 <- temp[-c(1:17),]
+temp3 <- temp2[-c(81:85),]
+
+data2 <- corpus(temp3, docid_field = "V1",
+  text_field = "V1")
+
+tab2 <- textstat_readability(data2,
+                     measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
+
+#write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/self4_quanteda.csv", row.names = TRUE)
+```
+
+```{r quantedaother1, include=FALSE}
+
+test <- read.csv("Observer-Rated+Personality_+Once+Removed+1+(Fall+2019)+-+Copy+-+Copy_September+11,+2020_17.53.csv") 
+
+temp <- as.data.frame(t(test))   ## Duplicate item
+temp2 <- temp[-c(1:17),]
+temp3 <- temp2[-c(81:85),]
+
+data2 <- corpus(temp3, docid_field = "V1",
+  text_field = "V1")
+
+tab2 <- textstat_readability(data2,
+                     measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
+
+write.csv(tab2, "other1_quanteda.csv", row.names = TRUE)
+```
+
+```{r quantedaother2, include=FALSE}
+
+test <- read.csv("Observer-Rated+Personality_+Once+Removed+2+(Fall+2019)+-+Copy+-+Copy_December+13,+2019_10.30.csv") 
+
+temp <- as.data.frame(t(test))   ## Duplicate item
+temp2 <- temp[-c(1:17),]
+temp3 <- temp2[-c(81:85),]
+
+data2 <- corpus(temp3, docid_field = "V1",
+  text_field = "V1")
+
+tab2 <- textstat_readability(data2,
+                     measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
+
+#write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/other2_quanteda.csv", row.names = TRUE)
+```
+
+```{r quantedaother3, include=FALSE}
+
+test <- read.csv("Observer-Rated+Personality_+Once+Removed+3+(Fall+2019)+-+Copy+-+Copy_December+13,+2019_10.29.csv") 
+
+temp <- as.data.frame(t(test))   ## Duplicate item
+temp2 <- temp[-c(1:17),]
+temp3 <- temp2[-c(81:85),]
+
+data2 <- corpus(temp3, docid_field = "V1",
+  text_field = "V1")
+
+tab2 <- textstat_readability(data2,
+                     measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
+
+#write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/other3_quanteda.csv", row.names = TRUE)
+```
+
+```{r quantedaother4, include=FALSE}
+
+test <- read.csv("Observer-Rated Personality_ Once Removed 4 (Fall 2019) - Copy - Copy_December 8, 2019_10.36.csv") 
+
+temp <- as.data.frame(t(test))   ## Duplicate item
+temp2 <- temp[-c(1:17),]
+temp3 <- temp2[-c(81:85),]
+
+data2 <- corpus(temp3, docid_field = "V1",
+  text_field = "V1")
+
+tab2 <- textstat_readability(data2,
+                     measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
+
+#write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/other4_quanteda.csv", row.names = TRUE)
+```
+
+```{r quantedatwice1, include=FALSE}
+
+test <- read.csv("Observer-Rated+Personality_+Twice+Removed+1+(Fall+2019)+-+Copy+-+Copy_December+11,+2019_15.11.csv") 
+
+temp <- as.data.frame(t(test))   ## Duplicate item
+temp2 <- temp[-c(1:17),]
+temp3 <- temp2[-c(81:85),]
+
+data2 <- corpus(temp3, docid_field = "V1",
+  text_field = "V1")
+
+tab2 <- textstat_readability(data2,
+                     measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
+
+#write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/twice1_quanteda.csv", row.names = TRUE)
+```
+
+```{r quantedatwice2, include=FALSE}
+
+test <- read.csv("Observer-Rated+Personality_+Twice+Removed+2+(Fall+2019)+-+Copy+-+Copy_December+11,+2019_15.11.csv") 
+
+temp <- as.data.frame(t(test))   ## Duplicate item
+temp2 <- temp[-c(1:17),]
+temp3 <- temp2[-c(81:85),]
+
+data2 <- corpus(temp3, docid_field = "V1",
+  text_field = "V1")
+
+tab2 <- textstat_readability(data2,
+                     measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
+
+#write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/twice2_quanteda.csv", row.names = TRUE)
+```
+
+```{r quantedatwice3, include=FALSE}
+
+test <- read.csv("Observer-Rated+Personality_+Twice+Removed+3+(Fall+2019)+-+Copy+-+Copy_December+11,+2019_15.12.csv") 
+
+temp <- as.data.frame(t(test))   ## Duplicate item
+temp2 <- temp[-c(1:17),]
+temp3 <- temp2[-c(81:85),]
+
+data2 <- corpus(temp3, docid_field = "V1",
+  text_field = "V1")
+
+tab2 <- textstat_readability(data2,
+                     measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
+
+#write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/twice3_quanteda.csv", row.names = TRUE)
+```
+
+```{r quantedatwice4, include=FALSE}
+test <- read.csv("Observer-Rated+Personality_+Twice+Removed+4+(Fall+2019)+-+Copy+-+Copy_December+11,+2019_15.12.csv") 
+
+temp <- as.data.frame(t(test))   ## Duplicate item
+View(temp)
+temp2 <- temp[-c(1:17),]
+temp3 <- temp2[-c(81:85),]
+
+data2 <- corpus(temp3, docid_field = "V1",
+  text_field = "V1")
+
+tab2 <- textstat_readability(data2,
+                     measure = c("Flesch.Kincaid", "Dale.Chall", "ELF", "FOG.NRI"))
+
+#write.csv(tab2, "C:/Users/stachowskia/Desktop/Work/Research/SIOP/SIOP (2021)/Missing Analysis/twice4_quanteda.csv", row.names = TRUE)
+```
+
+```{r self1gather, include=FALSE}
+
+library(dplyr)
+library(tidyr)
+
+
+self1long <- read.csv("Observer-Rated Personality_ Self1 (Fall 2019) - Copy - Copy_December 3, 2019_13.53.csv")
+
+self1long_temp <- self1long[-c(1:2),]
+# View(self1long_temp)
+
+form <- c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1)
+
+selfother <- c("self", "self","self","self","self","self","self","self","self","self",
+               "self", "self","self","self","self","self","self","self","self","self",
+               "self", "self","self","self","self","self","self","self","self","self",
+               "self", "self","self","self","self","self","self","self","self","self",
+               "self", "self","self","self","self","self","self","self","self","self",
+               "self", "self","self","self","self","self","self","self","self","self",
+               "self", "self","self","self","self","self","self","self","self","self",
+               "self", "self","self","self")
+
+temp1 <- cbind(self1long_temp, form, selfother)
+#View(temp1)
+
+#Make the format "long"
+combinedself1long <- temp1 %>% 
+  gather(key = "item", 
+         value = "responses",
+         c(18:97))
+
+#View(combinedself1long)
+```
+
+```{r transposed-self, include=FALSE}
+
+library(dplyr)
+library(tidyr)
+
+View(use_self)
+
+#Make the format "long"
+self_long <- use_self %>% 
+  gather(key = "item", 
+         value = "responses",
+         c(1:80))
+
+View(self_long)
+
+write.csv(self_long, "self_long.csv", row.names = TRUE)
+
+```
+
+```{r transposed-once, include=FALSE}
+
+library(dplyr)
+library(tidyr)
+
+View(use_one)
+
+#Make the format "long"
+once_long <- use_one %>% 
+  gather(key = "item", 
+         value = "responses",
+         c(1:80))
+
+View(once_long)
+
+write.csv(once_long, "once_long.csv", row.names = TRUE)
+
+```
+
+
+```{r transposed-twice, include=FALSE}
+
+library(dplyr)
+library(tidyr)
+
+View(use_two)
+
+#Make the format "long"
+twice_long <- use_two %>% 
+  gather(key = "item", 
+         value = "responses",
+         c(1:80))
+
+View(twice_long)
+
+write.csv(twice_long, "twice_long.csv", row.names = TRUE)
+
+```
+
 # Introduction
 
 This paper explored patterns of missing data by item characteristics including item desirability and indices of readability, using both self and informant ratings, and classification of missing responses in three stages: 1) examining the most recent and uniquely apt General Social Survey data for patterns in the reasons for non-response, 2) exploring overall social desirability and readability as they relate to missing responses, and 3) considering potential differences in missing responses across self-, self-nominated other, and non-self-nominated other ratings. 
 
-H1: There exist differing reasons for non-response.
-H2: Item readability is negatively associated with non-response.
-H3: Item social desirability is negatively associated with non-response. 
-H4: Item social desirability will be more strongly related to non-response than readability. 
-H5: The item social desirability effect remains after making considerations of rater source.
+*H1*: There exist differing reasons for non-response.
 
+*H2*: Item readability is negatively associated with non-response.
+
+*H3*: Item social desirability is negatively associated with non-response. 
+
+*H4*: Item social desirability will be more strongly related to non-response than readability. 
+
+*H5*: The item social desirability effect remains after making considerations of rater source.
 
 ```{r, include=FALSE}
 knitr::write_bib(c('posterdown', 'rmarkdown','pagedown'), 'packages.bib')
@@ -74,11 +3092,13 @@ knitr::write_bib(c('posterdown', 'rmarkdown','pagedown'), 'packages.bib')
 
 Data from three sources were used to explore the above predictions: 2020 data from the General Social Survey, ratings of item social desirability, and personality ratings from undergraduates.  
 
+*Missingness Reason*. The GSS included the following categories: “don’t know”, “no answer”, and “skipped on the web”.
 
-Missingness Reason. The GSS included the following categories: “don’t know”, “no answer”, and “skipped on the web”. 
-Item Social Desirability. Ratings of the social desirability of 2,413 IPIP personality indicators were made along a 9-point scale from: (-4) extremely undesirable to (+4) extremely desirable (see, for example, Edwards, 1957). Graduate student raters’ (n = 6) inter-rater consistency estimates using a 2-way random model was .96. 
-Readability. Four readability indices included: 1) Easy Listening Formula (ELF; Fang 1966), 2) the FOG Navy Readability Index (FOG-NRI; Kincaid et al., 1975), 3) the Flesch-Kincaid Grade Level (Flesch & Kincaid, 1975), and 4) the New Dale-Chall formula (Chall & Dale, 1995). 
-Personality measure(s). Four stratified random samplings of the 2,413 IPIP items were conducted. The strata were defined via the 9-point rating scale: stratum #1 = social desirability values below -3.01, stratum #2 = -3 to -2.01, stratum #3 = -2 to -1.01, stratum #4 = -1 to -.01, stratum #5 = 0 to 1, stratum #6 = 1.01 to 2, stratum #7 = 2.01 to 3, and stratum #8 = above 3.01 (e.g., extremely desirable). All participants made typical personality ratings on a 5-point Likert-type agreement scale ranging from strongly disagree to strongly agree to 80 items.
+*Item Social Desirability*. Ratings of the social desirability of 2,413 IPIP personality indicators were made along a 9-point scale from: (-4) extremely undesirable to (+4) extremely desirable (see, for example, Edwards, 1957). Graduate student raters’ (n = 6) inter-rater consistency estimates using a 2-way random model was .96. 
+
+*Readability*. Four readability indices included: 1) Easy Listening Formula (ELF; Fang 1966), 2) the FOG Navy Readability Index (FOG-NRI; Kincaid et al., 1975), 3) the Flesch-Kincaid Grade Level (Flesch & Kincaid, 1975), and 4) the New Dale-Chall formula (Chall & Dale, 1995).
+
+*Personality measure(s)*. Four stratified random samplings of the 2,413 IPIP items were conducted. The strata were defined via the 9-point rating scale: stratum #1 = social desirability values below -3.01, stratum #2 = -3 to -2.01, stratum #3 = -2 to -1.01, stratum #4 = -1 to -.01, stratum #5 = 0 to 1, stratum #6 = 1.01 to 2, stratum #7 = 2.01 to 3, and stratum #8 = above 3.01 (e.g., extremely desirable). All participants made typical personality ratings on a 5-point Likert-type agreement scale ranging from strongly disagree to strongly agree to 80 items.
 
 # Results  
 
@@ -94,15 +3114,75 @@ A series of t-tests revealed that items that were skipped (missing below) had mo
 
 Figure 2
 Comparison of Standardized Values for Valid and Missing (NA) Responses across DVs
+```{r FigureNEW, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE, fig.width=11, fig.cap="Smoothed (regression-predicted) missing value estimates across social desirability strata."}
+
+self.r <- regress[c(1:8),]
+once.r <- regress[c(9:16),]
+twice.r <- regress[c(17:24),]
+
+allthree <- rbind(self.r,once.r,twice.r)
+
+all.reg <- lm(missing~sd, allthree)
+
+t <- ggplot(allthree, aes(x=sd, y=missing)) +
+  geom_point()+ 
+#   labs(linetype = "Rater Type") +
+#   scale_shape_manual(values=c(19,21,15)) +
+    theme_classic() +
+#   guides(linetype=FALSE) +
+    geom_smooth(method=lm, se=FALSE) +
+    scale_color_grey()
+
+tlarger <- t + theme(axis.text = element_text(size = 9), axis.title = element_text(size = 20))
+
+tlarger + scale_x_continuous(name="Social Desirability Stratum", breaks=c(1,3,6,8),
+        labels=c("Extremely Undesirable", "Moderately Undesirable", "Moderately Desirable","Extremely Desirable"))
+ 
+```
 
 Using only summaries of missingness within social desirability stratum, as well as an indication of source (self, self-nominated, or non-self-nominated), the overall R2 was .89 (F(5,18) = 28.18, p < .001).There were strong main effects for social desirability stratum (F(1,22) = 6.77, p = .016) as well as rater type (DeltaF(2,20) = 42.49, p < .001). The interaction effect (rater type x social desirability stratum) was non-significant (DeltaF(2,18) = 2.57, p = .100). See Figure 3. These results are in contrast with the expectation that self-nominated rating sources would possibly be more influenced by item desirability (“skip” a larger number of undesirable items).
 
 Figure 3
 Smoothed (Regression-predicted) Missing Value Estimates Across Social Desirability Strata by Rater Type
 
+```{r Figure4, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE, fig.width=11, fig.cap="Smoothed (regression-predicted) missing value estimates across social desirability strata and rater type."}
+
+self.r <- regress[c(1:8),]
+once.r <- regress[c(9:16),]
+twice.r <- regress[c(17:24),]
+
+self.reg <- lm(missing~sd, self.r)
+once.reg <- lm(missing~sd, once.r)
+twice.reg <- lm(missing~sd, twice.r)
+
+# plot(regress$sd,regress$missing)+abline(18.32, -2.15)+abline(16,-1.08)+abline(39.29,-2.95)
+regress$type[regress$type == "Once-removed"] <- "Self-nominated"
+regress$type[regress$type == "Twice-removed"] <- "NOT Self-nominated"
+
+regress$type <- factor(regress$type,levels = c("Self","Self-nominated","NOT Self-nominated"))
+
+t <- ggplot(regress, aes(x=sd, y=missing, color=type, linetype=type)) +
+  geom_point()+ 
+#   labs(linetype = "Rater Type") +
+#   scale_shape_manual(values=c(19,21,15)) +
+    theme_classic() +
+#   guides(linetype=FALSE) +
+    geom_smooth(method=lm, se=FALSE) +
+    scale_color_grey()
+
+tmod <- t + theme(axis.text = element_text(size = 13), axis.title = element_text(size = 20), legend.title = element_text(size = 20), legend.text = element_text(size = 15))
+
+tmod + scale_x_continuous(name="Social Desirability Stratum", breaks=c(1,3,6,8),
+        labels=c("Extremely Undesirable", "Moderately Undesirable", "Moderately Desirable","Extremely Desirable"))
+```
+
 # Discussion  
 
 Uncovering patterns in missingness would suggest that the data are not missing completely at random, but rather point toward systematic drivers.
 
 In sum, the results suggest social desirability predicts non-response, in this case, perhaps as much or more so than the readability of the items and generally across ratings sources. These results are in contrast with the expectation that those closer to a target would be more influenced by item desirability (“miss” a larger number of items). However, as noted above, all raters were quite familiar with the targets. Theory would actually suggest our obtained pattern of findings given how well informants (both self- and non-self-nominated) knew the targets they were rating. Interestingly, the pattern was nearly identical for targets and non-self-nominated raters (moderate negative slope), but although the trend was in the same direction, this pattern was less dramatic for self-nominated raters. The reason for this difference is unclear, and somewhat contrary to theory would suggest – in that those close to a target would be quite similarly biased and by extension, “miss” undesirable questions with similar frequency. 
+
+```{r}
+knitr::include_graphics("https://www.siop.org/portals/84/Images/Conference/Conference%202022/Logos/2022_SIOP_Seattle_Web.png?ver=EH1uNb9JIQvpJ8v6vBO5uA%3d%3d")
+```
 

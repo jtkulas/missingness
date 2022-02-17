@@ -31,6 +31,9 @@ affiliation:
     address: Department of Graphics and Layouts, University of Posters; Canada
   - num: 3
     address: Another Institute of a place where work gets done, Earth, Milky Way
+primary_colour: "#03045E"         ## navy blue
+secondary_colour: "#ADB5BD"       ## gray
+accent_colour: "#CAF0F8"          ## very light blue
 main_findings:
   - "Make **better posters** with RMarkdown + **posterdown**."
 logoleft_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png

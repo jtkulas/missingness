@@ -119,7 +119,7 @@ form4 <- rbind(form4_long_self, form4_long_once, form4_long_twice)
 
 ## Next step = add Quentada indices
 
-library(quanteda.textstats)
+library(quanteda)
 
 test <- read.csv("Observer-Rated Personality_ Self1 (Fall 2019) - Copy - Copy_December 3, 2019_13.53.csv") 
 
@@ -265,5 +265,7 @@ long2 <- gather(USETHIS, index, value, Elf:Sd, factor_key=TRUE)
 colnames(long2)[13] <- "Response"
 
 ggplot(long2, aes(x=index, y=value, fill=Response)) + 
-  geom_boxplot() + ylim(-4,4) + theme(axis.title.x = element_blank(), legend.title = element_text(size = 14), legend.text = element_text(size = 15), axis.text.x = element_text(size = 15), axis.text.y = element_text(size = 15), axis.title.y = element_blank())
+  geom_boxplot() + ylim(-4,4) + 
+  scale_fill_manual(values=c("#03045E", "#48a0f7")) +
+  theme(axis.title.x = element_blank(), legend.title = element_text(size = 14), legend.text = element_text(size = 15), axis.text.x = element_text(size = 15), axis.text.y = element_text(size = 15), axis.title.y = element_blank(), legend.position = "top")
 

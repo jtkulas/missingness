@@ -574,7 +574,6 @@ total <- merge(use_data_transpose, data_prep, by="Item")
 write.csv(total, file="merged_complete_file.csv")
 ```
 
-<<<<<<< HEAD
 
 ```{r}
 
@@ -595,7 +594,7 @@ ggplot(siop_long, aes(x = number, fill=reason)) +
   geom_density(alpha = .5)
 
 ```
-=======
+
 ```{r}
 # redoing 10/7/21 just for SIOP graph
 
@@ -620,4 +619,3 @@ ggplot(use_long, aes(x = number, fill = reason)) +                       # Draw 
 
 ```
 
->>>>>>> 69071cd4f6cbc334b0bc766733956d99d8d398b6

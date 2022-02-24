@@ -2132,6 +2132,12 @@ tmod + scale_x_continuous(name="Social Desirability Stratum", breaks=c(1,3,6,8),
         labels=c("Extremely Undesirable", "Moderately Undesirable", "Moderately Desirable","Extremely Desirable"))
 ```
 
+```{r img-with-knitr, echo=FALSE, out.width='100%', eval=TRUE}
+
+knitr::include_graphics("Boxplots.svg")
+
+```
+
 # Discussion  
 
 Uncovering patterns in missingness would suggest that the data are not missing completely at random, but rather point toward systematic drivers.

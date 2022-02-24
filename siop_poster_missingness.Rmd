@@ -23,10 +23,12 @@ main_findings:
 logoleft_name: "![](Quill_White.png)"
 logocenter_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png
 logoright_name: https&#58;//www.montclair.edu/university-communications/wp-content/uploads/sites/144//2020/10/hawk-logo-color.svg
+csl: "apa7.csl"
 output: 
   posterdown::posterdown_betterport:
     self_contained: false
     pandoc_args: --mathjax
+    highlight: espresso
     number_sections: false
 bibliography: packages.bib
 link-citations: true

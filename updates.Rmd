@@ -6,7 +6,7 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
 ```
 
 Updating EJPA data revisions with new Montclair data - collection to be closed 12/13/19 (we already have 300 self-respondents, just waiting on twice-removed stragglers - reminders were sent 12/5/19)
@@ -2718,15 +2718,15 @@ regress <- as.data.frame(cbind(type,sd,missing))
 regress$sd <- as.numeric(as.character(regress$sd))
 regress$missing <- as.numeric(as.character(regress$missing))
 
-reg <- summary(lm(missing ~ type + sd + type*sd))
+reg <- summary(lm(missing ~ sd))
 reg2 <- summary(lm(missing ~ sd))
-
+reg
 ```
 
 
-Because this chi-square does not adequately capture patterns of missingness, a rater type x social desirability stratum regression was also applied to missing values ($R^2$ = `r round(reg$r.squared,3)`). Figure 4 presents these results visually, with similar patterns of missingness progressing along the social desirability continuum, but greater *numbers* of missing responses at extremely undesirable locations for twice-removed raters. Collectively, this suggests that others are less likely to endorse undesirable items for a target than are self-raters (and perhaps implicates the "self"-protective motive to be in fact stronger in others than in selves).
+Because this chi-square does not adequately capture patterns of missingness, a rater type x social desirability stratum regression was also applied to missing values ($R^2$ = `r round(reg$r.squared,2)`, *F* = `r round(reg$fstatistic, 2)`). Figure 4 presents these results visually, with similar patterns of missingness progressing along the social desirability continuum, but greater *numbers* of missing responses at extremely undesirable locations for twice-removed raters. Collectively, this suggests that others are less likely to endorse undesirable items for a target than are self-raters (and perhaps implicates the "self"-protective motive to be in fact stronger in others than in selves).
 
-The undifferentiated $R^2$ = `r round(reg2$r.squared,3)`
+The undifferentiated $R^2$ = `r round(reg2$r.squared,2)`, *F* = `r round(reg2$fstatistic, 2)`
 
 > Actually scrap this - elevated regression line simply means less knowledge of person - interesting pattern is elevation for socially undesirable for all 3 rater types <- this should be acknowledged somewhere... 
 
@@ -2749,7 +2749,9 @@ t <- ggplot(allthree, aes(x=sd, y=missing)) +
     geom_smooth(method=lm, se=FALSE) +
     scale_color_grey()
 
-t + scale_x_continuous(name="Social Desirability Stratum", breaks=c(1,3,6,8),
+tlarger <- t + theme(axis.text = element_text(size = 9), axis.title = element_text(size = 20))
+
+tlarger + scale_x_continuous(name="Social Desirability Stratum", breaks=c(1,3,6,8),
         labels=c("Extremely Undesirable", "Moderately Undesirable", "Moderately Desirable","Extremely Desirable"))
  
 ```
@@ -2779,7 +2781,9 @@ t <- ggplot(regress, aes(x=sd, y=missing, color=type, linetype=type)) +
     geom_smooth(method=lm, se=FALSE) +
     scale_color_grey()
 
-t + scale_x_continuous(name="Social Desirability Stratum", breaks=c(1,3,6,8),
+tmod <- t + theme(axis.text = element_text(size = 13), axis.title = element_text(size = 20), legend.title = element_text(size = 20), legend.text = element_text(size = 15))
+
+tmod + scale_x_continuous(name="Social Desirability Stratum", breaks=c(1,3,6,8),
         labels=c("Extremely Undesirable", "Moderately Undesirable", "Moderately Desirable","Extremely Desirable"))
  
 ```

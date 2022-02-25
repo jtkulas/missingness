@@ -97,6 +97,12 @@ knitr::write_bib(c('posterdown', 'rmarkdown','pagedown'), 'packages.bib')
   height: 100px;
 }
 
+p.caption {
+  font-size: 0.8em;         /* This sets figure caption font size */
+  text-align: left
+}
+
+
 ```
 
 ```{r data, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}

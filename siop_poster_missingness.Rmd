@@ -1,5 +1,5 @@
 ---
-main_topsize: 0.2 #percent coverage of the poster
+main_topsize: 0.15 #percent coverage of the poster
 main_bottomsize: 0.1
 #ESSENTIALS
 #title: 
@@ -30,11 +30,11 @@ logocenter_name: https&#58;//www.montclair.edu/university-communications/wp-cont
 csl: "apa7.csl"
 output: 
   posterdown::posterdown_betterport:
-    self_contained: false
+    self_contained: true
     pandoc_args: --mathjax
 #    highlight: espresso
     number_sections: true
-#knit: pagedown::chrome_print
+knit: pagedown::chrome_print
 bibliography: ["packages.bib", "missing.bib"]
 suppress-bibliography: true 
 link-citations: true

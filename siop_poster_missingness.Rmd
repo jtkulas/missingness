@@ -2064,11 +2064,9 @@ Data from three sources were used to explore the above predictions: 2020 data fr
 
 # Results  
 
-`Alicia - We're missing a summary description of Figure \@ref(fig:FigureNEW))`
-
 Across 5,215 total responses, 0.19% were missing when respondents reported “don’t know” and 0.09% were missing because respondents refused to answer (i.e., “no answer), or 0.17% skipped responses on the web supporting `H1`.
 
-Directly comparing the qualitative item characteristics with ratings of socially desirable content, we applied logistic regression, treating missed and non-missed responses as binary outcomes. In this comprehensive approach, the strongest unstandardized predictors were the Dale-Chall ($b = -.03, z = -6.63, p < .001$) and item social desirability ($b = -.15, z = -6.23, p < .001$). The Fog-NRI was the only non-significant predictor of missingness ($b = .37, z = 1.91, p = .060$). See Figure \@ref(fig:img-with-knitr)). Results are supportive of `H2` and `H3`.
+Directly comparing the qualitative item characteristics with ratings of socially desirable content, we applied logistic regression, treating missed and non-missed responses as binary outcomes. In this approach, the strongest standardized predictors were the Dale-Chall ($b = -.03, z = -6.63, p < .001$) and item social desirability ($b = -.15, z = -6.23, p < .001$). The Fog-NRI was the only non-significant predictor of missingness ($b = .37, z = 1.91, p = .060$). Results are supportive of `H2`, `H3` and partially in support of `H4` (presented visually in Figure \@ref(fig:img-with-knitr)).
 
 ```{r img-with-knitr, echo=FALSE, out.width='100%', eval=TRUE, fig.cap="Comparison of standardized values for valid and missing (NA) responses across DVs"}
 
@@ -2076,7 +2074,7 @@ knitr::include_graphics("Boxplots.svg")
 
 ```
 
-A series of t-tests revealed that items that were skipped (missing below) had more difficult mean readability than those that were answered (valid). `Alicia - What are you referring to with this statement?`
+A simple regression revealed that frequency of missing responses decreased as social desirability increased ($F_(1,22) = 6.77, p = .016$), also supporting `H3`, see  Figure \@ref(fig:FigureNEW))
 
 ```{r FigureNEW, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE, fig.width=11, fig.cap="Smoothed (regression-predicted) missing value estimates across social desirability strata."}
 
@@ -2104,9 +2102,9 @@ tlarger + scale_x_continuous(name="Social Desirability Stratum", breaks=c(1,3,6,
  
 ```
 
-Using only summaries of missingness within social desirability stratum, as well as an indication of source (self, self-nominated, or non-self-nominated), the overall $R^2$ was .89 $(F(5,18) = 28.18, p < .001)$.There were strong main effects for social desirability stratum $(F(1,22) = 6.77, p = .016)$ as well as rater type $(\Delta F(2,20) = 42.49, p < .001)$. The interaction effect (rater type x social desirability stratum) was non-significant $(\Delta F(2,18) = 2.57, p = .100)$. See Figure \@ref(fig:Figure4)). These results are in contrast with the expectation that self-nominated rating sources would possibly be more influenced by item desirability (“skip” a larger number of undesirable items).
+Using only summaries of missingness within social desirability stratum, as well as an indication of source (self, self-nominated, or non-self-nominated), the overall $R^2$ was .89 $(F(5,18) = 28.18, p < .001)$.There were strong main effects for social desirability stratum $(F(1,22) = 6.77, p = .016)$ as well as rater type $(\Delta F(2,20) = 42.49, p < .001)$. The interaction effect (rater type x social desirability stratum) was non-significant $(\Delta F(2,18) = 2.57, p = .100)$. This is partial support of `H5`, see Figure \@ref(fig:Figure4). These results are in contrast with the expectation that self-nominated rating sources would possibly be more influenced by item desirability (“skip” a larger number of undesirable items).
 
-```{r Figure4, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE, fig.width=11, fig.height=6, fig.cap="Smoothed (regression-predicted) missing value estimates across social desirability strata and rater type."}
+```{r Figure4, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE, fig.width=11, fig.height=6, fig.cap="Smoothed (regression-predicted) missing value estimates across social desirability strata and rater type.", fig.height=7}
 
 self.r <- regress[c(1:8),]
 once.r <- regress[c(9:16),]
@@ -2147,4 +2145,6 @@ tmod + scale_x_continuous(name="Social Desirability Stratum", breaks=c(1,3,6,8),
 
 Uncovering patterns in missingness would suggest that the data are not missing completely at random, but rather point toward systematic drivers.
 
-In sum, the results suggest social desirability predicts non-response, in this case, perhaps as much or more so than the readability of the items and generally across ratings sources. These results are in contrast with the expectation that those closer to a target would be more influenced by item desirability (“miss” a larger number of items). However, as noted above, all raters were quite familiar with the targets. Theory would actually suggest our obtained pattern of findings given how well informants (both self- and non-self-nominated) knew the targets they were rating. Interestingly, the pattern was nearly identical for targets and non-self-nominated raters (moderate negative slope), but although the trend was in the same direction, this pattern was less dramatic for self-nominated raters. The reason for this difference is unclear, and somewhat contrary to theory would suggest – in that those close to a target would be quite similarly biased and by extension, “miss” undesirable questions with similar frequency. 
+In sum, the results suggest social desirability predicts non-response, in this case, perhaps as much or more so than the readability of the items and generally across ratings sources. These results are in contrast with the expectation that those closer to a target would be more influenced by item desirability (“miss” a larger number of items). However, as noted above, all raters were quite familiar with the targets. 
+
+Theory would actually suggest our obtained pattern of findings given how well informants (both self- and non-self-nominated) knew the targets they were rating. Interestingly, the pattern was nearly identical for targets and non-self-nominated raters (moderate negative slope), but although the trend was in the same direction, this pattern was less dramatic for self-nominated raters. The reason for this difference is unclear, and somewhat contrary to theory would suggest – in that those close to a target would be quite similarly biased and by extension, “miss” undesirable questions with similar frequency. 
